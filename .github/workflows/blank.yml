@@ -11,12 +11,12 @@ on:
 
 jobs:
   test:
-    name: Deploy on server
+    name: Test on server
     runs-on: ubuntu-latest
 
     steps:
       - name: Run a multi-line script
-      run: echo "test"
+        run: echo "test"
 
   deploy:
     # The type of runner that the job will run on
