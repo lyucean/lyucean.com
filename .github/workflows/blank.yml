@@ -20,10 +20,8 @@ jobs:
 
     steps:
 
+      - name: Clone Repo
+        run: actions/checkout@v3
+
       - name: Run a one-line deploy script
         run: ls -al
-
-      - name: Run a multi-line deploy script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
