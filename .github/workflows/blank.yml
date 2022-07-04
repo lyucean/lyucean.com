@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    runs-on: [self-hosted, linux, ARM64]
+    runs-on: ubuntu-latest
     environment: 
       name: production
       url: lyucean.com
@@ -26,7 +26,7 @@ jobs:
         script: whoami
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, ARM64]
     environment: production
     needs: [test]
 
