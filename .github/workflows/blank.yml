@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: production
-      url: lyucean.com
+      url: http://lyucean.com
 
     steps:
     - name: executing remote ssh commands using password
