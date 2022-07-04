@@ -9,14 +9,14 @@ on:
     branches: [ "main" ]
 
 jobs:
-  test:
+  test-host:
     runs-on: ubuntu-latest
     environment: 
       name: production
       url: http://lyucean.com
 
     steps:
-    - name: executing remote ssh commands using password
+    - name: Testing the accessibility of the host
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST }}
@@ -28,18 +28,15 @@ jobs:
   deploy:
     runs-on: self-hosted
     environment: production
-    needs: [test]
+    needs: [test-host]
 
     steps:
 
       - name: Clone Repo
         uses: actions/checkout@v3
 
-      - name: Run pwd
-        run: pwd
-        
-      - name: Run history
-        run: history
+      - name: CP file
+        run: cp -r ./* /var/www/lyucean.com/
 
-      - name: Run a one-line deploy script
-        run: ls -al
+      - name: ls folder
+        run: ls -al /var/www/lyucean.com/
