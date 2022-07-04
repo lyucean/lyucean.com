@@ -35,5 +35,11 @@ jobs:
       - name: Clone Repo
         uses: actions/checkout@v3
 
+      - name: Run pwd
+        run: pwd
+        
+      - name: Run history
+        run: history
+
       - name: Run a one-line deploy script
         run: ls -al
