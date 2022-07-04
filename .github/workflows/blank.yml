@@ -1,4 +1,6 @@
-name: CI
+name: Deployment
+
+concurrency: production
 
 on:
   push:
@@ -8,14 +10,24 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, ARM64]
+    environment: 
+      name: production
+      url: lyucean.com
 
     steps:
-      - name: Run test script
-        run: pwd
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        script: whoami
 
   deploy:
     runs-on: ubuntu-latest
+    environment: production
     needs: [test]
 
     steps:
