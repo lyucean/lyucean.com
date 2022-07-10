@@ -1,6 +1,6 @@
 /* general styling */
 :root {
-    --smaller: 0.75;
+    --smaller: .75;
 }
 
 * {
@@ -9,29 +9,27 @@
     padding: 0;
 }
 
-html,
-body {
+html, body {
     height: 100%;
     margin: 0;
 }
 
 body {
     align-items: center;
-    background-color: #ffd54f;
+    background-color: #000;
     display: flex;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-family: "Montserrat", "sans-serif";
 }
 
 .container {
-    color: #333;
+    color: #fff;
     margin: 0 auto;
     text-align: center;
 }
 
 h1 {
     font-weight: normal;
-    letter-spacing: 0.125rem;
+    letter-spacing: .125rem;
     text-transform: uppercase;
 }
 
@@ -55,7 +53,7 @@ li span {
 
 .emoji span {
     font-size: 4rem;
-    padding: 0 0.5rem;
+    padding: 0 .5rem;
 }
 
 @media all and (max-width: 768px) {
