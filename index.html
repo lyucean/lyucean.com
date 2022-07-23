@@ -17,15 +17,54 @@
 <nav id="menu-top" class="navbar shadow-sm">
   <div class="container-md">
 
+    <button class="btn d-block d-md-none d-lg-none"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#leftMobileMenu"
+            aria-controls="leftMobileMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
     <span class="site-logo fw-bold p-1" aria-label="DEV Community Home">
       LYUCEAN
     </span>
+
     <form class="d-flex" role="search">
       <a class="btn btn-outline-primary" target="_blank" href="https://t.me/lyucean">Telegram</a>
     </form>
   </div>
 </nav>
 <!-- END TOP -->
+
+<!-- MOBILE MENU -->
+<div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="leftMobileMenu"
+     aria-labelledby="leftMobileMenuLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Портфолио</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link link-dark " href="#">🏠 Дом</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link link-dark" href="#">🚀 Стаж</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link link-dark" href="#">⭐ Команда
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link link-dark" href="lyucean.com">😍 Советую</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link link-dark" href="#">😎 Обо мне</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- END MOBILE MENU -->
 
 <div class="container-fluid bg-light">
   <div class="container-md">
