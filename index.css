@@ -6,3 +6,7 @@
 /*.nav-link {*/
 /*    color: rgb(64, 64, 64);*/
 /*}*/
+
+html {
+    scroll-behavior: smooth;
+}
