@@ -8,7 +8,7 @@
 
   <!--  timer script-->
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:400,700'>
-  <link rel='stylesheet' href='index.css?v=5'>
+  <link rel='stylesheet' href='index.css?v=6'>
 
 </head>
 <body>
@@ -17,13 +17,13 @@
 <nav id="menu-top" class="navbar shadow-sm text-bg-dark">
   <div class="container-md">
 
-    <div class="d-flex justify-content-start">
-      <a class="btn d-block d-md-none d-lg-none"
+    <div class="d-flex justify-content-start custom-toggler">
+      <a class="btn d-block btn-dark d-md-none d-lg-none"
          type="button"
          data-bs-toggle="offcanvas"
          data-bs-target="#leftMobileMenu"
          aria-controls="leftMobileMenu">
-        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon "></span>
       </a>
 
       <div class="navbar-brand fw-bold p-1">
@@ -43,34 +43,35 @@
     <div class="row">
       <!-- START menu -->
       <div class="col-md-4 col-lg-3 p-1">
-        <div class="offcanvas-md offcanvas-start w-auto"
+        <div class="offcanvas-md offcanvas-start w-auto text-bg-dark"
              tabindex="-1"
              id="leftMobileMenu"
              aria-labelledby="leftMobileMenuLabel">
           <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="leftMobileMenuLabel">Портфолио</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#leftMobileMenu"
+            <button type="button" class="btn-close btn-close-white"
+                    data-bs-dismiss="offcanvas" data-bs-target="#leftMobileMenu"
                     aria-label="Close"></button>
           </div>
-          <div class="offcanvas-body ">
+          <div class="offcanvas-body">
             <ul class="nav nav-pills flex-column">
-              <li class="nav-item">
-                <a class="nav-link text-white" aria-current="page" href="#block_experience">🚀 Мой Стаж</a>
+              <li class="nav-item btn btn-dark">
+                <a class="nav-link text-white float-start" aria-current="page" href="#block_experience">🚀 Мой Стаж</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="#block_education">👨‍🎓 ‍Моё образование</a>
+              <li class="nav-item btn btn-dark">
+                <a class="nav-link text-white float-start" href="#block_education">👨‍🎓 ‍Моё образование</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="#block_team">⭐ Моя команда</a>
+              <li class="nav-item btn btn-dark">
+                <a class="nav-link text-white float-start" href="#block_team">⭐ Моя команда</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="#block_recommendations">😍 У кого учусь</a>
+              <li class="nav-item btn btn-dark">
+                <a class="nav-link text-white float-start" href="#block_recommendations">😍 У кого учусь</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="#block_about">😎 Обо мне</a>
+              <li class="nav-item btn btn-dark">
+                <a class="nav-link text-white float-start" href="#block_about">😎 Обо мне</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="#block_thanks">🌿 Благодарности</a>
+              <li class="nav-item btn btn-dark">
+                <a class="nav-link text-white float-start" href="#block_thanks">🌿 Благодарности</a>
               </li>
             </ul>
           </div>
