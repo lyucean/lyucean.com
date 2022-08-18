@@ -41,7 +41,7 @@
 <div class="container-fluid text-bg-dark">
   <div class="container-md">
     <div class="row">
-      <!-- START menu -->
+      <!-- Меню ------------------------------------------------------------------------------------------------------->
       <div class="col-md-4 col-lg-3 p-1">
         <div class="offcanvas-md offcanvas-start w-auto text-bg-dark"
              tabindex="-1"
@@ -77,9 +77,10 @@
           </div>
         </div>
       </div>
-      <!-- END menu -->
+      <!-- END Меню --------------------------------------------------------------------------------------------------->
 
       <div class="col-md-8 col-lg-9">
+        <!-- Вступление ----------------------------------------------------------------------------------------------->
         <div class="row" id="block_home">
           <div class="col-md-5 col-sm-12 d-flex align-items-center">
             <img src="img/my.png"
@@ -91,31 +92,43 @@
             <p class="lead">Я руковожу ИТ 10 лет.</p>
             <p>Задачи в области моей компетенции:</p>
             <ul>
-              <li>Сделать финансовый <a href="#" class="text-bg-primary">расчёт</a> внедрения</li>
-              <li>Сформировать и обучить <a href="#block_team" class="text-bg-primary">команду</a>, создать <a
-                href="" class="text-bg-primary">PDP</a> план
+              <li>Сделать финансовый <a data-bs-toggle="modal" data-bs-target="#it_strategy" class="text-bg-primary">расчёт</a>
+                внедрения
               </li>
-              <li>Запустить <a href="" class="text-bg-primary">MVP</a>, с <a href=""
-                                                                             class="text-bg-primary">минимальным</a>
+              <li>Сформировать и обучить <a data-bs-toggle="modal" data-bs-target="#it_strategy"
+                                            class="text-bg-primary">команду</a>, создать <a
+                data-bs-toggle="modal" data-bs-target="#it_strategy" class="text-bg-primary">PDP</a> план
+              </li>
+              <li>Запустить <a data-bs-toggle="modal" data-bs-target="#it_strategy" class="text-bg-primary">MVP</a>
+                , с <a data-bs-toggle="modal" data-bs-target="#it_strategy" class="text-bg-primary">минимальным</a>
                 количеством разработки
               </li>
-              <li>Протестировать <a href="" class="text-bg-primary">гипотезы</a></li>
-              <li>Организовать <a href="" class="text-bg-primary">процесс</a> разработки</li>
-              <li>Построить <a href="" class="text-bg-primary">отказоустойчивую</a> инфраструктуру и <a
-                href="" class="text-bg-primary">CI/CD</a></li>
-              <li>Построить непрерывной процесс <a href="" class="text-bg-primary">технической</a> поддержки
+              <li>Протестировать <a data-bs-toggle="modal" data-bs-target="#it_strategy" class="text-bg-primary">гипотезы</a>
               </li>
-              <li>Создать и автоматизировать <a href="" class="text-bg-primary">маркетинговую</a> и <a href=""
-                                                                                                       class="text-bg-primary">финансовую</a>
+              <li>Организовать <a data-bs-toggle="modal" data-bs-target="#it_strategy"
+                                  class="text-bg-primary">процесс</a> разработки
+              </li>
+              <li>Построить <a data-bs-toggle="modal" data-bs-target="#it_strategy" class="text-bg-primary">отказоустойчивую</a>
+                инфраструктуру и <a
+                  data-bs-toggle="modal" data-bs-target="#it_strategy" class="text-bg-primary">CI/CD</a></li>
+              <li>Построить непрерывной процесс <a data-bs-toggle="modal" data-bs-target="#it_strategy"
+                                                   class="text-bg-primary">технической</a> поддержки
+              </li>
+              <li>Создать и автоматизировать <a data-bs-toggle="modal" data-bs-target="#it_strategy"
+                                                class="text-bg-primary">маркетинговую</a> и
+                <a data-bs-toggle="modal" data-bs-target="#it_strategy" class="text-bg-primary">финансовую</a>
                 отчётность
               </li>
-              <li>Рассчитать <a href="" class="text-bg-primary">юнит-экономику</a> проекта</li>
-              <li>Создать <a href="" class="text-bg-primary">финансовый</a> план ИТ департамента</li>
+              <li>Рассчитать <a class="text-bg-primary" data-bs-toggle="modal" data-bs-target="#it_strategy">юнит-экономику</a>
+                проекта
+              </li>
+              <li>Создать <a data-bs-toggle="modal" data-bs-target="#it_strategy" class="text-bg-primary">финансовый</a>
+                план ИТ департамента
+              </li>
               <li>Создать <a class="text-bg-primary" data-bs-toggle="modal" data-bs-target="#it_strategy">стратегию</a>
                 развитие ИТ департамента
               </li>
             </ul>
-
 
             <!-- Modal -->
             <div class="modal fade" id="it_strategy" tabindex="-1" aria-labelledby="it_strategyLabel"
@@ -137,17 +150,15 @@
               </div>
             </div>
 
-
           </div>
           <br>
         </div>
-
         <!-- Мой стаж ------------------------------------------------------------------------------------------------->
         <div class="row" id="block_experience">
           <div class="col">
             <br>
             <br>
-            <h2>🚀 Мой стаж</h2>
+            <h2 class="text-center">🚀 Мой стаж</h2>
             <br>
             <dl class="row">
               <dt class="col-sm-3">Декабрь 2016 — По настоящее время<br/>(5 лет и 9 месяцев)</dt>
@@ -179,7 +190,7 @@
                   <span class="badge text-bg-primary">Управление разработкой</span>
                 </p>
               </dd>
-              <div class="text-white">
+              <div class="text-primary">
                 <hr>
               </div>
 
@@ -210,7 +221,7 @@
                   <span class="badge text-bg-primary">Юнит-экономика</span>
                 </p>
               </dd>
-              <div class="text-white">
+              <div class="text-primary">
                 <hr>
               </div>
 
@@ -244,7 +255,7 @@
                   <span class="badge text-bg-primary">CI/CD</span>
                 </p>
               </dd>
-              <div class="text-white">
+              <div class="text-primary">
                 <hr>
               </div>
 
@@ -274,7 +285,7 @@
                   <span class="badge text-bg-primary">Google Analytics</span>
                 </p>
               </dd>
-              <div class="text-white">
+              <div class="text-primary">
                 <hr>
               </div>
 
@@ -300,7 +311,7 @@
                   <span class="badge text-bg-primary">C++Builder</span>
                 </p>
               </dd>
-              <div class="text-white">
+              <div class="text-primary">
                 <hr>
               </div>
 
@@ -325,7 +336,7 @@
                   <span class="badge text-bg-primary">Git</span>
                 </p>
               </dd>
-              <div class="text-white">
+              <div class="text-primary">
                 <hr>
               </div>
 
@@ -349,7 +360,7 @@
                   <span class="badge text-bg-primary">C++Builder</span>
                 </p>
               </dd>
-              <div class="text-white">
+              <div class="text-primary">
                 <hr>
               </div>
 
@@ -371,7 +382,7 @@
                   <span class="badge text-bg-primary">MySQL</span>
                 </p>
               </dd>
-              <div class="text-white">
+              <div class="text-primary">
                 <hr>
               </div>
 
@@ -401,21 +412,124 @@
         <div class="row" id="block_education">
           <div class="col">
             <br>
-            <h2>👨‍🎓 Моё образование</h2>
             <br>
+            <h2 class="text-center">👨‍🎓 Моё образование</h2>
             <br>
-            <br>
-            <p class="lead"> В процессе наполнения :)</p>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
+            <dl class="row">
+              <dt class="col-sm-3">Сентябрь 2011 — Май 2013</dt>
+              <dd class="col-sm-9">
+                <figure>
+                  <blockquote class="blockquote">
+                    <p>Антистартап. Взгляд инвестора.</p>
+                  </blockquote>
+                  <figcaption class="blockquote-footer">
+                    Персональный курс Аркадия Морейниса
+                  </figcaption>
+                </figure>
+                <p>
+                  В процессе обучения на реальном проекте:
+
+                </p>
+                <ul>
+                  <li>Построена бизнес-модель.</li>
+                  <li>Просчитана unit-экономика продажи.</li>
+                  <li>Протестированы каналы продаж и просчитана стоимость привлечения.</li>
+                  <li>Построена финансовая модель.</li>
+                  <li>Проработан рынок и конкуренты, сформировано ценностное предложение</li>
+                  <li>Найдена стратегия лидерства</li>
+                  <li>Выделены аудитория и каналы, составлен медиаплан</li>
+                  <li>Проверены гипотезы развития проекта</li>
+                </ul>
+
+                <p>
+                  Просчитав проект Гипсарт и осознав невозможность его вывода из стадии самозанятости, принял решение
+                  о его закрытии.
+
+                </p>
+              </dd>
+              <div class="text-success">
+                <hr>
+              </div>
+            </dl>
+            <!--            <dl class="row">-->
+            <!--              <dt class="col-sm-3">Сентябрь 2011 — Май 2013</dt>-->
+            <!--              <dd class="col-sm-9">-->
+            <!--                <figure>-->
+            <!--                  <blockquote class="blockquote">-->
+            <!--                    <p>Курс ПМ</p>-->
+            <!--                  </blockquote>-->
+            <!--                  <figcaption class="blockquote-footer">-->
+            <!--                   2323-->
+            <!--                  </figcaption>-->
+            <!--                </figure>-->
+            <!--                <p>-->
+
+            <!--                  Что учил то?-->
+            <!--                </p>-->
+            <!--              </dd>-->
+            <!--              <div class="text-success">-->
+            <!--                <hr>-->
+            <!--              </div>-->
+            <!--            </dl>-->
+            <!--            <dl class="row">-->
+            <!--              <dt class="col-sm-3">Сентябрь 2011 — Май 2013</dt>-->
+            <!--              <dd class="col-sm-9">-->
+            <!--                <figure>-->
+            <!--                  <blockquote class="blockquote">-->
+            <!--                    <p>Курс 1С</p>-->
+            <!--                  </blockquote>-->
+            <!--                  <figcaption class="blockquote-footer">-->
+            <!--                    2323-->
+            <!--                  </figcaption>-->
+            <!--                </figure>-->
+            <!--                <p>-->
+            <!--                  Что учил то?-->
+            <!--                </p>-->
+            <!--              </dd>-->
+            <!--              <div class="text-success">-->
+            <!--                <hr>-->
+            <!--              </div>-->
+            <!--            </dl>-->
+            <dl class="row">
+              <dt class="col-sm-3">Сентябрь 2011 — Май 2013</dt>
+              <dd class="col-sm-9">
+                <figure>
+                  <blockquote class="blockquote">
+                    <p>Системный анализ и управление в больших системах</p>
+                  </blockquote>
+                  <figcaption class="blockquote-footer">
+                    Кафедра системного анализа и управления (САУ)
+                  </figcaption>
+                </figure>
+                <p>
+                  Тут бы хорошо написать, что это вынес из этого образования
+                </p>
+              </dd>
+              <div class="text-success">
+                <hr>
+              </div>
+            </dl>
+            <dl class="row">
+              <dt class="col-sm-3">Сентябрь 2006 — Май 2011</dt>
+              <dd class="col-sm-9">
+                <figure>
+                  <blockquote class="blockquote">
+                    <p>Ядерная физика и технологии</p>
+                  </blockquote>
+                  <figcaption class="blockquote-footer">
+                    Кафедра ядерной физики
+                  </figcaption>
+                </figure>
+                <p>
+                  Тут бы хорошо написать, что это вынес из этого образования.
+                  Исследование изотопов диспрозия в лаборатории ядерных проблем.
+                </p>
+              </dd>
+              <div class="text-success">
+                <hr>
+              </div>
+            </dl>
+
           </div>
         </div>
         <!-- Моя команда ---------------------------------------------------------------------------------------------->
@@ -438,10 +552,10 @@
           </div>
         </div>
         <!-- У кого учусь --------------------------------------------------------------------------------------------->
-        <div class="row">
+        <div class="row" id="block_recommendations">
           <div class="col">
             <br>
-            <h2 id="block_recommendations">😍 У кого учусь</h2>
+            <h2>😍 У кого учусь</h2>
             <br>
             <br>
             <br>
