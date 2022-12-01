@@ -14,3 +14,11 @@ for (var i = 0; i < nav_links.length; i++) {
   }
 }
 
+var width = window.screen.width;
+var nav = document.getElementById('menu-top');
+if(width < 768){
+  nav.classList.add("sticky-top");
+}
+else{
+  nav.classList.remove("sticky-top");
+}
