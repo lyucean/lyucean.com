@@ -7,6 +7,24 @@
     background-color: #17322e!important;
 }
 
+.btn-dark {
+    background-color: #17322e!important;
+    border-color: #17322e!important;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: #198754!important;
+    border-color: #198754!important;
+}
+
+.navbar-brand{
+    color: #ff671f!important;
+}
+
+.text-success hr{
+    color: #ff671f!important;
+}
+
 /* выбранный элемент leftMobileMenu */
 /*.nav-pills .nav-link:hover {*/
 /*    color: var(--bs-nav-pills-link-active-color);*/
