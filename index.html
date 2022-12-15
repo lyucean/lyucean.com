@@ -22,10 +22,10 @@
 
 <!-- START TOP -->
 <nav id="menu-top" class="navbar text-bg-dark navbar-dark bd-navbar navbar-expand-lg">
-  <div class="container-md">
+  <div class="container-lg">
 
     <div class="d-flex justify-content-start custom-toggler">
-      <a class="btn d-block btn-dark d-md-none d-lg-none"
+      <a class="btn d-block btn-dark d-lg-none"
          type="button"
          data-bs-toggle="offcanvas"
          data-bs-target="#leftMobileMenu"
@@ -34,7 +34,7 @@
       </a>
 
       <div class="navbar-brand fw-bold p-1">
-        <a class="navbar-brand text-white m-lg-3" href="#">Lyucean</a>
+        <a class="navbar-brand text-white m-lg-3" href="#">lyucean</a>
       </div>
     </div>
 
@@ -46,16 +46,16 @@
 <!-- END TOP -->
 
 <div class="container-fluid text-bg-dark">
-  <div class="container-md">
+  <div class="container-lg">
     <div class="row">
       <!-- Меню ------------------------------------------------------------------------------------------------------->
-      <div class="col-md-4 col-md-3 col-lg-2 p-1">
-        <div class="offcanvas-md offcanvas-start w-auto navbar text-bg-dark navbar-dark bd-navbar sticky-sm-top"
+      <div class="col-xl-3 col-xll-2 p-1">
+        <div class="offcanvas-lg offcanvas-start w-auto navbar text-bg-dark navbar-dark bd-navbar sticky-lg-top"
              tabindex="-1"
              id="leftMobileMenu"
              aria-labelledby="leftMobileMenuLabel">
           <div class="offcanvas-header w-100">
-            <h5 class="offcanvas-title" id="leftMobileMenuLabel">Портфолио</h5>
+            <h5 class="offcanvas-title text-secondary " id="leftMobileMenuLabel">#_</h5>
             <button type="button" class="btn-close btn-close-white"
                     data-bs-dismiss="offcanvas" data-bs-target="#leftMobileMenu"
                     aria-label="Close"></button>
@@ -66,19 +66,19 @@
                 <a class="nav-link text-white" href="#block_home">⭐ Привет</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="#block_power">🌿 Мои компетенции</a>
+                <a class="nav-link text-white" href="#block_power">🌿 Компетенции</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="#block_background">🚀 Мой Стаж</a>
+                <a class="nav-link text-white" href="#block_background">🚀 Стаж</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="#block_education">🏅 ‍Моё образование</a>
+                <a class="nav-link text-white" href="#block_education">🏅 Образование</a>
               </li>
               <!--              <li class="nav-item btn btn-dark">-->
               <!--                <a class="nav-link text-white float-start" href="#block_team">⭐ Моя команда</a>-->
               <!--              </li>-->
-              <!--              <li class="nav-item btn btn-dark">-->
-              <!--                <a class="nav-link text-white float-start" href="#block_recommendations">😍 У кого учусь</a>-->
+              <!--              <li class="nav-item">-->
+              <!--                <a class="nav-link text-white" href="#block_recommendations">🔥 У кого учусь</a>-->
               <!--              </li>-->
               <!--              <li class="nav-item btn btn-dark">-->
               <!--                <a class="nav-link text-white float-start" href="#block_about">😎 Обо мне</a>-->
@@ -92,20 +92,17 @@
       </div>
       <!-- END Меню --------------------------------------------------------------------------------------------------->
 
-      <div class="col-md-8 col-md-9 col-lg-10" data-bs-spy="scroll" data-bs-target="#leftMobileMenu">
+      <div class="col-xl-9 col-xll-10" data-bs-spy="scroll" data-bs-target="#leftMobileMenu">
         <!-- Вступление ----------------------------------------------------------------------------------------------->
         <div class="row" id="block_home">
-          <div class="col-sm-12 d-sm-none">
-            <br/>
-          </div>
-          <div class="col-sm-12 col-md-4 d-flex align-items-center">
+          <div class="col-sm-12 col-md-4 col-lg-4 d-flex align-items-center">
             <img src="img/my.png"
                  class="img-fluid rounded mx-auto" alt="это я!">
           </div>
-          <div class="col-sm-12 col-md-8 align-self-center">
+          <div class="col-sm-12 col-md-8 col-lg-8 align-self-center">
             <br/>
-            <h3>Привет!</h3>
-            <p>Я - профессиональный менеджер, с большим опытом в области ИТ и инженерии. Физик-ядерщик, который попал в
+            <p>Привет! Я - профессиональный менеджер, с большим опытом в области ИТ и инженерии. Физик-ядерщик, который
+              попал в
               IT
               через системный анализ. Глубокое техническое образование и опыт (архитектор/ведущий разработчик, IT
               администрирование). Опыт управления и развития ИТ для решения задач бизнеса. Прошел путь от программиста
@@ -142,37 +139,36 @@
             <!--            </div>-->
 
           </div>
-          <br>
+        </div>
+        <div class="text-dark ">
+          <hr/>
         </div>
         <!-- Моя Компетенции ---------------------------------------------------------------------------------------------->
-        <div class="row" id="block_power">
+        <div class="row text-bg-dark2 shadow-sm rounded" id="block_power">
           <div class="col">
-            <br>
-            <br>
-            <h2 class="text-center">🌿 Мои компетенции</h2>
-            <br>
-            <div class="row">
-              <ul>
-                <li>Финансовый расчёт внедрения (включая unit-экономику проекта)</li>
-                <li>Найм и обучение команды, создание индивидуальных PDP планов</li>
-                <li>Организация процесса разработки</li>
-                <li>Запуск MVP и тестирование продуктовых гипотез (с минимальным количеством разработки)</li>
-                <li>Разворачивание CI/CD и построение отказоустойчивой инфраструктуры</li>
-                <li>Выстраивание процесса непрерывной технической поддержки</li>
-                <li>Автоматизирование маркетинговой и финансовой отчётности</li>
-                <li>Расчёт финансового план ИТ департамента</li>
-                <li>Разработка стратегии развития ИТ департамента</li>
-              </ul>
-            </div>
-            <br>
+            <br/>
+            <h2 class="text-center">🌿 Компетенции</h2>
+            <ul>
+              <li>Финансовый расчёт внедрения (включая unit-экономику проекта)</li>
+              <li>Найм и обучение команды, создание индивидуальных PDP планов</li>
+              <li>Организация процесса разработки</li>
+              <li>Запуск MVP и тестирование продуктовых гипотез (с минимальным количеством разработки)</li>
+              <li>Разворачивание CI/CD и построение отказоустойчивой инфраструктуры</li>
+              <li>Выстраивание процесса непрерывной технической поддержки</li>
+              <li>Автоматизирование маркетинговой и финансовой отчётности</li>
+              <li>Расчёт финансового план ИТ департамента</li>
+              <li>Разработка стратегии развития ИТ департамента</li>
+            </ul>
+            <br/>
           </div>
+        </div>
+        <div class="text-dark ">
+          <hr>
         </div>
         <!-- Мой стаж ------------------------------------------------------------------------------------------------->
         <div class="row" id="block_background">
           <div class="col">
-            <br>
-            <br>
-            <h2 class="text-center">🚀 Мой стаж</h2>
+            <h2 class="text-center">🚀 Стаж</h2>
             <br>
             <dl class="row">
               <dt class="col-sm-3">Декабрь 2016 — По настоящее время<br/>(5 лет и 9 месяцев)</dt>
@@ -491,12 +487,14 @@
             </dl>
           </div>
         </div>
+        <div class="text-dark ">
+          <hr>
+        </div>
+
         <!-- Моё образование ------------------------------------------------------------------------------------------>
-        <div class="row" id="block_education">
+        <div class="row text-bg-dark2 shadow-sm rounded" id="block_education">
           <div class="col">
-            <br>
-            <br>
-            <h2 class="text-center">🏅 Моё образование</h2>
+            <h2 class="text-center">🏅 Образование</h2>
             <br>
             <dl class="row">
               <dt class="col-sm-3">Январь 2021 — Декабрь 2021</dt>
