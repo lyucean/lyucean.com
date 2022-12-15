@@ -3,31 +3,54 @@
 }
 
 .text-bg-dark {
-    color: #F4F4F4!important;
-    background-color: #17322e!important;
+    color: #F4F4F4 !important;
+    background-color: #17322e !important;
 }
 
 .text-bg-dark2 {
-    color: #F4F4F4!important;
+    color: #F4F4F4 !important;
     background-color: #122a26 !important;
 }
 
 .btn-dark {
-    background-color: #17322e!important;
-    border-color: #17322e!important;
+    background-color: #17322e !important;
+    border-color: #17322e !important;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    background-color: #198754!important;
-    border-color: #198754!important;
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: #198754 !important;
+    border-color: #198754 !important;
 }
 
-.navbar-brand{
-    color: #ff671f!important;
+.navbar-brand {
+    color: #ff671f !important;
 }
 
-.text-success hr{
-    color: #ff671f!important;
+.text-success hr {
+    color: #ff671f !important;
+}
+
+.nav-tabs .nav-link {
+    color: #F4F4F4 !important;
+    border: none !important;
+}
+
+.nav-tabs .nav-link.active {
+    color: #F4F4F4 !important;
+    background-color: #122a26 !important;
+}
+
+.nav-link:focus, .nav-link:hover {
+    color: #ff671f !important;
+    border: none !important;
+}
+
+.nav-tabs .nav-link:disabled {
+    color: var(--bs-nav-link-disabled-color) !important;
+}
+
+.nav-tabs {
+    border: none !important;
 }
 
 /* выбранный элемент leftMobileMenu */
