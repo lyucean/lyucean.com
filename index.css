@@ -5,6 +5,7 @@
 .text-bg-dark {
     color: #F4F4F4 !important;
     background-color: #17322e !important;
+    background: repeating-linear-gradient( 45deg, #17322e, #17322e 5px, #17322e 5px, #142e2a 10px );
 }
 
 .text-bg-dark2 {
