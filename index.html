@@ -25,15 +25,15 @@
 <body>
 
 <!-- START TOP -->
-<nav id="menu-top" class="navbar text-bg-dark navbar-dark bd-navbar navbar-expand-lg">
+<nav id="menuTop" class="navbar text-bg-dark navbar-dark bd-navbar navbar-expand-lg">
   <div class="container-lg">
 
     <div class="d-flex justify-content-start custom-toggler">
       <a class="btn d-block btn-dark d-lg-none"
          type="button"
          data-bs-toggle="offcanvas"
-         data-bs-target="#leftMobileMenu"
-         aria-controls="leftMobileMenu">
+         data-bs-target="#menuLeftMobile"
+         aria-controls="menuLeftMobile">
         <span class="navbar-toggler-icon "></span>
       </a>
 
@@ -54,14 +54,14 @@
     <div class="row">
       <!-- Меню ------------------------------------------------------------------------------------------------------->
       <div class="col-xl-3 col-xll-2 p-1">
-        <div class="offcanvas-lg offcanvas-start w-auto text-bg-dark navbar navbar-dark bd-navbar sticky-lg-top"
+        <div class="offcanvas-lg offcanvas-start w-auto navbar navbar-dark bd-navbar sticky-lg-top"
              tabindex="-1"
-             id="leftMobileMenu"
-             aria-labelledby="leftMobileMenuLabel">
+             id="menuLeftMobile"
+             aria-labelledby="menuLeftMobileLabel">
           <div class="offcanvas-header w-100">
-            <h5 class="offcanvas-title text-secondary " id="leftMobileMenuLabel">#_</h5>
+            <h5 class="offcanvas-title text-secondary " id="menuLeftMobileLabel">#_</h5>
             <button type="button" class="btn-close btn-close-white"
-                    data-bs-dismiss="offcanvas" data-bs-target="#leftMobileMenu"
+                    data-bs-dismiss="offcanvas" data-bs-target="#menuLeftMobile"
                     aria-label="Close"></button>
           </div>
           <div class="offcanvas-body">
@@ -87,7 +87,7 @@
       </div>
       <!-- END Меню --------------------------------------------------------------------------------------------------->
 
-      <div class="col-xl-9 col-xll-10" data-bs-spy="scroll" data-bs-target="#leftMobileMenu">
+      <div class="col-xl-9 col-xll-10" data-bs-spy="scroll" data-bs-target="#menuLeftMobile">
         <!-- Вступление ----------------------------------------------------------------------------------------------->
         <div class="row" id="block_home">
           <div class="col-sm-12 col-md-4 col-lg-4 d-flex align-items-center">
@@ -764,7 +764,7 @@
 
 
 <script src="bootstrap.bundle.min.js"></script>
-<script src="index.js?v=6"></script>
+<script src="index.js?v=10"></script>
 
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
