@@ -40,3 +40,5 @@ function resizeDom () {
   }
 }
 
+resizeDom (); // перерисуем на старте.
+
