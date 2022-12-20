@@ -5,16 +5,19 @@ const menuTop = document.getElementById('menuTop')
 
 // Прокрутка до нужного элемента страница
 function scrollToElement (id) {
+  const toElement = document.getElementById(id)
   if (window.screen.width < 768) {
     window.scrollTo({
-      top: document.getElementById(id).offsetTop - menuTop.offsetHeight,
+      top: toElement.offsetTop - menuTop.offsetHeight,
       behavior: 'smooth'
     })
   } else {
     window.scrollTo({
-      top: document.getElementById(id).offsetTop - 10,
+      top: toElement.offsetTop - 10,
       behavior: 'smooth'
     })
+
+    toElement.add('active') // закрепляем меню в Top
   }
 }
 
@@ -23,6 +26,7 @@ for (let i = 0; i < nav_links.length; i++) {
   nav_links[i].onclick = function () {
     offcanvas.hide()
     scrollToElement(this.hash.slice(1))
+    history.pushState(null, null, this.hash)
     return false
   }
 }
@@ -40,5 +44,5 @@ function resizeDom () {
   }
 }
 
-resizeDom (); // перерисуем на старте.
+resizeDom() // перерисуем на старте.
 
