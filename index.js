@@ -17,7 +17,7 @@ function scrollToElement (id) {
       behavior: 'smooth'
     })
 
-    toElement.add('active') // закрепляем меню в Top
+    toElement.classList.add('active') // закрепляем меню в Top
   }
 }
 

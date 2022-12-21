@@ -2,15 +2,24 @@
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
 
+/*.text-bg-dark {*/
+/*    color: #F4F4F4 !important;*/
+/*    background-color: #17322e !important;*/
+/*    background: repeating-linear-gradient( 45deg, #17322e, #17322e 5px, #17322e 5px, #142e2a 10px );*/
+/*}*/
 .text-bg-dark {
     color: #F4F4F4 !important;
-    background-color: #17322e !important;
-    background: repeating-linear-gradient( 45deg, #17322e, #17322e 5px, #17322e 5px, #142e2a 10px );
+    background-color: #003220 !important;
 }
+
+/*.text-bg-dark2 {*/
+/*    color: #F4F4F4 !important;*/
+/*    background-color: #122a26 !important;*/
+/*}*/
 
 .text-bg-dark2 {
     color: #F4F4F4 !important;
-    background-color: #122a26 !important;
+    background-color: #002c1c !important;
 }
 
 .btn-dark {
@@ -18,9 +27,24 @@
     border-color: #17322e !important;
 }
 
+/*.nav-pills .nav-link.active, .nav-pills .show > .nav-link {*/
+/*    background-color: #198754 !important;*/
+/*    border-color: #198754 !important;*/
+/*}*/
+
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-    background-color: #198754 !important;
-    border-color: #198754 !important;
+    background-color: #335b4c !important;
+    border-color: #335b4c !important;
+}
+
+.btn-success {
+    background-color: #335b4c !important;
+    border-color: #335b4c !important;
+}
+
+.btn:active, .btn:hover {
+    text-decoration-line: underline;
+    text-underline-offset: 5px;
 }
 
 .navbar-brand {
@@ -41,9 +65,16 @@
     background-color: #122a26 !important;
 }
 
-.nav-link:focus, .nav-link:hover {
-    color: #ff671f !important;
+.nav-link:hover {
+    /*color: #ff671f !important;*/
     border: none !important;
+
+    /*border-bottom:1px solid black;*/
+    /*padding-bottom:2px;*/
+    /*text-decoration: underline;*/
+    /*text-decoration: underline overline;*/
+    text-decoration-line: underline;
+    text-underline-offset: 6px;
 }
 
 .nav-tabs .nav-link:disabled {
