@@ -1,0 +1,12 @@
+
+/*Печать*/
+
+@media print {
+    .no_print {
+        display: none;
+    }
+
+    img {
+        max-width: 500px;
+    }
+}

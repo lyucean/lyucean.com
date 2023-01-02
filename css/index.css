@@ -32,7 +32,11 @@
 }
 
 .navbar-brand {
-    color: #ff671f !important;
+    background: #ff671f !important;
+    text-transform: uppercase;
+    font-weight: 900;
+    padding: 2px 10px 5px 8px;
+    color: #003220;
 }
 
 .text-success hr {
