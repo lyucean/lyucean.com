@@ -39,6 +39,11 @@
     color: #003220;
 }
 
+.navbar-brand:focus, .navbar-brand:hover {
+    color: #003220;
+    background: #ff671f !important;
+}
+
 .text-success hr {
     color: #ff671f !important;
 }
