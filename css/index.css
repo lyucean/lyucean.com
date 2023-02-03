@@ -37,6 +37,11 @@
     font-weight: 900;
     padding: 3px 10px 5px 8px;
     color: #003220;
+    margin-left: -12px;
+}
+
+#menuTop .navbar-brand {
+    margin-left: -12px;
 }
 
 .navbar-brand:focus, .navbar-brand:hover {
