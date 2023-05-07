@@ -58,7 +58,7 @@ jobs:
       - name: Check website
         uses: wei/curl@v1
         with:
-          args: -s -o /dev/null -w "%{http_code}" lyucean.com
+          args: -s -o /dev/null -w "%{http_code}" http://lyucean.com/
         id: response
       - name: Check response code
         run: |
