@@ -67,3 +67,4 @@ jobs:
             exit 1
           else
             echo "Website is available"
+            exit 1
