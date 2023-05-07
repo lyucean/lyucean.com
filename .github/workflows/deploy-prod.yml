@@ -32,7 +32,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          source: "public"
+          source: "./*"
           target: "/var/www/lyucean.com"
 
   publish:
@@ -48,7 +48,6 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd /var/www/lyucean.com/
-            docker-compose pull
             docker-compose up -d
             docker ps
 
