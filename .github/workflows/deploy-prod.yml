@@ -48,7 +48,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            cd /var/www/${{ $FOLDER_PATH }}/
+            cd /var/www/lyucean.com/
             docker-compose pull
             docker-compose up -d
             docker ps
