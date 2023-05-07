@@ -1,0 +1,70 @@
+name: Deployment
+
+concurrency: production
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [deploy]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Create project directory
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: mkdir -p /home/user/lyucean.com
+
+      - name: Copy docker-compose.yml to remote server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          source: "public"
+          target: "/var/www/lyucean.com"
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: [publish]
+    steps:
+      - name: Create web network and start docker-compose
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /var/www/${{ $FOLDER_PATH }}/
+            docker-compose pull
+            docker-compose up -d
+            docker ps
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check website
+        uses: wei/curl@v1
+        with:
+          args: -s -o /dev/null -w "%{http_code}" lyucean.com
+        id: response
+      - name: Check response code
+        run: |
+          if [ ${{ steps.response.outputs.stdout }} -ne 200 ]; then
+            echo "Website is not available"
+            exit 1
+          else
+            echo "Website is available"

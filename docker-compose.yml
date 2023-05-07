@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  nginx-lyucean:
+    image: nginx:latest
+    volumes:
+      - ./public:/usr/share/nginx/html
+    ports:
+      - "80:80"
+    environment:
+      - NGINX_HOST=lyucean.loc
+      - NGINX_INDEX=index.html
+      - NGINX_ROOT=/usr/share/nginx/html
+      - NGINX_PORT=80
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx-lyucean.rule=Host(`lyucean.com`)"
+      - "traefik.http.routers.nginx-lyucean.entrypoints=web"
+      - "traefik.http.services.nginx-lyucean.loadbalancer.server.port=80"
+    networks:
+      - web
+
+networks:
+  web:
+    external: true # стандартная для всех на этом сервере
