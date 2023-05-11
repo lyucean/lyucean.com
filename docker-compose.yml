@@ -6,7 +6,7 @@ services:
     volumes:
       - ./public:/usr/share/nginx/html
     environment:
-      - NGINX_HOST=lyucean.loc
+      - NGINX_HOST=lyucean.com
       - NGINX_INDEX=index.html
       - NGINX_ROOT=/usr/share/nginx/html
       - NGINX_PORT=80
