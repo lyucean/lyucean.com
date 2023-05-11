@@ -78,4 +78,4 @@ jobs:
 
             Изменения: https://github.com/${{ github.repository }}/commit/${{github.sha}}
             
-            github.action
+            Action: ${{ github.action }}
