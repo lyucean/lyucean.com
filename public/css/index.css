@@ -13,8 +13,8 @@
 }
 
 .btn-dark {
-    background-color: #17322e !important;
-    border-color: #17322e !important;
+    background-color: #002c1c !important;
+    border-color: #00291a !important;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -41,7 +41,7 @@
 }
 
 #menuTop .navbar-brand {
-    margin-left: -12px;
+    margin-left: calc(var(--bs-gutter-x) * -.5);
 }
 
 .navbar-brand:focus, .navbar-brand:hover {
