@@ -1,6 +1,6 @@
-const menuLeftMobile = document.getElementById('menuLeftMobile')
-const offcanvas = new bootstrap.Offcanvas(menuLeftMobile)
-const nav_links = menuLeftMobile.querySelectorAll('.nav-link')
+const menuRightMobile = document.getElementById('menuRightMobile')
+const offcanvas = new bootstrap.Offcanvas(menuRightMobile)
+const nav_links = menuRightMobile.querySelectorAll('.nav-link')
 const menuTop = document.getElementById('menuTop')
 
 // Прокрутка до нужного элемента страница
@@ -37,10 +37,10 @@ window.addEventListener('resize', resizeDom)
 function resizeDom () {
   if (window.screen.width < 768) {
     menuTop.classList.add('sticky-top') // закрепляем меню в Top
-    menuLeftMobile.classList.add('text-bg-dark2') // Меням цвет у бокового меню
+    menuRightMobile.classList.add('text-bg-dark2') // Меням цвет у бокового меню
   } else {
     menuTop.classList.remove('sticky-top')
-    menuLeftMobile.classList.remove('text-bg-dark2')
+    menuRightMobile.classList.remove('text-bg-dark2')
   }
 }
 

@@ -31,20 +31,20 @@
   <div class="container-lg">
 
     <div class="d-flex justify-content-start custom-toggler">
+      <div class="fw-bold">
+        <a class="navbar-brand d-lg-block" href=".">. lyucean</a>
+      </div>
+    </div>
+    <div class="d-flex justify-content-end custom-toggler">
       <a class="btn d-block btn-dark d-lg-none"
          type="button"
          data-bs-toggle="offcanvas"
-         data-bs-target="#menuLeftMobile"
-         aria-controls="menuLeftMobile">
+         data-bs-target="#menuRightMobile"
+         aria-controls="menuRightMobile">
         <span class="navbar-toggler-icon "></span>
       </a>
-
-      <div class="fw-bold p-1">
-        <a class="navbar-brand d-none d-lg-block" href=".">. lyucean</a>
-      </div>
     </div>
-
-    <form class="d-flex">
+    <form class="d-flex d-none d-lg-block">
       <a class="btn btn-success" target="_blank" href="https://t.me/lyucean"><i class="tl_telegram_share_icon"></i> Telegram</a>
     </form>
   </div>
@@ -56,14 +56,14 @@
     <div class="row">
       <!-- Меню ------------------------------------------------------------------------------------------------------->
       <div class="col-xl-3 col-xll-2 p-1">
-        <div class="offcanvas-lg offcanvas-start w-auto navbar navbar-dark bd-navbar sticky-lg-top"
+        <div class="offcanvas-lg offcanvas-end w-auto navbar navbar-dark bd-navbar sticky-lg-top"
              tabindex="-1"
-             id="menuLeftMobile"
-             aria-labelledby="menuLeftMobileLabel">
+             id="menuRightMobile"
+             aria-labelledby="menuRightMobileLabel">
           <div class="offcanvas-header w-100">
-            <h5 class="offcanvas-title text-secondary " id="menuLeftMobileLabel"></h5>
+            <h5 class="offcanvas-title text-secondary " id="menuRightMobileLabel"></h5>
             <button type="button" class="btn-close btn-close-white"
-                    data-bs-dismiss="offcanvas" data-bs-target="#menuLeftMobile"
+                    data-bs-dismiss="offcanvas" data-bs-target="#menuRightMobile"
                     aria-label="Close"></button>
           </div>
           <div class="offcanvas-body">
@@ -80,6 +80,9 @@
               <li class="nav-item">
                 <a class="nav-link text-white" href="#block_education">🏅 Образование</a>
               </li>
+              <li class="nav-item d-lg-none">
+                <a class="nav-link text-white" target="_blank" href="https://t.me/lyucean">📫 Telegram</a>
+              </li>
 <!--              <li class="nav-item">-->
 <!--                <a class="nav-link text-white" href="#block_recommendations">🔖 Рекомендую</a>-->
 <!--              </li>-->
@@ -89,7 +92,7 @@
       </div>
       <!-- END Меню --------------------------------------------------------------------------------------------------->
 
-      <div class="col-xl-9 col-xll-10" data-bs-spy="scroll" data-bs-target="#menuLeftMobile">
+      <div class="col-xl-9 col-xll-10" data-bs-spy="scroll" data-bs-target="#menuRightMobile">
         <!-- Вступление ----------------------------------------------------------------------------------------------->
         <div class="row" id="block_home">
           <div class="col-sm-12 col-md-4 col-lg-4 d-flex align-items-center">
