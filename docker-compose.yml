@@ -3,6 +3,8 @@ version: '3'
 services:
   nginx-lyucean:
     image: nginx:latest
+    container_name: lyucean-nginx
+    hostname: lyucean.com
     volumes:
       - ./public:/usr/share/nginx/html
     environment:
