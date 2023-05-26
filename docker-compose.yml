@@ -17,7 +17,6 @@ services:
       - traefik.http.routers.nginx-lyucean.tls=true
       - traefik.http.routers.nginx-lyucean.tls.certresolver=letsencrypt
       - traefik.http.services.nginx-lyucean.loadbalancer.server.port=80
-      - traefik.http.services.nginx-lyucean.loadbalancer.server.name='lyucean.com'
     networks:
       - web
 
