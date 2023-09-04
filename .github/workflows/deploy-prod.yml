@@ -48,7 +48,7 @@ jobs:
           script: |
             cd /var/www/lyucean.com/
             docker-compose up -d
-            docker ps
+            docker-compose ps
 
   test:
     runs-on: ubuntu-latest
