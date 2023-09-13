@@ -47,10 +47,11 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd /var/www/lyucean.com/
-            docker-compose up -d
+            docker-compose --profile single up -d
+            docker-compose --profile blog up -d
             docker-compose ps
 
-  test:
+  test-single:
     runs-on: ubuntu-latest
     needs: [publish]
     steps:
@@ -58,6 +59,15 @@ jobs:
         uses: wei/curl@v1
         with:
           args:  https://lyucean.com/
+
+  test-blog:
+    runs-on: ubuntu-latest
+    needs: [publish]
+    steps:
+      - name: Check website
+        uses: wei/curl@v1
+        with:
+          args:  https://blog.lyucean.com/
 
   alert:
     name: Alert
