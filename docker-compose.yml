@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   nginx-single:
-    profiles: ["single"]
+#    profiles: ["single"]
     image: nginx:latest
     container_name: lyucean-nginx-page
     hostname: lyucean.com
@@ -24,7 +24,7 @@ services:
       - web
 
   nginx-lyucean:
-    profiles: ["blog"]
+#    profiles: ["blog"]
     image: nginx:latest
     container_name: lyucean-nginx-blog
     hostname: lyucean.com
