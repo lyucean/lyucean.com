@@ -9,7 +9,7 @@ services:
     volumes:
       - ./public:/usr/share/nginx/html
     ports:
-      - "8080:80" # Внешний порт 8080, внутренний порт 80
+      - "8082:80" # Внешний порт 8082, внутренний порт 80
     environment:
       - NGINX_HOST=lyucean.com
       - NGINX_INDEX=index.html
@@ -21,7 +21,7 @@ services:
       - traefik.http.routers.nginx-lyucean.entrypoints=websecure
       - traefik.http.routers.nginx-lyucean.tls=true
       - traefik.http.routers.nginx-lyucean.tls.certresolver=letsencrypt
-      - traefik.http.services.nginx-lyucean.loadbalancer.server.port=8080
+      - traefik.http.services.nginx-lyucean.loadbalancer.server.port=8082
     networks:
       - web
 
