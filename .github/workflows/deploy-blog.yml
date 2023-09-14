@@ -5,9 +5,9 @@ concurrency: production
 on:
   push:
     branches: [ "main" ]
-    paths:
-      - "app/*"
-      - ".github/workflows/deploy-blog.yml"
+#    paths:
+#      - "app/*"
+#      - ".github/workflows/deploy-blog.yml"
   pull_request:
     branches: [ "main" ]
 
