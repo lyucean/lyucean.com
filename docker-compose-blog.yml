@@ -12,14 +12,14 @@ services:
       - NGINX_HOST=blog.lyucean.com
       - NGINX_INDEX=index.html
       - NGINX_ROOT=/usr/share/nginx/html
-      - NGINX_PORT=80
+      - NGINX_PORT=8081
     labels:
       - traefik.enable=true
       - traefik.http.routers.nginx-lyucean.rule=Host(`blog.lyucean.com`)
       - traefik.http.routers.nginx-lyucean.entrypoints=websecure
       - traefik.http.routers.nginx-lyucean.tls=true
       - traefik.http.routers.nginx-lyucean.tls.certresolver=letsencrypt
-      - traefik.http.services.nginx-lyucean.loadbalancer.server.port=80
+      - traefik.http.services.nginx-lyucean.loadbalancer.server.port=8081
     networks:
       - web
 
