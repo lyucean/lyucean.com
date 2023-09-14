@@ -19,9 +19,9 @@ help:
 # Если это developer окружение, то подключим debug профиль
 PROFILE =
 ifeq ($(ENVIRONMENT),developer)
-	PROFILE := --profile blog
+	PROFILE := -f docker-compose-blog.yml
 else
-	PROFILE := --profile single
+	PROFILE :=
 endif
 
 init: ## Инициализация проекта

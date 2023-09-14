@@ -1,10 +1,13 @@
-name: Deployment
+name: Deployment Blog
 
 concurrency: production
 
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - "app/*"
+      - ".github/workflows/deploy-blog.yml"
   pull_request:
     branches: [ "main" ]
 
@@ -47,7 +50,7 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd /var/www/lyucean.com/
-            docker-compose up -d
+            docker-compose -f docker-compose-blog.yml up -d
             docker-compose ps
 
   test-single:
