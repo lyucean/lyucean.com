@@ -6,8 +6,8 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - "public/*"
       - ".github/workflows/deploy-page.yml"
+      - "public"
   pull_request:
     branches: [ "main" ]
 
