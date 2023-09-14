@@ -8,6 +8,8 @@ services:
     hostname: lyucean.com
     volumes:
       - ./public:/usr/share/nginx/html
+    ports:
+      - "8080:80" # Внешний порт 8080, внутренний порт 80
     environment:
       - NGINX_HOST=lyucean.com
       - NGINX_INDEX=index.html
@@ -19,7 +21,7 @@ services:
       - traefik.http.routers.nginx-lyucean.entrypoints=websecure
       - traefik.http.routers.nginx-lyucean.tls=true
       - traefik.http.routers.nginx-lyucean.tls.certresolver=letsencrypt
-      - traefik.http.services.nginx-lyucean.loadbalancer.server.port=80
+      - traefik.http.services.nginx-lyucean.loadbalancer.server.port=8080
     networks:
       - web
 
@@ -30,6 +32,8 @@ services:
     hostname: blog.lyucean.com
     volumes:
       - ./app:/usr/share/nginx/html
+    ports:
+      - "8081:80" # Внешний порт 8081, внутренний порт 80
     environment:
       - NGINX_HOST=blog.lyucean.com
       - NGINX_INDEX=index.html
@@ -41,7 +45,7 @@ services:
       - traefik.http.routers.nginx-lyucean.entrypoints=websecure
       - traefik.http.routers.nginx-lyucean.tls=true
       - traefik.http.routers.nginx-lyucean.tls.certresolver=letsencrypt
-      - traefik.http.services.nginx-lyucean.loadbalancer.server.port=80
+      - traefik.http.services.nginx-lyucean.loadbalancer.server.port=8081
     networks:
       - web
 
