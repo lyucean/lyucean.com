@@ -11,7 +11,7 @@ let mouse = {
   tY: 0
 }
 let params = {
-  pointsNumber: 40,
+  pointsNumber: 30,
   widthFactor: .3,
   mouseThreshold: .6,
   spring: .4,
