@@ -22,27 +22,6 @@ services:
     networks:
       - web
 
-  nginx-blog:
-    image: nginx:latest
-    container_name: lyucean-nginx-blog
-    hostname: blog.lyucean.com
-    volumes:
-      - ./app:/usr/share/nginx/html
-    environment:
-      - NGINX_HOST=blog.lyucean.com
-      - NGINX_INDEX=index.html
-      - NGINX_ROOT=/usr/share/nginx/html
-      - NGINX_PORT=80
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.nginx-blog.rule=Host(`blog.lyucean.com`)
-      - traefik.http.routers.nginx-blog.entrypoints=websecure
-      - traefik.http.routers.nginx-blog.tls=true
-      - traefik.http.routers.nginx-blog.tls.certresolver=letsencrypt
-      - traefik.http.services.nginx-blog.loadbalancer.server.port=80
-    networks:
-      - web
-
 networks:
   web:
     external: true # стандартная для всех на этом сервере
