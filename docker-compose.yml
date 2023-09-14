@@ -1,7 +1,7 @@
 version: '3.3'
 
 services:
-  nginx-single:
+  nginx-page:
 #    profiles: ["single"]
     image: nginx:latest
     container_name: lyucean-nginx-page
@@ -23,11 +23,11 @@ services:
     networks:
       - web
 
-  nginx-lyucean:
+  nginx-blog:
 #    profiles: ["blog"]
     image: nginx:latest
     container_name: lyucean-nginx-blog
-    hostname: lyucean.com
+    hostname: blog.lyucean.com
     volumes:
       - ./app:/usr/share/nginx/html
     environment:
