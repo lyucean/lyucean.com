@@ -2,14 +2,11 @@ version: '3.3'
 
 services:
   nginx-page:
-#    profiles: ["single"]
     image: nginx:latest
     container_name: lyucean-nginx-page
     hostname: lyucean.com
     volumes:
       - ./public:/usr/share/nginx/html
-    ports:
-      - "8082:80" # Внешний порт 8082, внутренний порт 80
     environment:
       - NGINX_HOST=lyucean.com
       - NGINX_INDEX=index.html
@@ -21,31 +18,7 @@ services:
       - traefik.http.routers.nginx-lyucean.entrypoints=websecure
       - traefik.http.routers.nginx-lyucean.tls=true
       - traefik.http.routers.nginx-lyucean.tls.certresolver=letsencrypt
-      - traefik.http.services.nginx-lyucean.loadbalancer.server.port=8082
-    networks:
-      - web
-
-  nginx-blog:
-#    profiles: ["blog"]
-    image: nginx:latest
-    container_name: lyucean-nginx-blog
-    hostname: blog.lyucean.com
-    volumes:
-      - ./app:/usr/share/nginx/html
-    ports:
-      - "8081:80" # Внешний порт 8081, внутренний порт 80
-    environment:
-      - NGINX_HOST=blog.lyucean.com
-      - NGINX_INDEX=index.html
-      - NGINX_ROOT=/usr/share/nginx/html
-      - NGINX_PORT=80
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.nginx-lyucean.rule=Host(`blog.lyucean.com`)
-      - traefik.http.routers.nginx-lyucean.entrypoints=websecure
-      - traefik.http.routers.nginx-lyucean.tls=true
-      - traefik.http.routers.nginx-lyucean.tls.certresolver=letsencrypt
-      - traefik.http.services.nginx-lyucean.loadbalancer.server.port=8081
+      - traefik.http.services.nginx-lyucean.loadbalancer.server.port=80
     networks:
       - web
 
