@@ -3,6 +3,7 @@ version: '3.3'
 services:
   nginx-page:
     image: nginx:latest
+    profiles: ["page"]
     container_name: lyucean-nginx-page
     hostname: lyucean.com
     volumes:
@@ -24,6 +25,7 @@ services:
 
   nginx-blog:
     image: nginx:latest
+    profiles: ["blog"]
     container_name: lyucean-nginx-blog
     hostname: blog.lyucean.com
     volumes:
