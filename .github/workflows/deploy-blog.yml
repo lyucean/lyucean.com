@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
     paths:
       - ".github/workflows/deploy-blog.yml"
-      - "app"
+      - "app/*"
   pull_request:
     branches: [ "main" ]
 
