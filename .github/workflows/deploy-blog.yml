@@ -50,7 +50,7 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd /var/www/lyucean.com/
-            docker-compose -d --profile blog up 
+            docker-compose --profile blog up -d
             docker-compose ps
 
   test-single:
