@@ -1,9 +1,10 @@
 version: '3.3'
 
 services:
+
   nginx-page:
     image: nginx:latest
-    profiles: ["page"]
+    profiles: [ "page" ]
     container_name: lyucean-nginx-page
     hostname: lyucean.com
     volumes:
@@ -23,18 +24,23 @@ services:
     networks:
       - web
 
-  nginx-blog:
-    image: nginx:latest
-    profiles: ["blog"]
-    container_name: lyucean-nginx-blog
-    hostname: blog.lyucean.com
-    volumes:
-      - ./app:/usr/share/nginx/html
+  wordpress:
+    image: wordpress
+    restart: always
+    container_name: lyucean-blog-wordpress
+    profiles: [ "blog" ]
+    ports:
+      - "80:80"
     environment:
-      - NGINX_HOST=blog.lyucean.com
-      - NGINX_INDEX=index.html
-      - NGINX_ROOT=/usr/share/nginx/html
-      - NGINX_PORT=80
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+      WORDPRESS_DEBUG: ${WORDPRESS_DEBUG}
+    volumes:
+      - ./app/wordpress:/var/www/html
+      - ./app/my_plugin:/var/www/html/wp-content/plugins/my_plugin
+      - ./app/my_theme:/var/www/html/wp-content/themes/my_theme
     labels:
       - traefik.enable=true
       - traefik.http.routers.nginx-blog.rule=Host(`blog.lyucean.com`)
@@ -44,6 +50,24 @@ services:
       - traefik.http.services.nginx-blog.loadbalancer.server.port=80
     networks:
       - web
+
+  db:
+    image: mysql:5.7
+    restart: always
+    container_name: lyucean-blog-mysql
+    profiles: [ "blog" ]
+    environment:
+      MYSQL_DATABASE: ${WORDPRESS_DB_NAME}
+      MYSQL_USER: ${WORDPRESS_DB_USER}
+      MYSQL_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - web
+
+volumes:
+  db: # Определяем том для сохранения данных MySQL
 
 networks:
   web:

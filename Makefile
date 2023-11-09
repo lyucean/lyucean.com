@@ -19,9 +19,9 @@ help:
 # Если это developer окружение, то подключим debug профиль
 PROFILE =
 ifeq ($(ENVIRONMENT),developer)
-	PROFILE := -f docker-compose-blog.yml
+	PROFILE := --profile blog --profile dev
 else
-	PROFILE :=
+	PROFILE := --profile blog
 endif
 
 init: ## Инициализация проекта
@@ -45,6 +45,6 @@ docker-pull: ## Поучим все контейнеры
 	@echo "$(PURPLE) Поучим все контейнеры $(RESET)"
 	docker-compose $(ENV) $(PROFILE) pull --include-deps
 
-docker-down: ## Остановим контейнеры
+down: ## Остановим контейнеры
 	@echo "$(PURPLE) Остановим контейнеры $(RESET)"
 	docker-compose $(ENV) $(PROFILE) down --remove-orphans
