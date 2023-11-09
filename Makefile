@@ -45,6 +45,6 @@ docker-pull: ## Поучим все контейнеры
 	@echo "$(PURPLE) Поучим все контейнеры $(RESET)"
 	docker-compose $(ENV) $(PROFILE) pull --include-deps
 
-down: ## Остановим контейнеры
+docker-down: ## Остановим контейнеры
 	@echo "$(PURPLE) Остановим контейнеры $(RESET)"
 	docker-compose $(ENV) $(PROFILE) down --remove-orphans
