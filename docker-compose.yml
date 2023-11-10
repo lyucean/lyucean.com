@@ -29,8 +29,6 @@ services:
     restart: always
     container_name: lyucean-blog-wordpress
     profiles: [ "blog" ]
-    ports:
-      - "80:80"
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
