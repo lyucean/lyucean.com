@@ -7,6 +7,9 @@ include app/.env
 # И укажем его для docker-compose
 ENV = --env-file app/.env
 
+# Дата время
+BACKUP_DATETIME := $(shell date '+%Y-%m-%d')
+
 # Добавим красоты и чтоб наши команды было видно в теле скрипта
 PURPLE = \033[1;35m $(shell date +"%H:%M:%S") --
 RESET = --\033[0m
@@ -48,3 +51,11 @@ docker-pull: ## Поучим все контейнеры
 docker-down: ## Остановим контейнеры
 	@echo "$(PURPLE) Остановим контейнеры $(RESET)"
 	docker-compose $(ENV) $(PROFILE) down --remove-orphans
+
+backup-db:  ## Снимем дамп с БД
+	@echo "$(PURPLE) Снимем дамп с БД $(RESET)"
+	docker-compose $(ENV) exec db sh -c 'exec mysqldump -u root -p"${MYSQL_ROOT_PASSWORD}" "${WORDPRESS_DB_NAME}"' | gzip > "${BACKUPS_FOLDER}/LS_$(BACKUP_DATETIME).sql.gz"
+
+backup-file:  ## Снимем дамп с БД
+	@echo "$(PURPLE) Создадим архив файлов $(RESET)"
+	tar -cvzf ${BACKUPS_FOLDER}/LS_${BACKUP_DATETIME}.file.gz ./app/wordpress/wp-content/uploads/*
