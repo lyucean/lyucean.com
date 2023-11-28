@@ -25,9 +25,9 @@ services:
       - web
 
   wordpress:
-    image: wordpress
-    restart: always
     container_name: lyucean-blog-wordpress
+    image: wordpress
+    restart: unless-stopped
     profiles: [ "blog" ]
     environment:
       WORDPRESS_DB_HOST: db
@@ -50,9 +50,9 @@ services:
       - web
 
   db:
-    image: mysql:5.7
-    restart: always
     container_name: lyucean-blog-mysql
+    image: mysql:5.7
+    restart: unless-stopped
     profiles: [ "blog" ]
     environment:
       MYSQL_DATABASE: ${WORDPRESS_DB_NAME}
