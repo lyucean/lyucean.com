@@ -33,9 +33,6 @@ jobs:
           echo "WORDPRESS_DEBUG=${{ vars.WORDPRESS_DEBUG }}" >> .env
           echo "BACKUPS_FOLDER=${{ vars.BACKUPS_FOLDER }}" >> .env
 
-      - name: "Скопируйте .env в папку проекта."
-        run: cp .env ./app || ls ./app
-
       - name: "Создадим каталог проекта"
         uses: appleboy/ssh-action@master
         with:
@@ -44,6 +41,9 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: mkdir -p /home/user/lyucean.com
+
+      - name: "Скопируйте .env в папку проекта."
+        run: cp .env ./app || ls ./app
 
       - name: "Скопируйте файлы приложения на удаленный сервер."
         uses: appleboy/scp-action@master
