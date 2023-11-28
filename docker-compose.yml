@@ -29,6 +29,8 @@ services:
     image: wordpress
     restart: unless-stopped
     profiles: [ "blog" ]
+    ports:
+      - "8888:80"
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
@@ -58,7 +60,7 @@ services:
       MYSQL_DATABASE: ${WORDPRESS_DB_NAME}
       MYSQL_USER: ${WORDPRESS_DB_USER}
       MYSQL_PASSWORD: ${WORDPRESS_DB_PASSWORD}
-      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
       - db:/var/lib/mysql
     networks:
