@@ -34,7 +34,7 @@ jobs:
           echo "BACKUPS_FOLDER=${{ vars.BACKUPS_FOLDER }}" >> .env
 
       - name: "Скопируйте .env в папку проекта."
-        run: cp .env ./app
+        run: cp .env ./app || ls ./app
 
       - name: "Создадим каталог проекта"
         uses: appleboy/ssh-action@master
