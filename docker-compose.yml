@@ -42,7 +42,7 @@ services:
       - ./app/my_plugin:/var/www/html/wp-content/plugins/my_plugin
       - ./app/my_theme:/var/www/html/wp-content/themes/my_theme
     labels:
-      - traefik.enable=true
+      - traefik.enable=trueЛ
       - traefik.http.routers.nginx-blog.rule=Host(`blog.lyucean.com`)
       - traefik.http.routers.nginx-blog.entrypoints=websecure
       - traefik.http.routers.nginx-blog.tls=true

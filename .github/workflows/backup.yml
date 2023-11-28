@@ -2,30 +2,30 @@ name: Making a backup
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Запускать каждый день в полночь UTC
+    - cron: '0 3 * * *' # Запускать каждый день в полночь UTC
   push:
     paths:
       - ".github/workflows/backup.yml"
 
 jobs:
-#  backup-db:
-#    name: "Бекап БД"
-#    runs-on: ubuntu-latest
-#    environment: production  # использовать среду "production"
-#    steps:
-#      - name: "Подготовка репозитория"
-#        uses: actions/checkout@v3
-#
-#      - name: "Снимем дамп БД"
-#        uses: appleboy/ssh-action@master
-#        with:
-#          host: ${{ secrets.HOST }}
-#          username: ${{ secrets.USERNAME }}
-#          password: ${{ secrets.PASSWORD }}
-#          port: ${{ secrets.PORT }}
-#          script: |
-#            cd ${{ vars.PROJECT_PATH }}
-#            make backup-db
+  backup-db:
+    name: "Бекап БД"
+    runs-on: ubuntu-latest
+    environment: production  # использовать среду "production"
+    steps:
+      - name: "Подготовка репозитория"
+        uses: actions/checkout@v3
+
+      - name: "Снимем дамп БД"
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd ${{ vars.PROJECT_PATH }}
+            make backup-db
 
   backup-file:
     name: "Бекап файлов"
@@ -49,7 +49,7 @@ jobs:
   alert:
     name: "Уведомление"
     runs-on: ubuntu-latest
-    needs: [ backup-file ]
+    needs: [ backup-file, backup-db ]
     steps:
       - name: "Отправим сообщение через телеграм"
         uses: appleboy/telegram-action@master
