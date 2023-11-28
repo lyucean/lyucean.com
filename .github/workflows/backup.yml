@@ -49,7 +49,7 @@ jobs:
   alert:
     name: "Уведомление"
     runs-on: ubuntu-latest
-    needs: [ backup-file, backup-db ]
+    needs: [ backup-file ]
     steps:
       - name: "Отправим сообщение через телеграм"
         uses: appleboy/telegram-action@master
