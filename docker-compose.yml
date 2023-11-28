@@ -29,8 +29,8 @@ services:
     image: wordpress
     restart: unless-stopped
     profiles: [ "blog" ]
-    ports:
-      - "8888:80"
+#    ports:
+#      - "8888:80"
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
