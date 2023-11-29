@@ -43,11 +43,11 @@ services:
       - ./app/my_theme:/var/www/html/wp-content/themes/my_theme
     labels:
       - traefik.enable=trueЛ
-      - traefik.http.routers.nginx-blog.rule=Host(`blog.lyucean.com`)
-      - traefik.http.routers.nginx-blog.entrypoints=websecure
-      - traefik.http.routers.nginx-blog.tls=true
-      - traefik.http.routers.nginx-blog.tls.certresolver=letsencrypt
-      - traefik.http.services.nginx-blog.loadbalancer.server.port=80
+      - traefik.http.routers.wordpress.rule=Host(`blog.lyucean.com`)
+      - traefik.http.routers.wordpress.entrypoints=websecure
+      - traefik.http.routers.wordpress.tls=true
+      - traefik.http.routers.wordpress.tls.certresolver=letsencrypt
+      - traefik.http.services.wordpress.loadbalancer.server.port=80
     networks:
       - web
 
