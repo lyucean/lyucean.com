@@ -2,33 +2,10 @@ version: '3.3'
 
 services:
 
-  nginx-page:
-    image: nginx:latest
-    profiles: [ "page" ]
-    container_name: lyucean-nginx-page
-    hostname: lyucean.com
-    volumes:
-      - ./public:/usr/share/nginx/html
-    environment:
-      - NGINX_HOST=lyucean.com
-      - NGINX_INDEX=index.html
-      - NGINX_ROOT=/usr/share/nginx/html
-      - NGINX_PORT=80
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.nginx-page.rule=Host(`lyucean.com`)
-      - traefik.http.routers.nginx-page.entrypoints=websecure
-      - traefik.http.routers.nginx-page.tls=true
-      - traefik.http.routers.nginx-page.tls.certresolver=letsencrypt
-      - traefik.http.services.nginx-page.loadbalancer.server.port=80
-    networks:
-      - web
-
   wordpress:
     container_name: lyucean_blog_wp
     image: wordpress
     restart: unless-stopped
-    profiles: [ "blog" ]
 #    ports:
 #      - "8888:80"
     environment:
@@ -55,7 +32,6 @@ services:
     container_name: lyucean_blog_mysql
     image: mysql:5.7
     restart: unless-stopped
-    profiles: [ "blog" ]
     environment:
       MYSQL_DATABASE: ${WORDPRESS_DB_NAME}
       MYSQL_USER: ${WORDPRESS_DB_USER}

@@ -33,8 +33,8 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          source: "./public"
-          target: "/var/www/lyucean.com/public"
+          source: "./page"
+          target: "/var/www/lyucean.com/page"
 
   publish:
     runs-on: ubuntu-latest
@@ -48,8 +48,8 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            cd /var/www/lyucean.com/
-            docker-compose --profile page up -d
+            cd /var/www/lyucean.com/page
+            docker-compose up -d
             docker-compose ps
 
   test-single:
