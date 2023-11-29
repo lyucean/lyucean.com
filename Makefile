@@ -24,7 +24,7 @@ PROFILE =
 ifeq ($(ENVIRONMENT),developer)
 	PROFILE := --profile blog --profile dev
 else
-	PROFILE := --profile blog
+	PROFILE := --profile blog --profile page
 endif
 
 init: ## Инициализация проекта

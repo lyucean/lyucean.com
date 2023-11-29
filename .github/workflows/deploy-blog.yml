@@ -43,7 +43,7 @@ jobs:
           script: mkdir -p /home/user/lyucean.com
 
       - name: "Скопируйте .env в папку проекта."
-        run: cp .env ./app || ls ./app
+        run: mv .env ./app || ls ./app
 
       - name: "Скопируйте файлы приложения на удаленный сервер."
         uses: appleboy/scp-action@master
