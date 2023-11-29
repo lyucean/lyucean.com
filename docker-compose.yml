@@ -25,14 +25,14 @@ services:
       - web
 
   wordpress:
-    container_name: lyucean-blog-wordpress
+    container_name: lyucean_blog_wp
     image: wordpress
     restart: unless-stopped
     profiles: [ "blog" ]
 #    ports:
 #      - "8888:80"
     environment:
-      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_HOST: mysql
       WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
       WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
       WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
@@ -51,8 +51,8 @@ services:
     networks:
       - web
 
-  db:
-    container_name: lyucean-blog-mysql
+  mysql:
+    container_name: lyucean_blog_mysql
     image: mysql:5.7
     restart: unless-stopped
     profiles: [ "blog" ]
@@ -62,12 +62,12 @@ services:
       MYSQL_PASSWORD: ${WORDPRESS_DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
-      - db:/var/lib/mysql
+      - lyucean-mysql-data:/var/lib/mysql
     networks:
       - web
 
 volumes:
-  db: # Определяем том для сохранения данных MySQL
+  lyucean-mysql-data: # Определяем том для сохранения данных MySQL
 
 networks:
   web:
