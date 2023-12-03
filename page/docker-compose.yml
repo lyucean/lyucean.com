@@ -7,7 +7,7 @@ services:
     image: nginx:latest
     hostname: lyucean.com
     volumes:
-      - ./page:/usr/share/nginx/html
+      - ./:/usr/share/nginx/html
     environment:
       - NGINX_HOST=lyucean.com
       - NGINX_INDEX=index.html
