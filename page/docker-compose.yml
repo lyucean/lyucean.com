@@ -4,7 +4,6 @@ services:
 
   nginx-page:
     image: nginx:latest
-    profiles: [ "page" ]
     container_name: lyucean-nginx-page
     hostname: lyucean.com
     volumes:
@@ -27,3 +26,5 @@ services:
 networks:
   web:
     external: true # стандартная для всех на этом сервере
+
+
