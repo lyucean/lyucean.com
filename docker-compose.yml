@@ -6,8 +6,6 @@ services:
     container_name: lyucean_blog_wp
     image: wordpress
     restart: unless-stopped
-#    ports:
-#      - "8888:80"
     environment:
       WORDPRESS_DB_HOST: mysql
       WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
@@ -19,7 +17,7 @@ services:
       - ./app/my_plugin:/var/www/html/wp-content/plugins/my_plugin
       - ./app/my_theme:/var/www/html/wp-content/themes/my_theme
     labels:
-      - traefik.enable=trueЛ
+      - traefik.enable=true
       - traefik.http.routers.wordpress.rule=Host(`blog.lyucean.com`)
       - traefik.http.routers.wordpress.entrypoints=websecure
       - traefik.http.routers.wordpress.tls=true
