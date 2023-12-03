@@ -37,7 +37,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           source: "./page"
-          target: "/var/www/lyucean.com/"
+          target: "/var/www/lyucean.com"
 
   publish:
     runs-on: ubuntu-latest
