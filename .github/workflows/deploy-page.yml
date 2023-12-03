@@ -38,7 +38,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           rm: true
           port: ${{ secrets.PORT }}
-          source: "page/*"
+          source: "./page/*"
           target: "/var/www/lyucean_page"
 
   publish:
