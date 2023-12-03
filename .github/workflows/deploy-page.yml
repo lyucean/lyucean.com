@@ -30,24 +30,15 @@ jobs:
             rm -rf /var/www/lyucean_page
             mkdir -p /var/www/lyucean_page
 
-#      - name: "Скопируем docker-compose.yml на удаленный сервер."
-#        uses: appleboy/scp-action@master
-#        with:
-#          host: ${{ secrets.HOST }}
-#          username: ${{ secrets.USERNAME }}
-#          password: ${{ secrets.PASSWORD }}
-#          port: ${{ secrets.PORT }}
-#          source: "./page/*"
-#          target: "/var/www/lyucean_page"
-
       - name: "Скопируем docker-compose.yml на удаленный сервер."
-        uses: appleboy/scp-action@v0.1.4
+        uses: appleboy/scp-action@v3
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
+          rm: true
           port: ${{ secrets.PORT }}
-          source: "page/*"
+          source: "page"
           target: "/var/www/lyucean_page"
 
   publish:
