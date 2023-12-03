@@ -24,7 +24,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            cd ${{ vars.PROJECT_PATH }}
+            cd /var/www/lyucean.com/
             make backup-db
 
   backup-file:
@@ -43,7 +43,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            cd ${{ vars.PROJECT_PATH }}
+            cd /var/www/lyucean.com/
             make backup-file
 
   alert:
