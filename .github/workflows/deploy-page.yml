@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Инициализация"
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
 
       - name: "Очистим каталог и директорию"
         uses: appleboy/ssh-action@master
@@ -37,7 +37,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          source: "./*"
+          source: "./page/*"
           target: "/var/www/lyucean_page"
 
   publish:
