@@ -7,7 +7,7 @@ services:
     image: nginx:latest
     hostname: lyucean.com
     volumes:
-      - ./page:/usr/share/nginx/html
+      - ./:/usr/share/nginx/html
     environment:
       - NGINX_HOST=lyucean.com
       - NGINX_INDEX=index.html
@@ -20,11 +20,5 @@ services:
       - traefik.http.routers.nginx-page.tls=true
       - traefik.http.routers.nginx-page.tls.certresolver=letsencrypt
       - traefik.http.services.nginx-page.loadbalancer.server.port=80
-    networks:
-      - web
-
-networks:
-  web:
-    external: true # стандартная для всех на этом сервере
 
 
