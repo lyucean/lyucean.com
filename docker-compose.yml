@@ -18,7 +18,7 @@ services:
       - ./app/my_theme:/var/www/html/wp-content/themes/my_theme
     labels:
       - traefik.enable=true
-      - traefik.http.routers.wordpress.rule=Host(`blog.lyucean.com`)
+      - traefik.http.routers.wordpress.rule=Host(`lyucean.com`)
       - traefik.http.routers.wordpress.entrypoints=websecure
       - traefik.http.routers.wordpress.tls=true
       - traefik.http.routers.wordpress.tls.certresolver=letsencrypt

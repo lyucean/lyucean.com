@@ -5,11 +5,6 @@ concurrency: production
 on:
   push:
     branches: [ "main" ]
-    paths:
-      - ".github/workflows/deploy-blog.yml"
-      - "docker-compose.yml"
-      - "Makefile"
-      - "app/*"
   pull_request:
     branches: [ "main" ]
 
@@ -82,7 +77,7 @@ jobs:
       - name: Check website
         uses: wei/curl@v1
         with:
-          args:  https://blog.lyucean.com/
+          args:  https://lyucean.com/
 
   alert:
     name: Alert
