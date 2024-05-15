@@ -4,7 +4,7 @@
 # Подключим файл конфигурации
 include app/.env
 
-# И укажем его для docker-compose
+# И укажем его для docker compose
 ENV = --env-file app/.env
 
 # Дата время
@@ -38,23 +38,23 @@ restart: docker-down docker-up
 
 docker-up: ## Поднимем контейнеры
 	@echo "$(PURPLE) Поднимем контейнеры $(RESET)"
-	docker-compose $(ENV) $(PROFILE) up -d
+	docker compose $(ENV) $(PROFILE) up -d
 
 docker-build: ## Соберём образы
 	@echo "$(PURPLE) Соберём образы $(RESET)"
-	docker-compose $(ENV) $(PROFILE) build
+	docker compose $(ENV) $(PROFILE) build
 
 docker-pull: ## Поучим все контейнеры
 	@echo "$(PURPLE) Поучим все контейнеры $(RESET)"
-	docker-compose $(ENV) $(PROFILE) pull --include-deps
+	docker compose $(ENV) $(PROFILE) pull --include-deps
 
 docker-down: ## Остановим контейнеры
 	@echo "$(PURPLE) Остановим контейнеры $(RESET)"
-	docker-compose $(ENV) $(PROFILE) down --remove-orphans
+	docker compose $(ENV) $(PROFILE) down --remove-orphans
 
 backup-db:  ## Снимем дамп с БД
 	@echo "$(PURPLE) Снимем дамп с БД $(RESET)"
-	docker-compose $(ENV) exec mysql sh -c 'exec mysqldump -u root -p"${MYSQL_ROOT_PASSWORD}" "${WORDPRESS_DB_NAME}"' | gzip > "${BACKUPS_FOLDER}/LS_$(BACKUP_DATETIME).sql.gz"
+	docker compose $(ENV) exec mysql sh -c 'exec mysqldump -u root -p"${MYSQL_ROOT_PASSWORD}" "${WORDPRESS_DB_NAME}"' | gzip > "${BACKUPS_FOLDER}/LS_$(BACKUP_DATETIME).sql.gz"
 
 backup-file:  ## Снимем дамп с БД
 	@echo "$(PURPLE) Создадим архив файлов $(RESET)"
@@ -63,7 +63,7 @@ backup-file:  ## Снимем дамп с БД
 import-dump:  ## Импорт БД из сегодняшнего дампа
 	@echo "$(PURPLE) Импорт БД из дампа $(RESET)"
 	@if [ -f "app/db/dump/RIB_test.sql" ]; then \
-		zcat LS_$(BACKUP_DATETIME).sql.gz | docker-compose $(ENV) exec -T mysql sh -c 'exec mysql -u root -p"${MYSQL_ROOT_PASSWORD}" "${WORDPRESS_DB_NAME}"'; \
+		zcat LS_$(BACKUP_DATETIME).sql.gz | docker compose $(ENV) exec -T mysql sh -c 'exec mysql -u root -p"${MYSQL_ROOT_PASSWORD}" "${WORDPRESS_DB_NAME}"'; \
 	else \
 		echo "Дампа за сегодня нет!"; \
 	fi
