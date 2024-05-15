@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: "Инициализация репозитория"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: "Заполнение переменных среды"
         run: |
@@ -56,7 +56,7 @@ jobs:
     needs: [deploy]
     environment: production  # использовать среду "production"
     steps:
-      - name: "Создадим веб-сеть и запустите docker-compose."
+      - name: "Создадим веб-сеть и запустите docker compose."
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
@@ -67,7 +67,7 @@ jobs:
             docker network ls | grep web || docker network create web
             cd /var/www/lyucean.com/
             make init
-            docker-compose ps
+            docker compose ps
 
   test:
     name: "Проверим, что наш блог запущен"

@@ -45,7 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [deploy]
     steps:
-      - name: "Поднимем сеть, если её нет и запустим docker-compose."
+      - name: "Поднимем сеть, если её нет и запустим docker compose."
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
@@ -55,8 +55,8 @@ jobs:
           script: |
             docker network ls | grep web || docker network create web
             cd /var/www/lyucean_page/page
-            docker-compose up -d
-            docker-compose ps
+            docker compose up -d
+            docker compose ps
 
   test:
     name: "Тест"
