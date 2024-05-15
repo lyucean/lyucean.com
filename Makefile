@@ -54,8 +54,16 @@ docker-down: ## Остановим контейнеры
 
 backup-db:  ## Снимем дамп с БД
 	@echo "$(PURPLE) Снимем дамп с БД $(RESET)"
-	docker-compose $(ENV) exec db sh -c 'exec mysqldump -u root -p"${MYSQL_ROOT_PASSWORD}" "${WORDPRESS_DB_NAME}"' | gzip > "${BACKUPS_FOLDER}/LS_$(BACKUP_DATETIME).sql.gz"
+	docker-compose $(ENV) exec mysql sh -c 'exec mysqldump -u root -p"${MYSQL_ROOT_PASSWORD}" "${WORDPRESS_DB_NAME}"' | gzip > "${BACKUPS_FOLDER}/LS_$(BACKUP_DATETIME).sql.gz"
 
 backup-file:  ## Снимем дамп с БД
 	@echo "$(PURPLE) Создадим архив файлов $(RESET)"
 	tar -cvzf ${BACKUPS_FOLDER}/LS_${BACKUP_DATETIME}.file.gz ./app/wordpress/wp-content/uploads/*
+
+import-dump:  ## Импорт БД из сегодняшнего дампа
+	@echo "$(PURPLE) Импорт БД из дампа $(RESET)"
+	@if [ -f "app/db/dump/RIB_test.sql" ]; then \
+		zcat LS_$(BACKUP_DATETIME).sql.gz | docker-compose $(ENV) exec -T mysql sh -c 'exec mysql -u root -p"${MYSQL_ROOT_PASSWORD}" "${WORDPRESS_DB_NAME}"'; \
+	else \
+		echo "Дампа за сегодня нет!"; \
+	fi
