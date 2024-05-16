@@ -33,7 +33,7 @@ jobs:
     environment: production  # использовать среду "production"
     steps:
       - name: "Подготовка репозитория"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: "Создаём архив"
         uses: appleboy/ssh-action@master
