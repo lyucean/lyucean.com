@@ -54,11 +54,11 @@ docker-down: ## Остановим контейнеры
 
 backup-db:  ## Снимем дамп с БД
 	@echo "$(PURPLE) Снимем дамп с БД $(RESET)"
-	docker compose $(ENV) exec mysql sh -c 'exec mysqldump -u root -p"${MYSQL_ROOT_PASSWORD}" "${WORDPRESS_DB_NAME}"' | gzip > "${BACKUPS_FOLDER}/LS_$(BACKUP_DATETIME).sql.gz"
+	docker compose $(ENV) exec mysql sh -c 'exec mysqldump -u root -p"${MYSQL_ROOT_PASSWORD}" "${WORDPRESS_DB_NAME}"' > "${BACKUPS_FOLDER}/$(BACKUP_DATETIME)_LS.sql"
 
 backup-file:  ## Снимем дамп с БД
 	@echo "$(PURPLE) Создадим архив файлов $(RESET)"
-	tar -cvzf ${BACKUPS_FOLDER}/LS_${BACKUP_DATETIME}.file.gz ./app/wordpress/wp-content/uploads/*
+	tar -cvzf ${BACKUPS_FOLDER}/${BACKUP_DATETIME}_LS.file.gz ./app/wordpress/wp-content/uploads/*
 
 import-dump:  ## Импорт БД из сегодняшнего дампа
 	@echo "$(PURPLE) Импорт БД из дампа $(RESET)"
