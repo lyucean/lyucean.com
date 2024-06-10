@@ -62,8 +62,8 @@ backup-file:  ## Снимем дамп с БД
 
 import-dump:  ## Импорт БД из сегодняшнего дампа
 	@echo "$(PURPLE) Импорт БД из дампа $(RESET)"
-	@if [ -f "${BACKUPS_FOLDER}/LS_$(BACKUP_DATETIME).sql.gz" ]; then \
-		zcat "${BACKUPS_FOLDER}/LS_$(BACKUP_DATETIME).sql.gz" | docker compose $(ENV) exec -T mysql sh -c 'exec mysql -u root -p"${MYSQL_ROOT_PASSWORD}" "${WORDPRESS_DB_NAME}"'; \
+	@if [ -f "${BACKUPS_FOLDER}/$(BACKUP_DATETIME)_LS.sql" ]; then \
+		cat "${BACKUPS_FOLDER}/$(BACKUP_DATETIME)_LS.sql" > docker compose $(ENV) exec -T mysql sh -c 'exec mysql -u root -p"${MYSQL_ROOT_PASSWORD}" "${WORDPRESS_DB_NAME}"'; \
 	else \
 		echo "Дампа за сегодня нет!"; \
 	fi
