@@ -39,7 +39,7 @@ services:
       - lyucean-mysql-data:/var/lib/mysql
     networks:
       - web
-      -
+
   ssh:
     container_name: lyucean_blog_ssh
     image: rastasheep/ubuntu-sshd:18.04  # Образ легковесного SSH-сервера
