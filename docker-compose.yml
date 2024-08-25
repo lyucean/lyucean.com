@@ -52,7 +52,7 @@ services:
       - ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}  # Устанавливаем пароль для root (замените на свой)
     networks:
       - web
-    command: /usr/sbin/sshd -D
+    command: /bin/bash -c "sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config && /usr/sbin/sshd -D"
 
 
 volumes:
