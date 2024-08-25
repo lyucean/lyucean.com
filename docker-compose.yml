@@ -39,6 +39,21 @@ services:
       - lyucean-mysql-data:/var/lib/mysql
     networks:
       - web
+      -
+  ssh:
+    container_name: lyucean_blog_ssh
+    image: rastasheep/ubuntu-sshd:18.04  # Образ легковесного SSH-сервера
+    restart: unless-stopped
+    ports:
+      - "2222:22"  # Пробрасываем порт 22 контейнера на порт 2222 хоста
+    volumes:
+      - ./:/project  # Монтируем корневую папку проекта в контейнер
+    environment:
+      - ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}  # Устанавливаем пароль для root (замените на свой)
+    networks:
+      - web
+    command: /usr/sbin/sshd -D
+
 
 volumes:
   lyucean-mysql-data: # Определяем том для сохранения данных MySQL
