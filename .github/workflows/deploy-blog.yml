@@ -66,7 +66,7 @@ jobs:
           script: |
             docker network ls | grep web || docker network create web
             cd /var/www/lyucean.com/
-            make init
+            make update
             docker compose ps
 
   test:
