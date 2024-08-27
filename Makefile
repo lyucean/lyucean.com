@@ -22,9 +22,9 @@ help:
 # Если это developer окружение, то подключим debug профиль
 PROFILE =
 ifeq ($(ENVIRONMENT),developer)
-	PROFILE := --profile blog --profile dev
+	PROFILE := --profile dev
 else
-	PROFILE := --profile blog --profile page
+	PROFILE := --profile prod
 endif
 
 init: ## Инициализация проекта
@@ -52,13 +52,14 @@ docker-down: ## Остановим контейнеры
 	@echo "$(PURPLE) Остановим контейнеры $(RESET)"
 	docker compose $(ENV) $(PROFILE) down --remove-orphans
 
+# Команды для работы с дампами на продекшене
 backup-db:  ## Снимем дамп с БД
 	@echo "$(PURPLE) Снимем дамп с БД $(RESET)"
 	docker compose $(ENV) exec mysql sh -c 'exec mysqldump -u root -p"${MYSQL_ROOT_PASSWORD}" "${WORDPRESS_DB_NAME}"' > "${BACKUPS_FOLDER}/$(BACKUP_DATETIME)_LS.sql"
 
-backup-file:  ## Снимем дамп с БД
+backup-file:  ## Снимем дамп файлов с папки wordpress
 	@echo "$(PURPLE) Создадим архив файлов $(RESET)"
-	tar -cvzf ${BACKUPS_FOLDER}/${BACKUP_DATETIME}_LS.file.gz ./app/wordpress/wp-content/uploads/*
+	tar -cvzf ${BACKUPS_FOLDER}/${BACKUP_DATETIME}_LS.file.gz ./app/wordpress
 
 import-dump:  ## Импорт БД из сегодняшнего дампа
 	@echo "$(PURPLE) Импорт БД из дампа $(RESET)"
