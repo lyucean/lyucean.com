@@ -99,7 +99,7 @@ fetch-backup: fresh-backup  # Скачаем дамп с удаленного с
 
 update-backup: fetch-backup # Распакуем архив на локальной машине
 	@echo "$(PURPLE) Удаляем все лишние файлы в папке перед распаковкой $(RESET)"
-	rm -rf ./app/wordpress
+	rm -rf ./app/wordpress/*
 	@echo "$(PURPLE) Распаковываем архив на локальной машине $(RESET)"
 	tar -xzf ./backup/${BACKUP_DATETIME}_LS.file.gz -C ./app/wordpress
 
