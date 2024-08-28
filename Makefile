@@ -52,7 +52,7 @@ docker-down: ## Остановим контейнеры
 # Команды для работы с дампами на продакшене ----------------------------------------------------------------------------
 backup-db:  ## Снимем дамп с БД
 	@echo "$(PURPLE) Снимем дамп с БД $(RESET)"
-	docker compose $(ENV) exec mysql sh -c 'exec mysqldump -u root -p"${MYSQL_ROOT_PASSWORD}" "${WORDPRESS_DB_NAME}"' > "${BACKUPS_FOLDER}/$(BACKUP_DATETIME)_LS.sql"
+	@docker compose $(ENV) exec mysql sh -c 'exec mysqldump -u root -p"${MYSQL_ROOT_PASSWORD}" "${WORDPRESS_DB_NAME}"' > "${BACKUPS_FOLDER}/$(BACKUP_DATETIME)_LS.sql"
 
 backup-file:  ## Снимем дамп файлов с папки wordpress
 	@echo "$(PURPLE) Создадим архив файлов $(RESET)"
@@ -79,9 +79,12 @@ ifeq ($(ENVIRONMENT), development)
 	@$(MAKE) docker-down
 	@$(MAKE) docker-pull
 	@$(MAKE) docker-build
+	@$(MAKE) docker-up-mysql
 	@$(MAKE) update-backup
 	@$(MAKE) update-dump
+	@$(MAKE) update-urls
 	@$(MAKE) update
+	@$(MAKE) open-url
 else
 	@echo "Команда init может быть запущена только в окружении development. Текущее окружение: $(ENVIRONMENT)"
 endif
@@ -90,7 +93,7 @@ fresh-backup:
 	@echo "$(PURPLE) Запуск команды 'make backup-db и backup-file' на удаленном сервере $(RESET)"
 	sshpass -p"${SSH_PASSWORD}" ssh ${SSH_USER}@${SSH_HOST} "cd ${SSH_FOLDER} && make backup-db && make backup-file"
 
-fetch-backup: fresh-backup  # Скачаем дамп с удаленного сервера на локальную машину
+fetch-backup: fresh-backup docker-up-mysql # Скачаем дамп с удаленного сервера на локальную машинуЗапускаем mysql заранее, чтоб успел развернутся
 	@mkdir -p backup
 	@echo "$(PURPLE) Скачиваем дамп с удаленного сервера $(RESET)"
 	sshpass -p"${SSH_PASSWORD}" scp ${SSH_USER}@${SSH_HOST}:${BACKUPS_FOLDER}/$(BACKUP_DATETIME)_LS.sql ./backup
@@ -107,10 +110,22 @@ docker-up-mysql: ## Поднимем базу данных для разрабо
 	@echo "$(PURPLE) Поднимем базу данных $(RESET)"
 	docker compose $(ENV) $(PROFILE) up -d mysql_dev
 
-update-dump: docker-up-mysql  ## Импорт БД из дампа
+update-dump:  ## Импорт БД из дампа
 	@echo "$(PURPLE) Импорт БД из дампа $(RESET)"
-	@if [ -f "$(BACKUP_DATETIME)_LS.sql" ]; then \
-		docker compose $(ENV) exec -T mysql_dev sh -c 'exec mysql -u root -p"$(MYSQL_ROOT_PASSWORD)" "$(WORDPRESS_DB_NAME)"' < ./backup/$(BACKUP_DATETIME)_LS.sql; \
-	else \
-		echo "Дампа за сегодня нет!"; \
-	fi
+	@docker compose $(ENV) exec -T mysql_dev sh -c 'exec mysql -u root -p"$(MYSQL_ROOT_PASSWORD)" "$(WORDPRESS_DB_NAME)"' < ./backup/$(BACKUP_DATETIME)_LS.sql;
+
+update-urls:
+	@echo "$(PURPLE) Обновление URL-адресов WordPress для окружения $(ENVIRONMENT)... $(RESET)"
+	@docker compose $(ENV) exec -T mysql_dev sh -c "mysql -u root -p'$(MYSQL_ROOT_PASSWORD)' $(WORDPRESS_DB_NAME) -e \"UPDATE wp_options SET option_value = 'http://lyucean.loc' WHERE option_name = 'siteurl';\""
+	@docker compose $(ENV) exec -T mysql_dev sh -c "mysql -u root -p'$(MYSQL_ROOT_PASSWORD)' $(WORDPRESS_DB_NAME) -e \"UPDATE wp_options SET option_value = 'http://lyucean.loc' WHERE option_name = 'home';\""
+
+# Цель для открытия URL в браузере
+open-url:
+	@echo "Открытие URL http://lyucean.loc/ в браузере..."
+ifeq ($(shell uname), Darwin)
+	@open http://lyucean.loc/
+else
+ifeq ($(shell uname), Linux)
+	@xdg-open http://lyucean.loc/
+endif
+endif
