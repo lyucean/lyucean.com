@@ -11,7 +11,6 @@ services:
       WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
       WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
       WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
-      WORDPRESS_DEBUG: ${WORDPRESS_DEBUG}
     volumes:
       - ./app/wordpress:/var/www/html
       - ./app/my_plugin:/var/www/html/wp-content/plugins/my_plugin
@@ -25,10 +24,32 @@ services:
       - traefik.http.services.wordpress.loadbalancer.server.port=80
     networks:
       - web
+    profiles:
+      - prod
+
+  wordpress_dev:
+    container_name: lyucean_blog_wp_dev
+    image: wordpress:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"  # Пробрасываем порт 8080 на хосте к порту 80 внутри контейнера
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+      WORDPRESS_DEBUG: 1  # Включаем режим отладки WordPress
+    volumes:
+      - ./app/wordpress:/var/www/html  # Монтируем локальную папку с WordPress
+    networks:
+      - web
+    profiles:
+      - dev  # запускаем только в локальном окружении
 
   mysql:
     container_name: lyucean_blog_mysql
-    image: mysql:5.7
+    image: mariadb:10.5  # Используем MariaDB вместо MySQL
+    platform: linux/arm64  # Указываем платформу для ARM
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: ${WORDPRESS_DB_NAME}
@@ -39,6 +60,9 @@ services:
       - lyucean-mysql-data:/var/lib/mysql
     networks:
       - web
+    profiles:
+      - prod
+      - dev
 
 volumes:
   lyucean-mysql-data: # Определяем том для сохранения данных MySQL
