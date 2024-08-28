@@ -49,7 +49,7 @@ services:
     ports:
       - "80:80"  # Пробрасываем порт 8080 на хосте к порту 80 внутри контейнера
     environment:
-      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_HOST: mysql_dev
       WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
       WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
       WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
