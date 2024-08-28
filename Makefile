@@ -58,11 +58,10 @@ backup-file:  ## Снимем дамп файлов с папки wordpress
 	@echo "$(PURPLE) Создадим архив файлов $(RESET)"
 	tar -czf ${BACKUPS_FOLDER}/${BACKUP_DATETIME}_LS.file.gz \
 		--exclude='app/wordpress/wp-content/cache' \
-		--exclude='app/wordpress/wp-content/cache' \
-		--exclude='app/wordpress/wp-content/plugins/*/cache/' \
-		--exclude='app/wordpress/wp-content/tmp' \
-		--exclude='app/wordpress/wp-content/upgrade/' \
 		--exclude='app/wordpress/wp-content/backup' \
+		--exclude='app/wordpress/wp-content/upgrade-temp-backup' \
+		--exclude='app/wordpress/wp-content/upgrade/' \
+		--exclude='app/wordpress/wp-content/plugins/*/cache/' \
 		--exclude='app/wordpress/wp-content/backups' -C ./app/wordpress
 
 import-backup:  ## Импорт БД из сегодняшнего дампа (удобно восстанавливать, если что-то сломал в настройках)
