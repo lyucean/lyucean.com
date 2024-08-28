@@ -72,6 +72,15 @@ backup-file:  ## Снимем дамп файлов с папки wordpress
 		--exclude='app/wordpress/wp-content/backup' \
 		--exclude='app/wordpress/wp-content/backups' -C ./app/wordpress
 
+import-backup:  ## Импорт БД из сегодняшнего дампа (удобно восстанавливать, если что-то сломал в настройках)
+	@echo "$(PURPLE) Импорт БД из дампа $(RESET)"
+	@if [ -f "${BACKUPS_FOLDER}/$(BACKUP_DATETIME)_LS.sql" ]; then \
+		cat "${BACKUPS_FOLDER}/$(BACKUP_DATETIME)_LS.sql" > docker compose $(ENV) exec -T mysql sh -c 'exec mysql -u root -p"${MYSQL_ROOT_PASSWORD}" "${WORDPRESS_DB_NAME}"'; \
+	else \
+		echo "Дампа за сегодня нет!"; \
+	fi
+
+
 # Команды для инициализации проекта на локальной машине -----------------------------------------------------------------
 init: ## Инициализация проекта для локальной разработки
 init: docker-down docker-pull docker-build update-backup update-dump restart
