@@ -49,14 +49,6 @@ docker-down: ## Остановим контейнеры
 	@echo "$(PURPLE) Остановим контейнеры $(RESET)"
 	docker compose $(ENV) $(PROFILE) down --remove-orphans
 
-docker-up-mysql: ## Поднимем базу данных
-	@echo "$(PURPLE) Поднимем базу данных $(RESET)"
-	docker compose $(ENV) $(PROFILE) up -d mysql
-
-docker-up-wordpress_dev: ## Поднимем базу данных
-	@echo "$(PURPLE) Поднимем базу данных $(RESET)"
-	docker compose $(ENV) $(PROFILE) up -d wordpress
-
 # Команды для работы с дампами на продакшене ----------------------------------------------------------------------------
 backup-db:  ## Снимем дамп с БД
 	@echo "$(PURPLE) Снимем дамп с БД $(RESET)"
@@ -66,7 +58,8 @@ backup-file:  ## Снимем дамп файлов с папки wordpress
 	@echo "$(PURPLE) Создадим архив файлов $(RESET)"
 	tar -czf ${BACKUPS_FOLDER}/${BACKUP_DATETIME}_LS.file.gz \
 		--exclude='app/wordpress/wp-content/cache' \
-		--exclude='wp-content/plugins/*/cache/' \
+		--exclude='app/wordpress/wp-content/cache' \
+		--exclude='app/wordpress/wp-content/plugins/*/cache/' \
 		--exclude='app/wordpress/wp-content/tmp' \
 		--exclude='app/wordpress/wp-content/upgrade/' \
 		--exclude='app/wordpress/wp-content/backup' \
@@ -82,7 +75,7 @@ import-backup:  ## Импорт БД из сегодняшнего дампа (�
 
 # Команды для инициализации проекта на локальной машине -----------------------------------------------------------------
 init: ## Инициализация проекта для локальной разработки
-init: docker-down docker-pull docker-build update-backup update-dump restart
+init: docker-down docker-pull docker-build update-backup update-dump update
 
 fresh-backup:
 	@echo "$(PURPLE) Запуск команды 'make backup-db и backup-file' на удаленном сервере $(RESET)"
@@ -99,12 +92,16 @@ update-backup: fetch-backup # Распакуем архив на локальн�
 	@echo "$(PURPLE) Удаляем все лишние файлы в папке перед распаковкой $(RESET)"
 	rm -rf ./app/wordpress
 	@echo "$(PURPLE) Распаковываем архив на локальной машине $(RESET)"
-	tar -xzf ./backup/${BACKUP_DATETIME}_LS.file.gz -C ./
+	tar -xzf ./backup/${BACKUP_DATETIME}_LS.file.gz -C ./app/wordpress
+
+docker-up-mysql: ## Поднимем базу данных для разработки
+	@echo "$(PURPLE) Поднимем базу данных $(RESET)"
+	docker compose $(ENV) $(PROFILE) up -d mysql_dev
 
 update-dump: docker-up-mysql  ## Импорт БД из дампа
 	@echo "$(PURPLE) Импорт БД из дампа $(RESET)"
 	@if [ -f "$(BACKUP_DATETIME)_LS.sql" ]; then \
-		docker compose $(ENV) exec -T mysql sh -c 'exec mysql -u root -p"$(MYSQL_ROOT_PASSWORD)" "$(WORDPRESS_DB_NAME)"' < ./backup/$(BACKUP_DATETIME)_LS.sql; \
+		docker compose $(ENV) exec -T mysql_dev sh -c 'exec mysql -u root -p"$(MYSQL_ROOT_PASSWORD)" "$(WORDPRESS_DB_NAME)"' < ./backup/$(BACKUP_DATETIME)_LS.sql; \
 	else \
 		echo "Дампа за сегодня нет!"; \
 	fi

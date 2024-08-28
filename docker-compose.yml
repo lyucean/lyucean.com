@@ -1,4 +1,3 @@
-version: '3.3'
 
 services:
 
@@ -27,6 +26,22 @@ services:
     profiles:
       - prod
 
+  mysql:
+    container_name: lyucean_blog_mysql
+    image: mysql:5.7
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${WORDPRESS_DB_NAME}
+      MYSQL_USER: ${WORDPRESS_DB_USER}
+      MYSQL_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - lyucean-mysql-data:/var/lib/mysql
+    networks:
+      - web
+    profiles:
+      - prod
+
   wordpress_dev:
     container_name: lyucean_blog_wp_dev
     image: wordpress:latest
@@ -46,11 +61,10 @@ services:
     profiles:
       - dev  # запускаем только в локальном окружении
 
-  mysql:
-    container_name: lyucean_blog_mysql
-    image: mysql:5.7
-#    image: mariadb:10.5  # Используем MariaDB вместо MySQL
-#    platform: linux/arm64  # Указываем платформу для ARM
+  mysql_dev:
+    container_name: lyucean_blog_mysql_dev
+    image: mariadb:10.5  # Используем MariaDB вместо MySQL
+    platform: linux/arm64  # Указываем платформу для ARM
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: ${WORDPRESS_DB_NAME}
@@ -59,10 +73,11 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
       - lyucean-mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
     networks:
       - web
     profiles:
-      - prod
       - dev
 
 volumes:
