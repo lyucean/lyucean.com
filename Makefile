@@ -56,7 +56,7 @@ backup-db:  ## Снимем дамп с БД
 
 backup-file:  ## Снимем дамп файлов с папки wordpress
 	@echo "$(PURPLE) Создадим архив файлов $(RESET)"
-	tar -czf ${BACKUPS_FOLDER}/${BACKUP_DATETIME}_LS.file.gz \
+	tar --warning=no-file-changed -czf ${BACKUPS_FOLDER}/${BACKUP_DATETIME}_LS.file.gz \
 		--exclude='app/wordpress/wp-content/cache' \
 		--exclude='app/wordpress/wp-content/backup' \
 		--exclude='app/wordpress/wp-content/upgrade-temp-backup' \
