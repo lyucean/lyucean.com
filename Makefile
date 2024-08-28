@@ -104,8 +104,3 @@ update-dump: docker-up-mysql  ## Импорт БД из дампа
 	else \
 		echo "Дампа за сегодня нет!"; \
 	fi
-
-cleanup-backup:## Удалим архив после распаковки
-	@echo "$(PURPLE) Удаляем архив и дамп после распаковки $(RESET)"
-	rm -f ./backup/${BACKUP_DATETIME}_LS.file.gz
-	rm -f ./backup/$(BACKUP_DATETIME)_LS.sql
