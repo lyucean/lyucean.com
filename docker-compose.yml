@@ -48,8 +48,9 @@ services:
 
   mysql:
     container_name: lyucean_blog_mysql
-    image: mariadb:10.5  # Используем MariaDB вместо MySQL
-    platform: linux/arm64  # Указываем платформу для ARM
+    image: mysql:5.7
+#    image: mariadb:10.5  # Используем MariaDB вместо MySQL
+#    platform: linux/arm64  # Указываем платформу для ARM
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: ${WORDPRESS_DB_NAME}
