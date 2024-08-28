@@ -62,7 +62,7 @@ backup-file:  ## Снимем дамп файлов с папки wordpress
 		--exclude='app/wordpress/wp-content/upgrade-temp-backup' \
 		--exclude='app/wordpress/wp-content/upgrade/' \
 		--exclude='app/wordpress/wp-content/plugins/*/cache/' \
-		--exclude='app/wordpress/wp-content/backups' -C ./app/wordpress
+		--exclude='app/wordpress/wp-content/backups' -C ./app/wordpress .
 
 import-backup:  ## Импорт БД из сегодняшнего дампа (удобно восстанавливать, если что-то сломал в настройках)
 	@echo "$(PURPLE) Импорт БД из дампа $(RESET)"
@@ -74,7 +74,17 @@ import-backup:  ## Импорт БД из сегодняшнего дампа (�
 
 # Команды для инициализации проекта на локальной машине -----------------------------------------------------------------
 init: ## Инициализация проекта для локальной разработки
-init: docker-down docker-pull docker-build update-backup update-dump update
+ifeq ($(ENVIRONMENT), development)
+	@echo "Запуск команды init в окружении $(ENVIRONMENT)"
+	@$(MAKE) docker-down
+	@$(MAKE) docker-pull
+	@$(MAKE) docker-build
+	@$(MAKE) update-backup
+	@$(MAKE) update-dump
+	@$(MAKE) update
+else
+	@echo "Команда init может быть запущена только в окружении development. Текущее окружение: $(ENVIRONMENT)"
+endif
 
 fresh-backup:
 	@echo "$(PURPLE) Запуск команды 'make backup-db и backup-file' на удаленном сервере $(RESET)"
