@@ -116,16 +116,16 @@ update-dump:  ## Импорт БД из дампа
 
 update-urls:
 	@echo "$(PURPLE) Обновление URL-адресов WordPress для окружения $(ENVIRONMENT)... $(RESET)"
-	@docker compose $(ENV) exec -T mysql_dev sh -c "mysql -u root -p'$(MYSQL_ROOT_PASSWORD)' $(WORDPRESS_DB_NAME) -e \"UPDATE wp_options SET option_value = 'http://lyucean.loc' WHERE option_name = 'siteurl';\""
-	@docker compose $(ENV) exec -T mysql_dev sh -c "mysql -u root -p'$(MYSQL_ROOT_PASSWORD)' $(WORDPRESS_DB_NAME) -e \"UPDATE wp_options SET option_value = 'http://lyucean.loc' WHERE option_name = 'home';\""
+	@docker compose $(ENV) exec -T mysql_dev sh -c "mysql -u root -p'$(MYSQL_ROOT_PASSWORD)' $(WORDPRESS_DB_NAME) -e \"UPDATE wp_options SET option_value = '$(LOCAL_URL)' WHERE option_name = 'siteurl';\""
+	@docker compose $(ENV) exec -T mysql_dev sh -c "mysql -u root -p'$(MYSQL_ROOT_PASSWORD)' $(WORDPRESS_DB_NAME) -e \"UPDATE wp_options SET option_value = '$(LOCAL_URL)' WHERE option_name = 'home';\""
 
 # Цель для открытия URL в браузере
 open-url:
-	@echo "Открытие URL http://lyucean.loc/ в браузере..."
+	@echo "Открытие URL $(LOCAL_URL)/ в браузере..."
 ifeq ($(shell uname), Darwin)
-	@open http://lyucean.loc/
+	@open $(LOCAL_URL)/
 else
 ifeq ($(shell uname), Linux)
-	@xdg-open http://lyucean.loc/
+	@xdg-open $(LOCAL_URL)/
 endif
 endif
