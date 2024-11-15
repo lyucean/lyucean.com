@@ -141,3 +141,7 @@ ifeq ($(shell uname), Linux)
 	@xdg-open $(LOCAL_URL)/
 endif
 endif
+
+logs: ## Показать логи WordPress контейнера (последние 100 строк)
+	@echo "$(PURPLE) Просмотр логов WordPress контейнера $(RESET)"
+	docker compose $(ENV) $(PROFILE) logs --tail=300 -f wordpress
