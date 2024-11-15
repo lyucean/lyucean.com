@@ -90,15 +90,27 @@ else
 endif
 
 fresh-backup:
-	@echo "$(PURPLE) Запуск команды 'make backup-db и backup-file' на удаленном сервере $(RESET)"
-	sshpass -p"${SSH_PASSWORD}" ssh ${SSH_USER}@${SSH_HOST} "cd ${SSH_FOLDER} && make backup-db && make backup-file"
+	@if [ ! -f "./backup/$(BACKUP_DATETIME)_LS.sql" ] || [ ! -f "./backup/$(BACKUP_DATETIME)_LS.file.gz" ]; then \
+		echo "$(PURPLE) Запуск команды 'make backup-db и backup-file' на удаленном сервере $(RESET)"; \
+		sshpass -p"${SSH_PASSWORD}" ssh ${SSH_USER}@${SSH_HOST} "cd ${SSH_FOLDER} && make backup-db && make backup-file"; \
+	else \
+		echo "$(PURPLE) Все необходимые файлы уже существуют локально, пропускаем скачивание бэкапа $(RESET)"; \
+	fi
 
-fetch-backup: fresh-backup docker-up-mysql # Скачаем дамп с удаленного сервера на локальную машинуЗапускаем mysql заранее, чтоб успел развернутся
+fetch-backup: fresh-backup docker-up-mysql
 	@mkdir -p backup
-	@echo "$(PURPLE) Скачиваем дамп с удаленного сервера $(RESET)"
-	sshpass -p"${SSH_PASSWORD}" scp ${SSH_USER}@${SSH_HOST}:${BACKUPS_FOLDER}/$(BACKUP_DATETIME)_LS.sql ./backup
-	@echo "$(PURPLE) Скачиваем архив с удаленного сервера $(RESET)"
-	sshpass -p"${SSH_PASSWORD}" scp ${SSH_USER}@${SSH_HOST}:${BACKUPS_FOLDER}/${BACKUP_DATETIME}_LS.file.gz ./backup
+	@if [ ! -f "./backup/$(BACKUP_DATETIME)_LS.sql" ]; then \
+		echo "$(PURPLE) Скачиваем дамп с удаленного сервера $(RESET)"; \
+		sshpass -p"${SSH_PASSWORD}" scp ${SSH_USER}@${SSH_HOST}:${BACKUPS_FOLDER}/$(BACKUP_DATETIME)_LS.sql ./backup; \
+	else \
+		echo "$(PURPLE) Дамп БД уже существует локально, пропускаем скачивание $(RESET)"; \
+	fi
+	@if [ ! -f "./backup/$(BACKUP_DATETIME)_LS.file.gz" ]; then \
+		echo "$(PURPLE) Скачиваем архив с удаленного сервера $(RESET)"; \
+		sshpass -p"${SSH_PASSWORD}" scp ${SSH_USER}@${SSH_HOST}:${BACKUPS_FOLDER}/${BACKUP_DATETIME}_LS.file.gz ./backup; \
+	else \
+		echo "$(PURPLE) Архив файлов уже существует локально, пропускаем скачивание $(RESET)"; \
+	fi
 
 update-backup: fetch-backup # Распакуем архив на локальной машине
 	@echo "$(PURPLE) Удаляем все лишние файлы в папке перед распаковкой $(RESET)"
