@@ -12,22 +12,20 @@ function my_theme_enqueue_styles() {
     // Подключаем скрипты
     wp_enqueue_script('bootstrap-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js', array('jquery'), null, true);
 }
-add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
+add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles'); // Подключаем стили и скрипты когда WordPress загружает скрипты и стили
 
-// Поддержка миниатюр
+// Поддержка миниатюр. Нужен т.к. я планирую использовать миниатюры для постов/страниц
 add_theme_support('post-thumbnails');
 
-// Регистрация меню
+// Регистрация меню. Нужно только если у вас будет навигационное меню, которое можно редактировать через админку
 function my_theme_register_menus() {
     register_nav_menus(array(
-        'primary' => __('Primary Menu', 'my_theme'),
+        'primary' => __('Меню сборку', 'my_theme'),
     ));
 }
 add_action('after_setup_theme', 'my_theme_register_menus');
 
-// Поддержка заголовков
+// Позволяет пользователям менять шапку сайта через админку
 add_theme_support('custom-header');
 
-// Поддержка фоновых изображений
-add_theme_support('custom-background');
 ?>
