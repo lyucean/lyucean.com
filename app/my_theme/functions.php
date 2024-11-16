@@ -52,4 +52,11 @@ function bootstrap_pagination() {
         'before_page_number' => '<span class="screen-reader-text">' . __('Page', 'textdomain') . ' </span>',
     ));
 }
+
+// Подключаем скрипт для мобильной строки поиска
+function theme_enqueue_scripts() {
+    wp_enqueue_script('mobile-search', get_template_directory_uri() . '/js/mobile-search.js', array(), '1.0.0', true);
+}
+add_action('wp_enqueue_scripts', 'theme_enqueue_scripts');
+
 ?>
