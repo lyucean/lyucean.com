@@ -29,4 +29,11 @@ add_action('after_setup_theme', 'my_theme_register_menus');
 // Позволяет пользователям менять шапку сайта через админку
 add_theme_support('custom-header');
 
+// Подключаем скрипт для переключения тем
+function enqueue_theme_scripts() {
+    wp_enqueue_script('theme-toggle', get_template_directory_uri() . '/js/theme-toggle.js', array(), '1.0', true);
+}
+add_action('wp_enqueue_scripts', 'enqueue_theme_scripts');
+
+
 ?>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html <?php language_attributes(); ?> lang="ru">
+<html <?php language_attributes(); ?> lang="ru" data-bs-theme="light">
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +8,7 @@
 </head>
 <body <?php body_class(); ?>>
 
-<header class="py-3 border-bottom bg-white">
+<header class="py-3 border-bottom">
     <div class="container-xl">
         <div class="row align-items-center justify-content-between">
             <!-- Логотип -->
@@ -26,10 +26,10 @@
             <div class="col-md-5 position-relative">
                 <form class="d-flex" role="search">
                     <div class="input-group">
-            <span class="input-group-text bg-white border-end-0">
-                <i class="bi bi-search"></i>
-            </span>
-                        <input class="form-control border-start-0 ps-0" type="search" placeholder="Search" aria-label="Search">
+                        <span class="input-group-text border-end-0">
+                            <i class="bi bi-search"></i>
+                        </span>
+                        <input class="form-control border-start-0 ps-0" type="search" placeholder=" Поищем?" aria-label="Search">
                     </div>
                 </form>
             </div>
