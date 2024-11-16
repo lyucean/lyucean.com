@@ -35,5 +35,21 @@ function enqueue_theme_scripts() {
 }
 add_action('wp_enqueue_scripts', 'enqueue_theme_scripts');
 
+// Пагинация
+function bootstrap_pagination() {
+    global $wp_query;
 
+    $big = 999999999;
+
+    return paginate_links(array(
+        'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+        'format' => '?paged=%#%',
+        'current' => max(1, get_query_var('paged')),
+        'total' => $wp_query->max_num_pages,
+        'type' => 'list',
+        'prev_text' => '&laquo;',
+        'next_text' => '&raquo;',
+        'before_page_number' => '<span class="screen-reader-text">' . __('Page', 'textdomain') . ' </span>',
+    ));
+}
 ?>
