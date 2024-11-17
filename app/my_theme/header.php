@@ -13,14 +13,20 @@
         <div class="row align-items-center justify-content-between">
             <!-- Логотип -->
             <div class="col-auto">
-                <?php
-                if (has_custom_logo()) {
-                    the_custom_logo();
-                } else {
-                    echo '<a class="navbar-brand text-uppercase fw-bold fs-4 ps-3 ms-2" href="' . esc_url(home_url('/')) . '">' . get_bloginfo('name') . '</a>';
-                }
-                ?>
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-outline-secondary border-0 d-md-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false">
+                        <i class="bi bi-list fs-4"></i>
+                    </button>
+                    <?php
+                    if (has_custom_logo()) {
+                        the_custom_logo();
+                    } else {
+                        echo '<a class="navbar-brand text-uppercase fw-bold fs-4" href="' . esc_url(home_url('/')) . '">' . get_bloginfo('name') . '</a>';
+                    }
+                    ?>
+                </div>
             </div>
+
 
             <!-- Поиск (скрыт на мобильных) -->
             <div class="col d-none d-md-block">
@@ -77,11 +83,6 @@
         </div>
     </div>
 </header>
-
-
-
-
-
 
 <!-- Контейнер для основного контента -->
 <main class="container-xl py-4">
