@@ -1,35 +1,44 @@
-<?php
-// файл для отображения главной страницы
-// Подключаем заголовок
-get_header();
-?>
+<?php get_header(); ?>
 
-    <div class="container mt-5">
-        <header class="mb-4">
-            <h1><?php bloginfo('name'); ?></h1>
-            <p class="lead"><?php bloginfo('description'); ?></p>
-        </header>
+<div class="container-xl">
+    <div class="row g-4">
+        <!-- Левая колонка с меню -->
+        <div class="col-md-3 d-none d-md-block">
+            <div class="position-sticky" style="top: 1rem;">
+                <nav class="nav flex-column sidebar-nav">
+                    <?php
+                    wp_nav_menu(array(
+                        'theme_location' => 'sidebar-menu',
+                        'container'      => false,
+                        'menu_class'     => 'nav flex-column gap-1',
+                        'fallback_cb'    => false,
+                        'items_wrap'     => '<ul class="%2$s">%3$s</ul>',
+                        'depth'          => 1,
+                        'walker'         => new Bootstrap_5_Nav_Walker()
+                    ));
+                    ?>
+                </nav>
+            </div>
+        </div>
 
-        <div class="row">
-            <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <?php if (has_post_thumbnail()) : ?>
-                            <img src="<?php the_post_thumbnail_url(); ?>" class="card-img-top" alt="<?php the_title(); ?>">
-                        <?php endif; ?>
-                        <div class="card-body">
-                            <h5 class="card-title"><?php the_title(); ?></h5>
-                            <p class="card-text"><?php the_excerpt(); ?></p>
-                            <a href="<?php the_permalink(); ?>" class="btn btn-primary">Читать далее</a>
-                        </div>
-                    </div>
-                </div>
-            <?php endwhile; else : ?>
-                <p>Записей не найдено.</p>
-            <?php endif; ?>
+        <!-- Правая колонка с контентом -->
+        <div class="col-12 col-md-9">
+            <main>
+                <?php
+                if (have_posts()) :
+                    while (have_posts()) :
+                        the_post();
+                        get_template_part('template-parts/content', get_post_type());
+                    endwhile;
+
+                    the_posts_pagination();
+                else :
+                    get_template_part('template-parts/content', 'none');
+                endif;
+                ?>
+            </main>
         </div>
     </div>
+</div>
 
-<?php
-// Подключаем подвал
-get_footer();
+<?php get_footer(); ?>
