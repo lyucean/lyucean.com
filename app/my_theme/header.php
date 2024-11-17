@@ -56,11 +56,11 @@
                     </div>
 
                     <div class="d-flex align-items-center gap-2">
-                        <i class="bi bi-sun-fill opacity-50"></i>
+                        <i class="bi bi-sun-fill theme-icon-sun"></i>
                         <div class="form-check form-switch mb-0">
                             <input class="form-check-input" type="checkbox" role="switch" id="theme-toggle">
                         </div>
-                        <i class="bi bi-moon-fill opacity-50"></i>
+                        <i class="bi bi-moon-fill theme-icon-moon"></i>
                     </div>
                 </div>
             </div>

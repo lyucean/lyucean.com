@@ -10,7 +10,11 @@ License URI: none
 Text Domain: my_theme
 */
 
-/* Мобильный поиск */
+
+/* ==========================================================================
+   Мобильный поиск
+   ========================================================================== */
+
 .mobile-search-bar {
     position: absolute;
     left: 0;
@@ -19,6 +23,7 @@ Text Domain: my_theme
     border-bottom: 1px solid var(--bs-border-color);
     z-index: 1000;
 }
+
 @keyframes slideDown {
     from {
         opacity: 0;
@@ -30,15 +35,24 @@ Text Domain: my_theme
     }
 }
 
-/* Стили для бокового меню */
+
+/* ==========================================================================
+   Боковое меню
+   ========================================================================== */
+
 .sidebar-nav .nav-link {
-    color: var(--bs-body-color); /* Автоматически подстраивается под тему */
+    color: var(--bs-body-color);
 }
+
 .sidebar-nav .nav-link:hover {
     background-color: var(--bs-gray-300);
 }
 
-/* Стили для контейнера статей */
+
+/* ==========================================================================
+   Контейнер статей
+   ========================================================================== */
+
 .articles .card-img-wrapper {
     height: 200px;
     overflow: hidden;
@@ -51,9 +65,33 @@ Text Domain: my_theme
 }
 
 
-/* Стили специально для темной темы */
+/* ==========================================================================
+   Темная тема
+   ========================================================================== */
+
 [data-bs-theme="dark"] .articles .card {
-    background-color: #2b3035; /* Чуть светлее чем стандартный темный фон */
+    background-color: #2b3035;
 }
 
 
+/* ==========================================================================
+   Переключатель темы
+   ========================================================================== */
+
+header .theme-icon-sun {
+    color: var(--bs-warning);
+}
+
+header .theme-icon-moon {
+    opacity: 0.5;
+}
+
+[data-bs-theme="dark"] header .theme-icon-sun {
+    opacity: 0.5;
+    color: inherit;
+}
+
+[data-bs-theme="dark"] header .theme-icon-moon {
+    opacity: 1;
+    color: var(--bs-warning);
+}
