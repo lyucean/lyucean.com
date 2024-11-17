@@ -21,7 +21,7 @@
                     if (has_custom_logo()) {
                         the_custom_logo();
                     } else {
-                        echo '<a class="navbar-brand text-uppercase fw-bold fs-4 ps-4 ms-2" href="' . esc_url(home_url('/')) . '">' . get_bloginfo('name') . '</a>';
+                        echo '<a class="navbar-brand  fw-bold fs-4 ps-4 ms-2 logo" href="' . esc_url(home_url('/')) . '"><span class="typed-text">' . get_bloginfo('name') . '</span></a>';
                     }
                     ?>
                 </div>
