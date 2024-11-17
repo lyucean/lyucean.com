@@ -118,9 +118,5 @@ class Bootstrap_5_Nav_Walker extends Walker_Nav_Menu {
             $item->title
         );
     }
-
-
 }
-
-
 ?>
