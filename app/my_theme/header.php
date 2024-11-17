@@ -21,12 +21,11 @@
                     if (has_custom_logo()) {
                         the_custom_logo();
                     } else {
-                        echo '<a class="navbar-brand text-uppercase fw-bold fs-4" href="' . esc_url(home_url('/')) . '">' . get_bloginfo('name') . '</a>';
+                        echo '<a class="navbar-brand text-uppercase fw-bold fs-4 ps-4 ms-2" href="' . esc_url(home_url('/')) . '">' . get_bloginfo('name') . '</a>';
                     }
                     ?>
                 </div>
             </div>
-
 
             <!-- Поиск (скрыт на мобильных) -->
             <div class="col d-none d-md-block">
@@ -51,7 +50,7 @@
 
             <!-- Иконка поиска (видна только на мобильных) и переключатель темы -->
             <div class="col-auto">
-                <div class="d-flex align-items-center gap-4">
+                <div class="d-flex align-items-center gap-4 me-2 me-md-5">
                     <div class="d-md-none">
                         <i class="bi bi-search opacity-50" id="mobile-search-icon"></i>
                     </div>
@@ -85,4 +84,4 @@
 </header>
 
 <!-- Контейнер для основного контента -->
-<main class="container-xl py-4">
+<main class="container-xl">
