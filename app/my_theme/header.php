@@ -6,9 +6,9 @@
     <title><?php wp_title(); ?></title>
     <?php wp_head(); ?>
 </head>
-<body <?php body_class(); ?>>
+<body class="bg-body-tertiary" <?php body_class(); ?>>
 
-<header class="py-3 border-bottom">
+<header class="py-3">
     <div class="container-xl">
         <div class="row align-items-center justify-content-between">
             <!-- Логотип -->
@@ -17,7 +17,7 @@
                 if (has_custom_logo()) {
                     the_custom_logo();
                 } else {
-                    echo '<a class="navbar-brand text-uppercase fw-bold fs-4" href="' . esc_url(home_url('/')) . '">' . get_bloginfo('name') . '</a>';
+                    echo '<a class="navbar-brand text-uppercase fw-bold fs-4 ps-3 ms-2" href="' . esc_url(home_url('/')) . '">' . get_bloginfo('name') . '</a>';
                 }
                 ?>
             </div>
