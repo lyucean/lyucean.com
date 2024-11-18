@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<div class="container-xl">
+<div class="front-page container-xl">
     <div class="row g-4">
         <!-- Левая колонка с меню -->
         <div class="col-md-2">

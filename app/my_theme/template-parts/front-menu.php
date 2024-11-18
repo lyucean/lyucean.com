@@ -1,5 +1,5 @@
-<!-- Мобильное меню -->
-<div class="offcanvas-md offcanvas-start" tabindex="-1" id="sidebarMenu" style="width: 280px;">
+<!-- Меню -->
+<div class="front-menu offcanvas-md offcanvas-start" tabindex="-1" id="sidebarMenu" style="width: 280px;">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title">Меню</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
