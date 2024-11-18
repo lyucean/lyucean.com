@@ -17,13 +17,9 @@
                     <button class="btn btn-outline-secondary border-0 d-md-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false">
                         <i class="bi bi-list fs-4"></i>
                     </button>
-                    <?php
-                    if (has_custom_logo()) {
-                        the_custom_logo();
-                    } else {
-                        echo '<a class="navbar-brand fw-bold fs-4 ps-md-4 ms-md-2 logo" href="' . esc_url(home_url('/')) . '"><span class="typed-text">' . get_bloginfo('name') . '</span></a>';
-                    }
-                    ?>
+                    <a class="navbar-brand fw-bold fs-4 ps-md-4 ms-md-2 logo" href="<?=esc_url(home_url('/'));  ?>">
+                        <?=get_bloginfo('name')?>
+                    </a>
                 </div>
             </div>
 
