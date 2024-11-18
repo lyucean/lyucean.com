@@ -99,9 +99,11 @@ header .logo {
 .front-menu .sidebar-nav .nav-link {
     color: var(--bs-body-color);
 }
-
 .front-menu .sidebar-nav .nav-link:hover {
     background-color: var(--bs-gray-300);
+}
+[data-bs-theme="dark"] .front-menu .sidebar-nav .nav-link:hover {
+    background-color: var(--bs-gray-700);
 }
 
 /* ==========================================================================

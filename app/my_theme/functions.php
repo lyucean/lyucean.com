@@ -63,24 +63,24 @@ add_action('init', 'register_theme_menus');
 
 // Bootstrap 5 Nav Walker для меню
 class Bootstrap_5_Nav_Walker extends Walker_Nav_Menu {
-    // Массив с иконками для каждого пункта меню
+    // Массив с иконками Bootstrap для каждого пункта меню
     private $menu_icons = [
-        'Главная' => '🏠',
-        'Посты' => '📝',
-        'Подписаться' => '🔔',
-        'Обо мне' => '👨‍💻',
-        'Блог ИТ-директора' => '👨‍💼',
-        'Ресурсы' => '📚',
-        'Инструменты' => '🛠️',
-        'Настройка Netdata' => '📊',
-        'Как всё успевать?' => '⏰',
-        'ITSM' => '🔄',
-        'Life' => '🌱',
-        'How' => '💡',
-        'Dev' => '👨‍💻',
-        'Support' => '🆘',
-        'Win' => '🎯',
-        'Management' => '📈'
+        'Главная' => 'bi bi-house',
+        'Посты' => 'bi bi-file-text',
+        'Подписаться' => 'bi bi-bell',
+        'Обо мне' => 'bi bi-person',
+        'Блог ИТ-директора' => 'bi bi-person-workspace',
+        'Ресурсы' => 'bi bi-book',
+        'Инструменты' => 'bi bi-tools',
+        'Настройка Netdata' => 'bi bi-graph-up',
+        'Как всё успевать?' => 'bi bi-clock',
+        'ITSM' => 'bi bi-arrow-repeat',
+        'Life' => 'bi bi-flower1',
+        'How' => 'bi bi-lightbulb',
+        'Dev' => 'bi bi-code-square',
+        'Support' => 'bi bi-question-circle',
+        'Win' => 'bi bi-bullseye',
+        'Management' => 'bi bi-graph-up-arrow'
     ];
 
     function start_lvl(&$output, $depth = 0, $args = null): void
@@ -104,21 +104,22 @@ class Bootstrap_5_Nav_Walker extends Walker_Nav_Menu {
         // $id - ID пункта меню
 
         // Получаем иконку для текущего пункта меню из массива
-        $emoji = $this->menu_icons[$item->title] ?? '📍';
+        $icon_class = $this->menu_icons[$item->title] ?? 'bi bi-dot';
 
         // Формируем HTML для пункта меню
         $output .= "<li class='nav-item'>";
         $output .= sprintf(
             "<a href='%s' class='nav-link d-flex align-items-center gap-2 py-2 px-3 rounded-3'>
-            <span style='font-size: 1.2em;'>%s</span>
-            %s
-        </a>",
+                <i class='%s'></i>
+                %s
+            </a>",
             $item->url,
-            $emoji,
+            $icon_class,
             $item->title
         );
     }
 }
+
 
 add_action('after_setup_theme', function() {
     // Добавляем поддержку thumbnails
