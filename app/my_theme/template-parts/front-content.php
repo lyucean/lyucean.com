@@ -6,14 +6,14 @@
             <!-- Колонка для отдельной статьи -->
             <div class="col">
                 <!-- Карточка статьи -->
-                <article class="card h-100 border-0 shadow">
+                <article class="card h-100 border-0">
                     <!-- Изображение статьи (если есть) -->
                     <?php if (has_post_thumbnail()) : ?>
-                        <div class="card-img-wrapper">
-                            <img src="<?php the_post_thumbnail_url('medium'); ?>"
+                        <a href="<?php the_permalink(); ?>" class="card-img-wrapper text-decoration-none">
+                            <img src="<?php the_post_thumbnail_url('large'); ?>"
                                  class="card-img-top"
                                  alt="<?php the_title(); ?>">
-                        </div>
+                        </a>
                     <?php endif; ?>
 
                     <!-- Основное содержимое карточки -->
@@ -31,15 +31,15 @@
                                 <!-- Блок с датой и тегами -->
                                 <div class="d-flex flex-wrap gap-2 align-items-center">
                                     <!-- Дата публикации -->
-                                    <small class="text-muted"><?php echo get_the_date(); ?></small>
+                                    <small class="text-muted fw-light"><?php echo get_the_date(); ?></small>
                                     <!-- Теги статьи -->
                                     <?php
                                     $tags = get_the_tags();
                                     if ($tags) :
                                         foreach ($tags as $tag) : ?>
                                             <a href="<?php echo get_tag_link($tag->term_id); ?>" class="text-decoration-none">
-                                                <span class="badge bg-secondary bg-opacity-10 text-secondary">
-                                                    #<?php echo $tag->name; ?>
+                                                <span class="badge bg-opacity-10 text-secondary fw-light">
+                                                    <span class="text-danger">#</span><?php echo $tag->name; ?>
                                                 </span>
                                             </a>
                                         <?php endforeach;
@@ -47,7 +47,7 @@
                                 </div>
 
                                 <!-- Время чтения -->
-                                <small class="text-muted">
+                                <small class="text-muted fw-light">
                                     <i class="bi bi-clock-history"></i>
                                     <?php
                                     $content = get_the_content();

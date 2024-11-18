@@ -138,3 +138,33 @@ header .theme-icon-moon {
     }
 }
 
+/* ==========================================================================
+   Карточки статей
+   ========================================================================== */
+
+.articles .card {
+    border-radius: 0.375rem;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border: 1px solid var(--bs-border-color) !important;
+}
+
+.articles .card-img-wrapper {
+    display: block; /* Для корректной работы ссылки */
+    height: 240px;
+    overflow: hidden;
+    border-top-left-radius: 0.375rem;
+    border-top-right-radius: 0.375rem;
+}
+
+/* Стили для светлой темы */
+.articles .card {
+    background-color: var(--bs-white);
+    /*box-shadow: 0 0 0 1px var(--bs-border-color) !important;*/
+}
+
+/* Стили для темной темы */
+[data-bs-theme="dark"] .articles .card {
+    background-color: var(--bs-dark);
+    /*box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1) !important;*/
+}
+

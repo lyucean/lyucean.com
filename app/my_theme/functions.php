@@ -119,4 +119,13 @@ class Bootstrap_5_Nav_Walker extends Walker_Nav_Menu {
         );
     }
 }
+
+add_action('after_setup_theme', function() {
+    // Добавляем поддержку thumbnails
+    add_theme_support('post-thumbnails');
+
+    // Добавляем свой размер изображения с высоким качеством
+    add_image_size('article-thumb', 1200, 630, true);
+});
+
 ?>
