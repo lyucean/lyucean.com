@@ -1,8 +1,53 @@
+<!-- Панель сортировки -->
+<div class="sort-panel">
+    <nav class="sort-nav">
+        <a href="?sort=latest" class="sort-link <?php echo (!isset($_GET['sort']) || $_GET['sort'] === 'latest') ? 'active' : ''; ?>">
+            Новые
+        </a>
+        <a href="?sort=oldest" class="sort-link <?php echo (isset($_GET['sort']) && $_GET['sort'] === 'oldest') ? 'active' : ''; ?>">
+            Старые
+        </a>
+        <a href="?sort=views" class="sort-link <?php echo (isset($_GET['sort']) && $_GET['sort'] === 'views') ? 'active' : ''; ?>">
+            Популярные
+        </a>
+    </nav>
+</div>
+
+<?php
+// Определяем параметры сортировки
+$args = array('posts_per_page' => get_option('posts_per_page'));
+
+$sort = isset($_GET['sort']) ? $_GET['sort'] : 'latest';
+
+switch ($sort) {
+    case 'latest':
+        $args['orderby'] = 'date';
+        $args['order'] = 'DESC';
+        break;
+    case 'oldest':
+        $args['orderby'] = 'date';
+        $args['order'] = 'ASC';
+        break;
+    case 'views':
+        $args['orderby'] = 'meta_value_num';
+        $args['meta_key'] = 'post_views_count';
+        $args['order'] = 'DESC';
+        break;
+    default:
+        $args['orderby'] = 'date';
+        $args['order'] = 'DESC';
+        break;
+}
+
+// Создаем новый запрос
+$query = new WP_Query($args);
+?>
+
 <!-- Основной контейнер для статей -->
 <div class="articles">
     <!-- Сетка статей: 1 колонка на мобильных, 2 колонки на десктопах -->
     <div class="row row-cols-1 row-cols-md-2 g-4">
-        <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+        <?php if ($query->have_posts()) : while ($query->have_posts()) : $query->the_post(); ?>
             <!-- Колонка для отдельной статьи -->
             <div class="col">
                 <!-- Карточка статьи -->
@@ -70,8 +115,11 @@
         echo paginate_links(array(
             'prev_text' => __('← Предыдущая'),
             'next_text' => __('Следующая →'),
-            'class' => 'pagination-link',
+            'total' => $query->max_num_pages,
+            'current' => max(1, get_query_var('paged')),
         ));
         ?>
     </nav>
 </div>
+
+<?php wp_reset_postdata(); // Сбрасываем запрос ?>

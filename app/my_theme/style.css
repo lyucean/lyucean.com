@@ -138,6 +138,38 @@ header .logo {
     background-color: var(--bs-dark);
 }
 
+/* Панель сортировки */
+.sort-nav {
+    display: flex;
+    gap: 1rem;
+}
+
+.sort-link {
+    color: var(--bs-secondary);
+    text-decoration: none;
+    padding: 1rem 0;
+    position: relative;
+}
+
+.sort-link:hover {
+    color: var(--bs-body-color);
+}
+
+.sort-link.active {
+    color: var(--bs-body-color);
+    font-weight: 700;
+}
+
+/* Стили для темной темы */
+[data-bs-theme="dark"] .sort-link {
+    color: var(--bs-gray-500);
+}
+
+[data-bs-theme="dark"] .sort-link:hover,
+[data-bs-theme="dark"] .sort-link.active {
+    color: var(--bs-white);
+}
+
 /* ==========================================================================
    Страница поста (single.php)
    ========================================================================== */

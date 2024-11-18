@@ -129,4 +129,20 @@ add_action('after_setup_theme', function() {
     add_image_size('article-thumb', 1200, 630, true);
 });
 
+// Добавляем счетчик просмотров
+function set_post_views() {
+    if (is_single()) {
+        $post_id = get_the_ID();
+        $count = get_post_meta($post_id, 'post_views_count', true);
+
+        if ($count == '') {
+            delete_post_meta($post_id, 'post_views_count');
+            add_post_meta($post_id, 'post_views_count', 1);
+        } else {
+            update_post_meta($post_id, 'post_views_count', $count + 1);
+        }
+    }
+}
+add_action('wp_head', 'set_post_views');
+
 ?>
