@@ -51,12 +51,14 @@
                         <i class="bi bi-search opacity-50" id="mobile-search-icon"></i>
                     </div>
 
-                    <div class="d-flex align-items-center gap-2">
-                        <i class="bi bi-sun-fill theme-icon-sun"></i>
-                        <div class="form-check form-switch mb-0">
-                            <input class="form-check-input" type="checkbox" role="switch" id="theme-toggle">
-                        </div>
-                        <i class="bi bi-moon-fill theme-icon-moon"></i>
+                    <div class="d-flex align-items-center pe-md-5 me-md-4">
+                        <label class="theme-toggle d-flex align-items-center gap-2">
+                            <i class="bi bi-sun-fill theme-icon-sun"></i>
+                            <div class="form-check form-switch mb-0">
+                                <input class="form-check-input" type="checkbox" role="switch" id="theme-toggle">
+                            </div>
+                            <i class="bi bi-moon-fill theme-icon-moon"></i>
+                        </label>
                     </div>
                 </div>
             </div>
