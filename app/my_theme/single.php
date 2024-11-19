@@ -3,11 +3,11 @@
 <div class="container-fluid single-post">
     <div class="row">
         <!-- Правая боковая панель -->
-        <aside class="col-md-1 col-lg-1">
+        <aside class="col-lg-1 d-none d-lg-block">
             <!-- Здесь можно добавить виджеты -->
         </aside>
         <!-- Основное содержимое -->
-        <main class="col-md-11 col-lg-10 px-md-5">
+        <main class="col-12 col-lg-10 px-lg-5">
             <article class="rounded mb-4"><!-- Убрали класс bg-white -->
 
                 <!-- Шапка статьи с изображением -->
