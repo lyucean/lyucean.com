@@ -2,9 +2,9 @@
 
 <div class="front-page container-xl">
     <div class="row g-4">
-        <!-- Левая колонка с меню -->
+        <!-- Левая колонка с десктопным меню -->
         <div class="col-md-2 d-none d-md-block">
-            <?php get_template_part('template-parts/front', 'menu'); ?>
+            <?php get_template_part('template-parts/front', 'menu-desktop'); ?>
         </div>
 
         <!-- Правая колонка с контентом -->

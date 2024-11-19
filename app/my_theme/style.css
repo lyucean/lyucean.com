@@ -113,15 +113,15 @@ header .logo {
 }
 
 /* ==========================================================================
-   Боковое меню (front-menu.php)
+   Боковое меню (front-menu-desktop.php)
    ========================================================================== */
-.front-menu .sidebar-nav .nav-link {
+.front-menu-desktop .sidebar-nav .nav-link {
     color: var(--bs-body-color);
 }
-.front-menu .sidebar-nav .nav-link:hover {
+.front-menu-desktop .sidebar-nav .nav-link:hover {
     background-color: var(--bs-gray-300);
 }
-[data-bs-theme="dark"] .front-menu .sidebar-nav .nav-link:hover {
+[data-bs-theme="dark"] .front-menu-desktop .sidebar-nav .nav-link:hover {
     background-color: var(--bs-gray-700);
 }
 

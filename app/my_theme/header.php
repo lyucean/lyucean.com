@@ -11,12 +11,15 @@
 <header class="py-3">
     <div class="container-xl">
         <div class="row align-items-center justify-content-between">
-            <!-- Логотип -->
             <div class="col-auto">
                 <div class="d-flex align-items-center">
-                    <button class="btn btn-outline-secondary border-0 d-md-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false">
+                    <!-- Мобильное меню вне колонок -->
+                    <button class="btn btn-outline-secondary border-0 d-md-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebarMenu" aria-controls="mobileSidebarMenu" aria-expanded="false">
                         <i class="bi bi-list fs-4"></i>
                     </button>
+                    <?php get_template_part('template-parts/front', 'menu-mobile'); ?>
+
+                    <!-- Логотип -->
                     <a class="navbar-brand fw-bold fs-4 ps-md-4 ms-md-2 logo" href="<?=esc_url(home_url('/'));  ?>">
                         <?=get_bloginfo('name')?>
                     </a>
@@ -83,3 +86,4 @@
 
 <!-- Контейнер для основного контента -->
 <main class="container-xl px-0 px-md-4">
+

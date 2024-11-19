@@ -1,10 +1,8 @@
-<!-- Меню -->
-<div class="front-menu offcanvas-md offcanvas-start" tabindex="-1" id="sidebarMenu" style="width: 280px;">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title">Меню</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
+<?php
+// Проверяем, зарегистрировано ли меню
+if (has_nav_menu('sidebar-menu')) : ?>
+    <!-- Десктопное меню -->
+    <div class="front-menu-desktop">
         <nav class="nav flex-column sidebar-nav">
             <?php
             wp_nav_menu(array(
@@ -19,4 +17,4 @@
             ?>
         </nav>
     </div>
-</div>
+<?php endif; ?>
