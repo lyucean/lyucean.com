@@ -46,7 +46,7 @@ $query = new WP_Query($args);
 <!-- Основной контейнер для статей -->
 <div class="articles">
     <!-- Сетка статей: 1 колонка на мобильных, 2 колонки на десктопах -->
-    <div class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="row row-cols-1 row-cols-md-2 g-3">
         <?php if ($query->have_posts()) : while ($query->have_posts()) : $query->the_post(); ?>
             <!-- Колонка для отдельной статьи -->
             <div class="col">
