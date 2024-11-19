@@ -20,7 +20,7 @@
                     <?php get_template_part('template-parts/front', 'menu-mobile'); ?>
 
                     <!-- Логотип -->
-                    <a class="navbar-brand fw-bold fs-4 ps-md-4 ms-md-2 logo" href="<?=esc_url(home_url('/'));  ?>">
+                    <a class="navbar-brand fw-bold fs-4 ps-md-4 ms-md-3 logo" href="<?=esc_url(home_url('/'));  ?>">
                         <?=get_bloginfo('name')?>
                     </a>
                 </div>
