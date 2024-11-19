@@ -82,4 +82,4 @@
 </header>
 
 <!-- Контейнер для основного контента -->
-<main class="container-xl">
+<main class="container-xl px-0 px-md-4">
