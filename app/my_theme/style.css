@@ -112,6 +112,24 @@ header .logo {
     }
 }
 
+
+/* ==========================================================================
+   Футер (footer.php)
+   ========================================================================== */
+footer {
+    background-color: var(--bs-gray-200);
+}
+[data-bs-theme="dark"] footer {
+    background-color: var(--bs-dark);
+}
+
+footer a.btn:hover {
+    background-color: var(--bs-gray-300);
+}
+[data-bs-theme="dark"] footer a.btn:hover {
+    background-color: var(--bs-gray-700);
+}
+
 /* ==========================================================================
    Десктопное меню (front-menu-desktop.php)
    ========================================================================== */
@@ -435,4 +453,3 @@ header .logo {
         }
     }
 }
-
