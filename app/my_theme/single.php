@@ -17,7 +17,6 @@
                             <?php the_post_thumbnail('large', ['class' => 'card-img rounded-top']); ?>
                             <div class="header-blur-overlay"></div>
                             <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                <h1 class="card-title text-white mb-3"><?php the_title(); ?></h1>
                                 <div class="d-flex flex-wrap gap-2 align-items-center">
                                     <span class="text-white-50"><?php echo get_the_date(); ?></span>
                                     <?php
@@ -60,8 +59,10 @@
                 </div>
 
                 <!-- Содержимое статьи -->
-                <div class="p-4">
-                    <div class="fs-5">
+                <div class="p-0 p-sm-3 p-md-4">
+                    <div class="article-content">
+
+                        <h1 class=" "><?php the_title(); ?></h1>
                         <?php the_content(); ?>
                     </div>
                 </div>
