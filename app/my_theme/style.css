@@ -113,7 +113,7 @@ header .logo {
 }
 
 /* ==========================================================================
-   Боковое меню (front-menu-desktop.php)
+   Десктопное меню (front-menu-desktop.php)
    ========================================================================== */
 .front-menu-desktop .sidebar-nav .nav-link {
     color: var(--bs-body-color);
@@ -122,6 +122,19 @@ header .logo {
     background-color: var(--bs-gray-300);
 }
 [data-bs-theme="dark"] .front-menu-desktop .sidebar-nav .nav-link:hover {
+    background-color: var(--bs-gray-700);
+}
+
+/* ==========================================================================
+   Мобильное меню (front-menu-mobile.php)
+   ========================================================================== */
+.front-menu-mobile .sidebar-nav .nav-link {
+    color: var(--bs-body-color);
+}
+.front-menu-mobile .sidebar-nav .nav-link:hover {
+    background-color: var(--bs-gray-300);
+}
+[data-bs-theme="dark"] .front-menu-mobile .sidebar-nav .nav-link:hover {
     background-color: var(--bs-gray-700);
 }
 
