@@ -10,14 +10,20 @@
                     <div class="col-md-6 col-lg-4">
                         <!-- Карточка статьи -->
                         <article class="card h-100 border-0">
-                            <!-- Изображение статьи (если есть) -->
-                            <?php if (has_post_thumbnail()) : ?>
-                                <a href="<?php the_permalink(); ?>" class="card-img-wrapper text-decoration-none">
-                                    <img src="<?php the_post_thumbnail_url('large'); ?>"
-                                         class="card-img-top"
-                                         alt="<?php the_title(); ?>">
-                                </a>
-                            <?php endif; ?>
+                            <!-- Обертка изображения -->
+                            <div class="card-img-wrapper">
+                                <?php if (has_post_thumbnail()) : ?>
+                                    <a href="<?php the_permalink(); ?>" class="card-img-wrapper text-decoration-none">
+                                        <img src="<?php the_post_thumbnail_url('large'); ?>"
+                                             class="card-img-top"
+                                             alt="<?php the_title(); ?>">
+                                    </a>
+                                <?php else: ?>
+                                    <a href="<?php the_permalink(); ?>" class="card-img-wrapper text-decoration-none">
+                                        <div class="placeholder-img" style="background-image: url('data:image/svg+xml,<?php echo rawurlencode(get_random_pattern()); ?>')"></div>
+                                    </a>
+                                <?php endif; ?>
+                            </div>
 
                             <!-- Основное содержимое карточки -->
                             <div class="card-body p-3 d-flex flex-column">

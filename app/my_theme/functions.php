@@ -145,4 +145,35 @@ function set_post_views() {
 }
 add_action('wp_head', 'set_post_views');
 
+
+// Функция для получения случайного SVG-паттерна (добавить в functions.php)
+function get_random_pattern() {
+    return '<svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <pattern id="tech-pattern" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+                <!-- Сетка -->
+                <path d="M 0 0 L 50 0 M 0 10 L 50 10 M 0 20 L 50 20 M 0 30 L 50 30 M 0 40 L 50 40 M 0 50 L 50 50" 
+                      stroke="#6c757d" stroke-width="0.5" fill="none"/>
+                <path d="M 0 0 L 0 50 M 10 0 L 10 50 M 20 0 L 20 50 M 30 0 L 10 50 M 20 0 L 20 50 M 30 0 L 30 50 M 40 0 L0 L 50 50" 
+                      stroke="#6c757d" stroke-width="0.5" fill="none"/>
+                
+                <!-- IT символы -->
+                <text x="5" y="15" font-family="monospace" font-size="8" fill="#dee2e6">no</text>
+                <text x="20" y="15" font-family="monospace" font-size="8" fill="#dee2e6">image</text>
+                <text x="15" y="35" font-family="monospace" font-size="4" fill="#dee2e6"> 10 50 M 20 0 L</text>
+                <text x="5" y="45" font-family="monospace" font-size="4" fill="#dee2e6">M 20 0 L 20 50 M 30 0 L </text>
+                
+                <!-- Круги -->
+                <circle cx="25" cy="25" r="20" stroke="#6c757d" stroke-width="0.5" fill="none"/>
+                <circle cx="25" cy="25" r="15" stroke="#6c757d" stroke-width="0.5" fill="none"/>
+                
+                <!-- Линии -->
+                <path d="M 0 0 L 50 50 M 50 0 L 0 50" stroke="#6c757d" stroke-width="0.5" fill="none"/>
+            </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="#495057"/>
+        <rect width="100%" height="100%" fill="url(#tech-pattern)"/>
+    </svg>';
+}
+
 ?>
