@@ -176,4 +176,32 @@ function get_random_pattern() {
     </svg>';
 }
 
+// Функция для расчета времени чтения
+function get_reading_time($content) {
+    // Очищаем текст от HTML тегов
+    $content = strip_tags($content);
+
+    // Удаляем пробелы в начале и конце
+    $content = trim($content);
+
+    // Заменяем множественные пробелы на один
+    $content = preg_replace('/\s+/', ' ', $content);
+
+    // Считаем количество слов, разделяя текст по пробелам
+    $word_count = count(explode(' ', $content));
+
+    // Подсчет времени на чтение текста
+    // Средняя скорость чтения - 150-200 слов в минуту
+    $reading_time = ceil($word_count / 150);
+
+    // Подсчет количества изображений в контенте
+    $image_count = substr_count(get_the_content(), '<img');
+
+    // Добавляем 0.5 минуты за каждое изображение
+    $image_time = $image_count * 0.5;
+
+    // Округляем общее время до ближайшего целого числа
+    return ceil($reading_time + $image_time);
+}
+
 ?>

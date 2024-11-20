@@ -94,12 +94,7 @@ $query = new WP_Query($args);
                                 <!-- Время чтения -->
                                 <small class="text-muted fw-light">
                                     <i class="bi bi-clock-history"></i>
-                                    <?php
-                                    $content = get_the_content();
-                                    $word_count = str_word_count(strip_tags($content));
-                                    $reading_time = ceil($word_count / 50);
-                                    echo $reading_time . ' мин чтения';
-                                    ?>
+                                    <?php echo get_reading_time(get_the_content()) . ' мин чтения'; ?>
                                 </small>
                             </div>
                         </div>
