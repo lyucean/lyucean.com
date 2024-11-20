@@ -190,6 +190,43 @@ header .logo {
 }
 
 /* ==========================================================================
+   Стили карточек статей (search.php)
+   ========================================================================== */
+.front-page .articles,
+.search-page {
+    /* Карточки статей */
+    .card {
+        border-radius: 0.375rem;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        border: 1px solid var(--bs-border-color) !important;
+        background-color: var(--bs-white);
+    }
+
+    .card-img-wrapper {
+        display: block;
+        height: 240px;
+        overflow: hidden;
+        border-top-left-radius: 0.375rem;
+        border-top-right-radius: 0.375rem;
+    }
+
+    .card-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+/* Темная тема для карточек */
+[data-bs-theme="dark"] {
+    .front-page .articles .card,
+    .search-page .card {
+        background-color: var(--bs-dark);
+    }
+}
+
+
+/* ==========================================================================
    Страница поста (single.php)
    ========================================================================== */
 .single-post {
