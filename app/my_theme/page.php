@@ -29,10 +29,8 @@
                 </div>
 
                 <!-- Содержимое страницы -->
-                <div class="p-0 p-sm-3 p-md-4">
-                    <div class="article-content">
-                        <?php the_content(); ?>
-                    </div>
+                <div class="article-content">
+                    <?php the_content(); ?>
                 </div>
 
             </article>

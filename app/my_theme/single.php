@@ -59,12 +59,9 @@
                 </div>
 
                 <!-- Содержимое статьи -->
-                <div class="p-0 p-sm-3 p-md-4">
-                    <div class="article-content">
-
-                        <h1 class=" "><?php the_title(); ?></h1>
-                        <?php the_content(); ?>
-                    </div>
+                <div class="article-content">
+                    <h1 class=" "><?php the_title(); ?></h1>
+                    <?php the_content(); ?>
                 </div>
             </article>
         </main>

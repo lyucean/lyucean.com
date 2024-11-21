@@ -474,7 +474,7 @@ footer a.btn:hover {
     font-size: 1.125rem;
     line-height: 1.8;
     color: var(--bs-body-color);
-    padding: 2rem 3rem;
+    padding: 2rem 4rem;
 }
 
 /* Заголовки */
@@ -602,6 +602,21 @@ footer a.btn:hover {
         background: rgba(59, 73, 223, 0.05);
     }
 }
+/* Для больших планшетов */
+@media screen and (max-width: 1200px) {
+    .article-content {
+        padding: 1.75rem 3rem;
+        font-size: 1.125rem;
+    }
+}
+
+/* Для планшетов */
+@media screen and (max-width: 992px) {
+    .article-content {
+        padding: 1.5rem 2rem;
+        font-size: 1.115rem;
+    }
+}
 
 /* Мобильная версия */
 @media screen and (max-width: 768px) {
@@ -661,6 +676,14 @@ footer a.btn:hover {
     .article-content td,
     .article-content th {
         padding: 0.5em;
+    }
+}
+
+/* Для малых экранов */
+@media screen and (max-width: 576px) {
+    .article-content {
+        padding: 1rem 1.25rem;
+        font-size: 1.05rem;
     }
 }
 
