@@ -253,6 +253,13 @@ footer a.btn:hover {
         background-position: center;
         background-repeat: repeat;
     }
+
+    article {
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        border: 1px solid var(--bs-border-color) !important;
+        background-color: var(--bs-body-bg);
+        color: var(--bs-body-color);
+    }
 }
 
 /* Темная тема для карточек */
