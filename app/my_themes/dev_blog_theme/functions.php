@@ -282,12 +282,16 @@ function remove_cleanup_schedule() {
     wp_clear_scheduled_hook('cleanup_viewed_ips_hook');
 }
 
-// Чтоб Bootstrap работал в редакторе
-function add_bootstrap_to_editor() {
+// Подключение стилей для редактора Gutenberg
+function add_custom_editor_styles() {
+    // Регистрируем стили для редактора
+    add_theme_support('editor-styles');
+
+    // Подключаем стили
     add_editor_style([
-        'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css',
-        'style.css' // ваши собственные стили
+        'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css',
+        'editor-style.css'
     ]);
 }
-add_action('admin_init', 'add_bootstrap_to_editor');
+add_action('after_setup_theme', 'add_custom_editor_styles');
 ?>
