@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
-    <div class="container-xl search-page">
-        <main class="row">
+    <div class="search-page">
+        <div class="row">
             <div class="col-12">
                 <?php if (have_posts()) : ?>
                 <div class="row g-4">
@@ -113,6 +113,7 @@
 
                 </main>
             <?php endif; ?>
+        </div>
     </div>
 
 <?php get_footer(); ?>
