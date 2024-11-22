@@ -12,7 +12,7 @@ services:
       WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
     volumes:
       - ./app/wordpress:/var/www/html
-      - ./app/my_plugins:/var/www/html/wp-content/plugins/
+      - ./app/my_plugins:/var/www/html/wp-content/plugins/custom
       - ./app/my_themes:/var/www/html/wp-content/themes/
     labels:
       - traefik.enable=true
@@ -56,7 +56,7 @@ services:
       WORDPRESS_DEBUG: 1  # Включаем режим отладки WordPress
     volumes:
       - ./app/wordpress:/var/www/html  # Монтируем локальную папку с WordPress
-      - ./app/my_plugins:/var/www/html/wp-content/plugins/
+      - ./app/my_plugins:/var/www/html/wp-content/plugins/custom
       - ./app/my_themes:/var/www/html/wp-content/themes/
     networks:
       - web
