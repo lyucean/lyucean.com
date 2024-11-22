@@ -282,4 +282,12 @@ function remove_cleanup_schedule() {
     wp_clear_scheduled_hook('cleanup_viewed_ips_hook');
 }
 
+// Чтоб Bootstrap работал в редакторе
+function add_bootstrap_to_editor() {
+    add_editor_style([
+        'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css',
+        'style.css' // ваши собственные стили
+    ]);
+}
+add_action('admin_init', 'add_bootstrap_to_editor');
 ?>
