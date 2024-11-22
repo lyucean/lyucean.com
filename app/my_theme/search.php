@@ -107,7 +107,10 @@
                     </article>
 
                     <!-- Блок со случайными статьями -->
-                    <?php get_template_part('template-parts/posts', 'related'); ?>
+                    <?php get_template_part('template-parts/posts', 'related', [
+                        'title' => 'Вместо этого можно почитать:'
+                    ]); ?>
+
                 </main>
             <?php endif; ?>
     </div>

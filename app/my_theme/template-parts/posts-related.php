@@ -1,5 +1,5 @@
 <div class="related-posts">
-    <h2>Прочитай ещё эти статьи:</h2>
+    <h2><?php echo $args['title'] ?? 'Прочитай ещё эти статьи:'; ?></h2>
     <div class="post-list">
         <?php
         $random_posts = new WP_Query(array(
