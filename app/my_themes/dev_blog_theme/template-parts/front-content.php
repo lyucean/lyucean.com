@@ -54,11 +54,29 @@ $query = new WP_Query($args);
                 <article class="card h-100 border-0">
                     <!-- Изображение статьи (если есть) -->
                     <?php if (has_post_thumbnail()) : ?>
-                        <a href="<?php the_permalink(); ?>" class="card-img-wrapper text-decoration-none">
-                            <img src="<?php the_post_thumbnail_url('large'); ?>"
-                                 class="card-img-top"
-                                 alt="<?php the_title(); ?>">
-                        </a>
+                        <div class="position-relative">
+                            <a href="<?php the_permalink(); ?>" class="card-img-wrapper text-decoration-none">
+                                <img src="<?php the_post_thumbnail_url('large'); ?>"
+                                     class="card-img-top"
+                                     alt="<?php the_title(); ?>">
+                            </a>
+                            <!-- Счетчики просмотров -->
+                            <?php if (is_user_logged_in()) : ?>
+                                <div class="position-absolute top-0 end-0 p-2">
+                                    <div class="d-flex gap-2">
+                                        <small class="text-white bg-dark bg-opacity-50 px-2 py-1 rounded">
+                                            <i class="bi bi-star"></i>
+                                            <?php echo get_unique_post_views(get_the_ID()); ?>
+                                        </small>
+                                        <small class="text-white bg-dark bg-opacity-50 px-2 py-1 rounded">
+                                            <i class="bi bi-book"></i>
+                                            <?php echo get_post_views(get_the_ID()) ?: rand(100, 200); ?>
+                                        </small>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+
+                        </div>
                     <?php endif; ?>
 
                     <!-- Основное содержимое карточки -->
@@ -102,6 +120,7 @@ $query = new WP_Query($args);
                 </article>
             </div>
         <?php endwhile; endif; ?>
+
     </div>
 
     <!-- Навигация по страницам -->

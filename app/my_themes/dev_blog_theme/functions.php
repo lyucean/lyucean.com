@@ -145,6 +145,18 @@ function set_post_views() {
 }
 add_action('wp_head', 'set_post_views');
 
+// Функция для получения количества просмотров
+function get_post_views($post_id) {
+    $count_key = 'post_views_count';
+    $count = get_post_meta($post_id, $count_key, true);
+
+    if ($count == '') {
+        delete_post_meta($post_id, $count_key);
+        add_post_meta($post_id, $count_key, '0');
+        return "0";
+    }
+    return $count;
+}
 
 // Функция для получения SVG-паттерна
 function get_random_pattern() {
@@ -202,6 +214,72 @@ function get_reading_time($content) {
 
     // Округляем общее время до ближайшего целого числа
     return ceil($reading_time + $image_time);
+}
+
+// Добавляем счетчик уникальных просмотров по IP
+function set_unique_post_views() {
+    if (is_single()) {
+        $post_id = get_the_ID();
+        $ip_address = $_SERVER['REMOTE_ADDR'];
+
+        // Получаем текущие уникальные просмотры
+        $unique_views = get_post_meta($post_id, 'unique_post_views', true) ?: 0;
+
+        // Получаем массив IP-адресов, которые уже просмотрели пост
+        $viewed_ips = get_post_meta($post_id, 'viewed_ips', true);
+        if (!is_array($viewed_ips)) {
+            $viewed_ips = array();
+        }
+
+        // Проверяем, просматривал ли уже этот IP данный пост
+        if (!in_array($ip_address, $viewed_ips)) {
+            // Добавляем IP в список просмотревших
+            $viewed_ips[] = $ip_address;
+            update_post_meta($post_id, 'viewed_ips', $viewed_ips);
+
+            // Увеличиваем счетчик уникальных просмотров
+            update_post_meta($post_id, 'unique_post_views', $unique_views + 1);
+        }
+    }
+}
+add_action('wp_head', 'set_unique_post_views');
+
+// Функция для получения количества уникальных просмотров
+function get_unique_post_views($post_id) {
+    $unique_views = get_post_meta($post_id, 'unique_post_views', true);
+    return empty($unique_views) ? 0 : $unique_views;
+}
+
+// Опционально: функция для очистки старых IP-адресов (можно вызывать по крону)
+function cleanup_viewed_ips() {
+    $args = array(
+        'post_type' => 'post',
+        'posts_per_page' => -1,
+        'fields' => 'ids'
+    );
+
+    $posts = get_posts($args);
+
+    foreach ($posts as $post_id) {
+        $viewed_ips = get_post_meta($post_id, 'viewed_ips', true);
+        if (is_array($viewed_ips) && count($viewed_ips) > 1000) { // Ограничение на 1000 IP
+            // Оставляем только последние 1000 IP
+            $viewed_ips = array_slice($viewed_ips, -1000);
+            update_post_meta($post_id, 'viewed_ips', $viewed_ips);
+        }
+    }
+}
+
+// Добавляем задачу в cron (выполняется раз в неделю)
+if (!wp_next_scheduled('cleanup_viewed_ips_hook')) {
+    wp_schedule_event(time(), 'weekly', 'cleanup_viewed_ips_hook');
+}
+add_action('cleanup_viewed_ips_hook', 'cleanup_viewed_ips');
+
+// При деактивации плагина или темы
+register_deactivation_hook(__FILE__, 'remove_cleanup_schedule');
+function remove_cleanup_schedule() {
+    wp_clear_scheduled_hook('cleanup_viewed_ips_hook');
 }
 
 ?>
