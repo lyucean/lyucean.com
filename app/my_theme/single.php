@@ -64,8 +64,11 @@
                     <?php the_content(); ?>
                 </div>
             </article>
+
+            <!-- Блок со случайными статьями -->
+            <?php get_template_part('template-parts/posts', 'related'); ?>
+
         </main>
     </div>
 </div>
-
 <?php get_footer(); ?>
