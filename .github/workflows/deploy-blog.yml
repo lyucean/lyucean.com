@@ -64,14 +64,19 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
+            set -e  # остановка при любой ошибке
+            echo "🚀 Начинаем развертывание..."
+            echo "🌐 Проверяем и создаем сеть Docker..."
             docker network ls | grep web || docker network create web
             cd /var/www/lyucean.com/
-            # Добавляем команду для изменения прав доступа к папкам
-            chown -R www-data:www-data ./app/wordpress ./app/my_plugin ./app/my_theme
-            find ./app/wordpress ./app/my_plugin ./app/my_theme -type d -exec chmod 755 {} \;
-            find ./app/wordpress ./app/my_plugin ./app/my_theme -type f -exec chmod 644 {} \;
+            echo "🔐 Настраиваем права доступа..."
+            chown -R www-data:www-data ./app/wordpress ./app/my_plugins ./app/my_themes
+            find ./app/wordpress ./app/my_plugins ./app/my_themes -type d -exec chmod 755 {} \;
+            find ./app/wordpress ./app/my_plugins ./app/my_themes -type f -exec chmod 644 {} \;
+            echo "🔄 Запускаем обновление..."
             make update
-            docker compose ps
+            echo "🔍 Проверяем статус контейнеров..."
+            docker compose ps || exit 1
 
   test:
     name: "Проверим, что наш блог запущен"
