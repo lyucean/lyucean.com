@@ -806,16 +806,14 @@ footer a.btn:hover {
 }
 
 /* Темная тема */
-@media (prefers-color-scheme: dark) {
-    .article-content pre,
-    .article-content code {
-        background: #2d333b;
-    }
-
-    .article-content blockquote {
-        background: rgba(59, 73, 223, 0.05);
-    }
+[data-bs-theme="dark"] .article-content pre,
+[data-bs-theme="dark"] .article-content code {
+    background: #2d333b;
 }
+[data-bs-theme="dark"].article-content blockquote {
+    background: rgba(59, 73, 223, 0.05);
+}
+
 /* Для больших планшетов */
 @media screen and (max-width: 1200px) {
     .article-content {
