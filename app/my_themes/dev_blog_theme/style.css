@@ -13,6 +13,12 @@ Text Domain: dev_blog_theme
 /* ==========================================================================
    Хедер (header.php)
    ========================================================================== */
+/* Общие фиксы для iOS */
+* {
+    -webkit-text-size-adjust: none;
+    -webkit-appearance: none;
+    -webkit-font-smoothing: antialiased;
+}
 
 /* Мобильный поиск */
 .mobile-search-bar {
@@ -454,11 +460,11 @@ footer a.btn:hover {
 
         img {
             width: 100%;
-            height: 100%;
             object-fit: cover;
             object-position: center;
             max-height: 100%;
-            aspect-ratio: 16/9; /* Фиксируем соотношение сторон */
+            aspect-ratio: 16/9;
+            height: auto;
         }
     }
 
