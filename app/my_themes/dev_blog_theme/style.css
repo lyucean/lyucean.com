@@ -259,10 +259,8 @@ footer a.btn:hover {
 }
 
 /* Темная тема для карточек */
-[data-bs-theme="dark"] {
-    .search-page .card {
-        background-color: var(--bs-dark);
-    }
+[data-bs-theme="dark"] .search-page .card {
+    background-color: var(--bs-dark);
 }
 
 /* ==========================================================================
@@ -299,10 +297,8 @@ footer a.btn:hover {
 }
 
 /* Темная тема для карточек */
-[data-bs-theme="dark"] {
-    .archive-page .card {
-        background-color: var(--bs-dark);
-    }
+[data-bs-theme="dark"] .archive-page .card {
+    background-color: var(--bs-dark);
 }
 
 
