@@ -457,8 +457,6 @@ footer a.btn:hover {
             height: 100%;
             object-fit: cover;
             object-position: center;
-            max-height: 100%;
-            aspect-ratio: 16/9; /* Фиксируем соотношение сторон */
         }
     }
 
