@@ -91,7 +91,8 @@ header .logo {
         right: 0;
         width: calc(100% - 1.5rem);
         height: 4px;
-        background-color: var(--bs-gray-300);
+        background-color: var(--bs-body-color);
+        opacity: 10%;
         transform: scaleX(0);
         transition: transform 0.3s ease;
     }
@@ -109,6 +110,14 @@ header .logo {
     header .logo:hover::before,
     header .logo:hover::after {
         transform: scaleX(1);
+    }
+}
+
+[data-bs-theme="dark"] {
+    header .logo::before,
+    header .logo::after {
+        background-color: var(--bs-body-color);
+        opacity: 20%;
     }
 }
 
@@ -338,7 +347,7 @@ footer a.btn:hover {
     right: 0;
     min-height: 20%;
     height: auto;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(54, 66, 123, 0.5);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
@@ -439,6 +448,13 @@ footer a.btn:hover {
 .page .rounded-top {
     border-top-left-radius: 0.375rem !important;
     border-top-right-radius: 0.375rem !important;
+}
+
+
+@media (max-width: 768px) {
+    .page .header-blur-overlay {
+        min-height: 50%;
+    }
 }
 
 /* Медиа-запрос для мобильных устройств */
