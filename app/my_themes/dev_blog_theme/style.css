@@ -679,13 +679,13 @@ footer a.btn:hover {
 .article-content h2 {
     font-size: 2rem;
     font-weight: 700;
-    margin: 1.5em 0 0.5em;
+    margin: 1em 0 0.5em;
 }
 
 .article-content h3 {
     font-size: 1.5rem;
     font-weight: 600;
-    margin: 1.2em 0 0.5em;
+    margin: 0.8em 0 0.5em;
 }
 
 /* Блоки кода */
@@ -829,7 +829,7 @@ footer a.btn:hover {
     /* Мобильные заголовки */
     .article-content h1 {
         font-size: 1.875rem;
-        margin: 1em 0 0.5em;
+        /*margin: 1em 0 0.5em;*/
     }
 
     .article-content h2 {
@@ -839,7 +839,7 @@ footer a.btn:hover {
 
     .article-content h3 {
         font-size: 1.25rem;
-        margin: 1em 0 0.5em;
+        margin: 0.8em 0 0.5em;
     }
 
     /* Мобильные изображения */
