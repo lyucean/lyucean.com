@@ -26,9 +26,14 @@ h3 {
     margin: 1.2em 0 0.5em;
 }
 
-/* Параграфы */
-p {
+/* Блоки кода */
+.wp-block-kevinbatdorf-code-block-pro {
     margin-bottom: 1.5em;
+}
+
+/* Цитаты */
+blockquote p {
+    margin-bottom: 0em;
 }
 
 /* Ссылки */

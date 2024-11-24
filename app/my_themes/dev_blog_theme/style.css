@@ -1,4 +1,4 @@
-/*
+﻿/*
 Theme Name: dev_blog_theme
 Theme URI: https://lyucean.com
 Author: lyucean
@@ -689,9 +689,24 @@ footer a.btn:hover {
     margin: 1.2em 0 0.5em;
 }
 
-/* Параграфы */
-.article-content p {
+/* Блоки кода */
+.article-content .wp-block-kevinbatdorf-code-block-pro {
     margin-bottom: 1.5em;
+}
+
+/* Цитаты */
+.article-content blockquote p {
+    margin-bottom: 0;
+}
+
+/* Цитаты */
+.article-content .wp-element-caption {
+    text-align: center;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    color: #505050;
+    font-size: 14px;
+    font-style: italic;
 }
 
 /* Ссылки */
@@ -728,7 +743,6 @@ footer a.btn:hover {
 .article-content img {
     max-width: 100%;
     height: auto;
-    margin: 2em auto;
     border-radius: 0.375rem;
     display: block;
 }
