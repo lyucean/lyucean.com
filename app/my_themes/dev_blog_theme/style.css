@@ -659,7 +659,6 @@ footer a.btn:hover {
     background-color: var(--bs-gray-700);
 }
 
-
 /* ==========================================================================
    Основной контейнер статьи (single.php и page.php)
    ========================================================================== */
@@ -699,14 +698,10 @@ footer a.btn:hover {
     margin-bottom: 0;
 }
 
-/* Цитаты */
+/* подпись к изображению */
 .article-content .wp-element-caption {
     text-align: center;
-    margin-top: 8px;
-    margin-bottom: 16px;
-    color: #505050;
     font-size: 14px;
-    font-style: italic;
 }
 
 /* Ссылки */
