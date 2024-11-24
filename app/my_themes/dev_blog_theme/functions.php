@@ -66,21 +66,16 @@ class Bootstrap_5_Nav_Walker extends Walker_Nav_Menu {
     // Массив с иконками Bootstrap для каждого пункта меню
     private $menu_icons = [
         'Главная' => 'bi bi-house',
-        'Посты' => 'bi bi-file-text',
-        'Подписаться' => 'bi bi-bell',
-        'Обо мне' => 'bi bi-person',
-        'Блог ИТ-директора' => 'bi bi-person-workspace',
+        'Менеджмент' => 'bi bi-graph-up-arrow',
+        'Инфраструктура' => 'bi bi-hdd-network',
+        'Карьера' => 'bi bi-ladder',
+        'Ответы' => 'bi bi-question-circle',
+        'Личное' => 'bi bi-person',
         'Ресурсы' => 'bi bi-book',
         'Инструменты' => 'bi bi-tools',
-        'Настройка Netdata' => 'bi bi-graph-up',
-        'Как всё успевать?' => 'bi bi-clock',
-        'ITSM' => 'bi bi-arrow-repeat',
-        'Life' => 'bi bi-flower1',
-        'How' => 'bi bi-lightbulb',
-        'Dev' => 'bi bi-code-square',
-        'Support' => 'bi bi-question-circle',
-        'Win' => 'bi bi-bullseye',
-        'Management' => 'bi bi-graph-up-arrow'
+        'Проекты' => 'bi bi-kanban',
+        'Подписаться' => 'bi bi-bell',
+        'Обо мне' => 'bi bi-person-vcard'
     ];
 
     function start_lvl(&$output, $depth = 0, $args = null): void
@@ -94,25 +89,17 @@ class Bootstrap_5_Nav_Walker extends Walker_Nav_Menu {
 
     function start_el(&$output, $item, $depth = 0, $args = null, $id = 0): void
     {
-        // $output - строка, куда записывается HTML-код (передается по ссылке &)
-        // $item - объект пункта меню, содержит такие свойства как:
-        //   - $item->title (название пункта)
-        //   - $item->url (ссылка)
-        //   - $item->classes (массив CSS-классов)
-        // $depth - уровень вложенности пункта меню (0 - верхний уровень)
-        // $args - аргументы, переданные в wp_nav_menu()
-        // $id - ID пункта меню
-
         // Получаем иконку для текущего пункта меню из массива
-        $icon_class = $this->menu_icons[$item->title] ?? 'bi bi-dot';
+        // Если иконка не найдена, используем универсальную иконку 'bi bi-chevron-right'
+        $icon_class = $this->menu_icons[$item->title] ?? 'bi bi-chevron-right';
 
         // Формируем HTML для пункта меню
         $output .= "<li class='nav-item'>";
         $output .= sprintf(
             "<a href='%s' class='nav-link d-flex align-items-center gap-2 py-2 px-3 rounded-3'>
-                <i class='%s'></i>
-                %s
-            </a>",
+            <i class='%s'></i>
+            %s
+        </a>",
             $item->url,
             $icon_class,
             $item->title
