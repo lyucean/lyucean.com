@@ -4,7 +4,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <div class="d-flex justify-content-center gap-4">
+                <!-- Социальные сети  -->
+                <div class="d-flex justify-content-center gap-4 mb-4">
                     <a href="https://www.instagram.com/lyucean"
                        class="btn text-secondary"
                        target="_blank"
@@ -38,14 +39,24 @@
                     </a>
                 </div>
 
+                <!-- Добавляем описание -->
+                <div class="text-center mb-4">
+                    <small class="text-secondary">
+                        Блог ИТ-директора: о технологиях, менеджменте и бизнесе.
+                        <br/>
+                        Делюсь опытом/знаниями, разбираю сложное и ищу способы сделать ИТ понятнее.
+                    </small>
+                </div>
+
                 <div class="text-center mt-4">
                     <small class="text-secondary">
-                        © <?php echo date('Y'); ?> Lyucean
+                        © Валентин Панченко, <?php echo date('Y'); ?>
                     </small>
                 </div>
             </div>
         </div>
     </div>
 </footer>
+
 </body>
 </html>
