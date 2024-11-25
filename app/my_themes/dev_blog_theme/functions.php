@@ -45,13 +45,13 @@ function bootstrap_pagination() {
     ));
 }
 
-// Подключаем скрипт для мобильной строки поиска
 function theme_enqueue_scripts() {
+    // Подключаем скрипт для мобильной строки поиска
     wp_enqueue_script('mobile-search', get_template_directory_uri() . '/js/mobile-search.js', array(), '1.0.0', true);
+    // Подключаем скрипт промотки страницы вверх
+    wp_enqueue_script('scroll-top', get_template_directory_uri() . '/js/scroll-top.js', array(), '1.0.0', true);
 }
 add_action('wp_enqueue_scripts', 'theme_enqueue_scripts');
-
-
 
 // Регистрация меню. Нужно только если у вас будет навигационное меню, которое можно редактировать через админку
 function register_theme_menus() {
