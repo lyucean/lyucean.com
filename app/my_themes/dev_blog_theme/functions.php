@@ -10,8 +10,13 @@ function dev_blog_theme_enqueue_styles() {
     // Bootstrap JS
     wp_enqueue_script('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js', array(), null, true);
 
-    // Подключаем стили темы
-    wp_enqueue_style('dev_blog_theme-style', get_stylesheet_uri());
+    // Получаем путь к файлу style.css
+    $style_path = get_stylesheet_directory() . '/style.css';
+    // Получаем время последней модификации файла. Будет выглядеть как: 20241125.170600
+    $version = date('Ymd.His', filemtime($style_path));
+
+    // Подключаем стили темы с версией
+    wp_enqueue_style('dev_blog_theme-style', get_stylesheet_uri(), array(), $version);
 }
 add_action('wp_enqueue_scripts', 'dev_blog_theme_enqueue_styles'); // Подключаем стили и скрипты когда WordPress загружает скрипты и стили
 
