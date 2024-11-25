@@ -348,6 +348,7 @@ footer a.btn:hover {
     min-height: 20%;
     height: auto;
     background: rgba(54, 66, 123, 0.5);
+
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
@@ -925,36 +926,6 @@ footer a.btn:hover {
     }
 }
 
-/*  Стилизация блока "Каткое описание" */
-.wp-block-site-tagline {
-    background: var(--bs-secondary-bg);
-    border-left: 4px solid var(--bs-primary);
-    padding: 20px 25px;
-    margin: 2rem 0;
-    border-radius: 0 0.375rem 0.375rem 0;
-    color: var(--bs-body-color);
-}
-
-.wp-block-site-tagline::before {
-    content: "О чём эта статья?";
-    display: block;
-    font-weight: 600;
-    font-size: 1.25rem;
-    margin-bottom: 0.75rem;
-    color: var(--bs-heading-color);
-}
-
-.wp-block-site-tagline {
-    font-size: 1rem;
-    line-height: 1.6;
-}
-
-/* Hover эффект */
-.wp-block-site-tagline:hover {
-    background: var(--bs-tertiary-bg);
-    transition: background-color 0.2s ease;
-}
-
 /* Адаптивность для мобильных */
 @media (max-width: 768px) {
     .wp-block-site-tagline {
@@ -965,18 +936,6 @@ footer a.btn:hover {
     .wp-block-site-tagline::before {
         font-size: 1.1rem;
     }
-}
-
-/* Специфичные стили для светлой темы */
-[data-bs-theme="light"] .wp-block-site-tagline {
-    background: rgba(var(--bs-primary-rgb), 0.03);
-    border-left-color: var(--bs-primary);
-}
-
-/* Специфичные стили для темной темы */
-[data-bs-theme="dark"] .wp-block-site-tagline {
-    background: rgba(var(--bs-primary-rgb), 0.15);
-    border-left-color: var(--bs-primary-border-subtle);
 }
 
 /* Кнопка домой и кнопка назад */
