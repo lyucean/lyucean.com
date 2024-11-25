@@ -43,8 +43,10 @@
                 <div class="text-center mb-4">
                     <small class="text-secondary">
                         Блог ИТ-директора: о технологиях, менеджменте и бизнесе.
-                        <br/>
-                        Делюсь опытом/знаниями, разбираю сложное и ищу способы сделать ИТ понятнее.
+                    </small>
+                    <small class="text-secondary">
+                        <?php echo esc_html(get_bloginfo('description')); ?>
+
                     </small>
                 </div>
 
