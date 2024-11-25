@@ -37,7 +37,7 @@ docker-up: ## Поднимем все контейнеры
 	@echo "$(PURPLE) Поднимем все контейнеры $(RESET)"
 	docker compose $(ENV) $(PROFILE) up -d
 
-docker-build:
+docker-build: ## Соберём все контейнеры
 	@echo "$(PURPLE) Соберём образы $(RESET)"
 	docker compose $(ENV) $(PROFILE) build
 

@@ -53,7 +53,7 @@ services:
       WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
       WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
       WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
-      WORDPRESS_DEBUG: 1  # Включаем режим отладки WordPress
+      WORDPRESS_DEBUG: ${WORDPRESS_DEBUG}  # Включаем режим отладки WordPress
     volumes:
       - ./app/wordpress:/var/www/html  # Монтируем локальную папку с WordPress
       - ./app/my_plugins:/var/www/html/wp-content/plugins/custom
