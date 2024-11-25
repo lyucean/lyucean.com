@@ -88,7 +88,7 @@
                                 <div class="mt-auto">
                                     <div class="d-flex flex-wrap justify-content-between align-items-center">
                                         <!-- Блок с датой и тегами -->
-                                        <div class="d-flex flex-wrap gap-2 align-items-center">
+                                        <div class="d-flex flex-wrap gap-0 align-items-center">
                                             <!-- Дата публикации -->
                                             <small class="text-muted fw-light"><?php echo get_the_date(); ?></small>
                                             <!-- Теги статьи -->
