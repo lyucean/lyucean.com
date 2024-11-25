@@ -281,4 +281,6 @@ function add_custom_editor_styles() {
     ]);
 }
 add_action('after_setup_theme', 'add_custom_editor_styles');
-?>
+
+// Подключим наш блок с кратким описанием статьи
+require_once get_template_directory() . '/blocks/summary-block.php';
