@@ -724,11 +724,11 @@ footer a.btn:hover {
 /* Ссылки */
 .article-content a {
     color: #3b49df;
-    text-decoration: none;
 }
 
 .article-content a:hover {
-    text-decoration: underline;
+    color: #1c2ac3;
+    text-decoration: none;
 }
 
 /* Списки */
