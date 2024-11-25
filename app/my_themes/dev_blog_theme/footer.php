@@ -44,6 +44,7 @@
                     <small class="text-secondary">
                         Блог ИТ-директора: о технологиях, менеджменте и бизнесе.
                     </small>
+                    <br/>
                     <small class="text-secondary">
                         <?php echo esc_html(get_bloginfo('description')); ?>
 
