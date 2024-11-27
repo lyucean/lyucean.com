@@ -52,6 +52,11 @@ a {
     color: #3b49df;
 }
 
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
 a:hover {
     color: #1c2ac3;
     text-decoration: none;
