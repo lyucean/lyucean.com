@@ -179,3 +179,117 @@ th {
         font-size: 1.1rem;
     }
 }
+
+
+/* ==========================================================================
+   Стилизация блока Details WordPress
+   ========================================================================== */
+.wp-block-details {
+    --details-border-color: var(--bs-border-color);
+    --details-bg: var(--bs-body-bg);
+    --details-hover-bg: var(--bs-gray-100);
+    --details-active-bg: var(--bs-gray-200);
+
+    background-color: var(--details-active-bg);
+    border-radius: var(--bs-border-radius);
+    padding: 0.25rem 1rem;
+    margin-bottom: 1rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.wp-block-details:hover {
+    background-color: var(--details-border-color);
+}
+
+.wp-block-details[open] {
+    background-color: var(--details-active-bg);
+}
+
+/* Стилизация summary (заголовка) */
+.wp-block-details summary {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.25rem 0;
+    font-weight: 500;
+    color: var(--bs-body-color);
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+}
+
+/* Кастомная стрелка */
+.wp-block-details summary::-webkit-details-marker {
+    display: none;
+}
+
+.wp-block-details summary::before {
+    content: '+';
+    width: 1rem;
+    height: 1rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.wp-block-details[open] summary::before {
+    content: '−';
+    transform: none;
+}
+
+/* Контент внутри details */
+.wp-block-details > *:not(summary) {
+    margin-top: 1rem;
+    padding: 0 0 0 1.5rem;
+    color: var(--bs-body-color);
+}
+
+/* Вложенные details */
+.wp-block-details .wp-block-details {
+    margin: 0.75rem 0;
+    border-left: 3px solid var(--bs-primary);
+}
+
+/* Темная тема */
+[data-bs-theme="dark"] .wp-block-details {
+    --details-hover-bg: var(--bs-gray-800);
+    --details-active-bg: var(--bs-gray-700);
+}
+
+/* Анимация при открытии/закрытии */
+.wp-block-details > *:not(summary) {
+    animation: details-show 0.2s ease-in-out;
+}
+
+@keyframes details-show {
+    from {
+        opacity: 0;
+        transform: translateY(-0.5rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Интерактивность */
+.wp-block-details summary:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
+    border-radius: var(--bs-border-radius-sm);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .wp-block-details {
+        padding: 0.5rem 0.75rem;
+    }
+
+    .wp-block-details > *:not(summary) {
+        padding: 0.5rem 0 0 1rem;
+    }
+}
