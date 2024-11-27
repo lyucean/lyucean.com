@@ -8,9 +8,18 @@
                 <a href="/" class="btn rounded-3 p-2 fs-4 border-0 shadow-none" title="На главную">
                     <i class="bi bi-house"></i>
                 </a>
-                <a href="javascript:history.back()" class="btn rounded-3 p-2 fs-4 border-0 shadow-none" title="Назад">
-                    <i class="bi bi-arrow-left"></i>
-                </a>
+                <?php
+                // Кнопка вернутся назад
+                // Получим HTTP_REFERER, что понять откуда к нам пришел пользователь
+                $referer = $_SERVER['HTTP_REFERER'] ?? '';
+                // Проверяем, содержит ли HTTP_REFERER URL нашего сайта, если да, то показываем кнопку
+                if (!empty($referer) && strpos($referer, parse_url(get_site_url(), PHP_URL_HOST)) !== false) :
+                    ?>
+                    <a href="javascript:history.back()" class="btn rounded-3 p-2 fs-4 border-0 shadow-none" title="Назад">
+                        <i class="bi bi-arrow-left"></i>
+                    </a>
+                <?php endif; ?>
+
             </div>
         </aside>
 

@@ -910,7 +910,7 @@ footer a.btn:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--bs-body-color);
+    color: var(--bs-secondary);
     transition: background-color 0.2s ease-in-out;
 }
 .sticky-top a:hover {
@@ -932,7 +932,7 @@ footer a.btn:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgba(var(--bs-body-color), 0.5);
+    color: var(--bs-secondary);
     transition: opacity 0.5s ease-in-out;
 }
 .sticky-bottom button:hover {
