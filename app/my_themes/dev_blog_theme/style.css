@@ -24,6 +24,15 @@ Text Domain: dev_blog_theme
     z-index: 1000;
 }
 
+/* Плейсхолдер картинки */
+.placeholder-img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+}
+
 @keyframes slideDown {
     from {
         opacity: 0;
@@ -250,14 +259,6 @@ footer a.btn:hover {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-
-.search-page .placeholder-img {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: repeat;
 }
 
 .search-page article {

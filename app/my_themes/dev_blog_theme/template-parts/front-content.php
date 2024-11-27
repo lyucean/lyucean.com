@@ -52,14 +52,21 @@ $query = new WP_Query($args);
             <div class="col">
                 <!-- Карточка статьи -->
                 <article class="card h-100 border-0">
-                    <!-- Изображение статьи (если есть) -->
-                    <?php if (has_post_thumbnail()) : ?>
                         <div class="position-relative">
-                            <a href="<?php the_permalink(); ?>" class="card-img-wrapper text-decoration-none">
-                                <img src="<?php the_post_thumbnail_url('large'); ?>"
-                                     class="card-img-top"
-                                     alt="<?php the_title(); ?>">
-                            </a>
+                            <!-- Изображение статьи (если есть) -->
+                            <?php if (has_post_thumbnail()) : ?>
+                                <a href="<?php the_permalink(); ?>" class="card-img-wrapper text-decoration-none">
+                                    <img src="<?php the_post_thumbnail_url('large'); ?>"
+                                         class="card-img-top"
+                                         alt="<?php the_title(); ?>">
+                                </a>
+                            <?php else: ?>
+                                <a href="<?php the_permalink(); ?>"
+                                   class="card-img-wrapper text-decoration-none">
+                                    <div class="placeholder-img"
+                                         style="background-image: url('data:image/svg+xml,<?php echo rawurlencode(get_random_pattern()); ?>')"></div>
+                                </a>
+                            <?php endif; ?>
                             <!-- Счетчики просмотров -->
                             <?php if (is_user_logged_in()) : ?>
                                 <div class="position-absolute top-0 end-0 p-2">
@@ -77,7 +84,6 @@ $query = new WP_Query($args);
                             <?php endif; ?>
 
                         </div>
-                    <?php endif; ?>
 
                     <!-- Основное содержимое карточки -->
                     <div class="card-body p-3 d-flex flex-column">
