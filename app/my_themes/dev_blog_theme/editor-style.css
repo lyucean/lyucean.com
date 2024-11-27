@@ -43,8 +43,8 @@ blockquote p {
 
 /* подпись к изображению */
 .wp-element-caption {
-    text-align: center;
-    font-size: 14px;
+    font-size: .875em;
+    color: var(--bs-secondary-color);
 }
 
 /* Ссылки */
