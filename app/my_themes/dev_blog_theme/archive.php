@@ -119,7 +119,25 @@
             </div>
 
             <div class="mt-4">
-                <?php echo bootstrap_pagination(); ?>
+                <!-- Навигация по страницам -->
+                <nav class="pagination-wrapper">
+                    <div class="pagination justify-content-center mt-4" role="navigation" aria-label="Постраничная навигация">
+                        <?php
+                        global $wp_query;
+                        echo paginate_links(array(
+                            'prev_text' => '<span aria-hidden="true">←</span><span class="visually-hidden">Предыдущая</span>',
+                            'next_text' => '<span aria-hidden="true">→</span><span class="visually-hidden">Следующая</span>',
+                            'total' => $wp_query->max_num_pages,
+                            'current' => max(1, get_query_var('paged')),
+                            'type' => 'plain',
+                            'mid_size' => 1,
+                            'end_size' => 1,
+                            'base' => str_replace(999999999, '%#%', get_pagenum_link(999999999)),
+                            'format' => '?paged=%#%',
+                        ));
+                        ?>
+                    </div>
+                </nav>
             </div>
 
         <?php else : ?>

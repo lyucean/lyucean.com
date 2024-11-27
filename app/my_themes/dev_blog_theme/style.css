@@ -1056,3 +1056,80 @@ footer a.btn:hover {
         padding: 0.5rem 0 0 1rem;
     }
 }
+
+/* ==========================================================================
+   Блок пагинации (posts-related.php)
+   ========================================================================== */
+/* Стили для пагинации */
+.pagination {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.pagination .page-numbers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    padding: 0.5rem 0.75rem;
+    margin: 0 0.125rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--bs-secondary);
+    background-color: transparent;
+    border: transparent;
+    border-radius: var(--bs-border-radius);
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.pagination .page-numbers.current {
+    color: var(--bs-body-color);
+    font-weight: 700;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.pagination .page-numbers:hover:not(.current) {
+    background-color: var(--bs-gray-300);
+}
+[data-bs-theme="dark"] .pagination .page-numbers:hover:not(.current) {
+    background-color: var(--bs-gray-700);
+}
+
+.pagination .prev,
+.pagination .next {
+    padding: 0.5rem 1rem;
+}
+
+/* Стили для многоточия */
+.pagination .dots {
+    border: none;
+    padding: 0.5rem;
+    cursor: default;
+}
+
+.pagination .dots:hover {
+    background-color: transparent;
+}
+
+/* Адаптивность */
+@media (max-width: 576px) {
+    .pagination {
+        gap: 0.25rem;
+    }
+
+    .pagination .page-numbers {
+        min-width: 2rem;
+        height: 2rem;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+    }
+
+    .pagination .prev,
+    .pagination .next {
+        padding: 0.25rem 0.75rem;
+    }
+}

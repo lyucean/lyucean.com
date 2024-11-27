@@ -51,16 +51,22 @@
                     <?php endwhile; ?>
                 </div>
 
-                <!-- Пагинация -->
-                <div class="pagination-wrapper mt-4">
-                    <?php
-                    echo paginate_links([
-                        'prev_text' => '<i class="fas fa-arrow-left"></i> Назад',
-                        'next_text' => 'Вперед <i class="fas fa-arrow-right"></i>',
-                        'class' => 'pagination-link'
-                    ]);
-                    ?>
-                </div>
+                <!-- Навигация по страницам -->
+                <nav class="pagination-wrapper">
+                    <div class="pagination justify-content-center mt-4" role="navigation" aria-label="Постраничная навигация">
+                        <?php
+                        echo paginate_links(array(
+                            'prev_text' => '<span aria-hidden="true">←</span><span class="visually-hidden">Предыдущая</span>',
+                            'next_text' => '<span aria-hidden="true">→</span><span class="visually-hidden">Следующая</span>',
+                            'total' => $query->max_num_pages,
+                            'current' => max(1, get_query_var('paged')),
+                            'type' => 'plain',
+                            'mid_size' => 1,
+                            'end_size' => 1,
+                        ));
+                        ?>
+                    </div>
+                </nav>
 
             <?php else : ?>
                 <div class="alert alert-info">

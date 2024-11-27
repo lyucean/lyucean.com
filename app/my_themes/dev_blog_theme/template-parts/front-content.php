@@ -124,16 +124,22 @@ $query = new WP_Query($args);
     </div>
 
     <!-- Навигация по страницам -->
-    <nav class="pagination justify-content-center mt-4">
-        <?php
-        echo paginate_links(array(
-            'prev_text' => __('← Предыдущая'),
-            'next_text' => __('Следующая →'),
-            'total' => $query->max_num_pages,
-            'current' => max(1, get_query_var('paged')),
-        ));
-        ?>
+    <nav class="pagination-wrapper">
+        <div class="pagination justify-content-center mt-4" role="navigation" aria-label="Постраничная навигация">
+            <?php
+            echo paginate_links(array(
+                'prev_text' => '<span aria-hidden="true">←</span><span class="visually-hidden">Предыдущая</span>',
+                'next_text' => '<span aria-hidden="true">→</span><span class="visually-hidden">Следующая</span>',
+                'total' => $query->max_num_pages,
+                'current' => max(1, get_query_var('paged')),
+                'type' => 'plain',
+                'mid_size' => 1,
+                'end_size' => 1,
+            ));
+            ?>
+        </div>
     </nav>
+
 </div>
 
 <?php wp_reset_postdata(); // Сбрасываем запрос ?>
