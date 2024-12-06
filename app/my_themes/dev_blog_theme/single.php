@@ -34,7 +34,7 @@
                             <?php the_post_thumbnail('large', ['class' => 'card-img rounded-top']); ?>
                             <div class="header-blur-overlay"></div>
                             <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                <div class="d-flex flex-wrap gap-0 align-items-center">
+                                <div class="d-flex flex-wrap gap-2 align-items-center">
                                     <span class="text-white-50"><?php echo get_the_date(); ?></span>
 
                                     <!-- Счетчики просмотров -->
