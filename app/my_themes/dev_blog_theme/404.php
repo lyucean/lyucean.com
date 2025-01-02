@@ -7,16 +7,15 @@
             <article class="rounded mb-4">
                 <!-- Содержимое страницы -->
                 <div class="article-content">
-                    <div class="mb-4">
+                    <div class="d-flex justify-content-center">
                         <img src="<?php echo get_template_directory_uri(); ?>/images/404.gif"
                              alt="Ничего не найдено"
-                             class="col-12 col-md-6 mb-4">
+                             class="col-12 col-md-6 mx-auto">
                     </div>
-
 
                     <h1 class="h1 fw-bold text-center mb-3">404: Похоже, вы заблудились.</h1>
 
-                    <p class="lead mb-4 text-center">Эта страница удалена или никогда не была на этом сайте</p>
+                    <p class="lead mb-4 text-center">Эта страница удалена или никогда не была на этом сайте</p>
 
                     <div class="d-grid gap-3 col-md-8 mx-auto mb-5">
                         <a href="<?php echo home_url(); ?>" class="btn btn-link">
@@ -24,6 +23,7 @@
                         </a>
                     </div>
                 </div>
+
             </article>
 
             <!-- Блок с рекомендованными статьями -->

@@ -116,15 +116,18 @@
             <?php else : ?>
                 <main class="col-12 col-lg-10 offset-lg-1 px-lg-5">
                     <article class="rounded mb-4">
-                        <div class="article-content">
-                            <img src="<?php echo get_template_directory_uri(); ?>/images/confused-travolta.gif"
-                                 alt="Ничего не найдено" class="w-75 w-md-100">
+                        <div class="article-content text-center">
+                            <div class="d-flex justify-content-center mb-3">
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/confused-travolta.gif"
+                                     alt="Ничего не найдено" class="w-75 w-md-100">
+                            </div>
 
-                            <h1 class="text-center">Упс! Кажется, мы в тупике... 🤔</h1>
+                            <h1>Упс! Кажется, мы в тупике... 🤔</h1>
 
-                            <p class="text-center lead">Либо ты слишком креативно написал запрос, либо я ещё не созрел на такую статью.</p>
+                            <p class="lead">Либо ты слишком креативно написал запрос, либо я ещё не созрел на такую статью.</p>
                         </div>
                     </article>
+
 
                     <!-- Блок со случайными статьями -->
                     <?php get_template_part('template-parts/posts', 'related', [
