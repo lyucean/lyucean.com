@@ -2,7 +2,19 @@
 
     <div class="search-page">
         <div class="row">
-            <div class="col-12">
+            <!-- Левая боковая панель -->
+            <aside class="col-lg-1 d-none d-lg-block">
+                <div class="sticky-top d-flex flex-column align-items-end">
+                    <a href="/" class="btn rounded-3 p-2 fs-4 border-0 shadow-none" title="На главную">
+                        <i class="bi bi-house"></i>
+                    </a>
+                    <a href="javascript:history.back()" class="btn rounded-3 p-2 fs-4 border-0 shadow-none" title="Назад">
+                        <i class="bi bi-arrow-left"></i>
+                    </a>
+                </div>
+            </aside>
+            <!-- Основное содержимое -->
+            <main class="col-12 col-lg-11">
                 <?php if (have_posts()) : ?>
                 <div class="row g-4">
                     <?php while (have_posts()) : the_post(); ?>
