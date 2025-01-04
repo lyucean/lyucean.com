@@ -72,7 +72,7 @@ class Bootstrap_5_Nav_Walker extends Walker_Nav_Menu {
     private $menu_icons = [
         'Главная' => 'bi bi-house',
         'Менеджмент' => 'bi bi-graph-up-arrow',
-        'Инфраструктура' => 'bi bi-hdd-network',
+        'DevOps' => 'bi bi-hdd-network',
         'Карьера' => 'bi bi-ladder',
         'Ответы' => 'bi bi-question-circle',
         'Личное' => 'bi bi-person',
