@@ -2,6 +2,7 @@
 
     <div class="search-page">
         <div class="row">
+            <?php if (have_posts()) : ?>
             <!-- Левая боковая панель -->
             <aside class="col-lg-1 d-none d-lg-block">
                 <div class="sticky-top d-flex flex-column align-items-end">
@@ -15,7 +16,6 @@
             </aside>
             <!-- Основное содержимое -->
             <main class="col-12 col-lg-11">
-                <?php if (have_posts()) : ?>
                 <div class="row g-4">
                     <?php while (have_posts()) : the_post(); ?>
 
@@ -122,8 +122,6 @@
                         </div>
                     </nav>
                 </div>
-
-
             </div>
             <?php else : ?>
                 <main class="col-12 col-lg-10 offset-lg-1 px-lg-5">
