@@ -684,16 +684,6 @@ footer a.btn:hover {
     color: var(--bs-secondary-color);
 }
 
-/* Ссылки */
-.article-content a {
-    color: #3b49df;
-}
-
-.article-content a:hover {
-    color: #1c2ac3;
-    text-decoration: none;
-}
-
 /* Списки */
 .article-content ul,
 .article-content ol {
