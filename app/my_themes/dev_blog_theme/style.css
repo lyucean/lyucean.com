@@ -1124,3 +1124,25 @@ footer a.btn:hover {
         padding: 0.25rem 0.75rem;
     }
 }
+
+/* Центрирование подписей к изображениям */
+.wp-element-caption,
+.wp-caption-text {
+    text-align: center !important;
+    margin: 0.5em auto !important;
+    width: 100% !important;
+}
+
+.wp-block-image figcaption {
+    text-align: center !important;
+    margin: 0.5em auto !important;
+    width: 100% !important;
+}
+
+figure.aligncenter {
+    text-align: center !important;
+}
+
+figure.aligncenter figcaption {
+    text-align: center !important;
+}
