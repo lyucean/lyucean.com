@@ -1,9 +1,9 @@
 <div class="related-posts">
-    <h2><?php echo $args['title'] ?? 'Прочитай ещё эти статьи:'; ?></h2>
+    <h2><?php echo $args['title'] ?? 'Это тоже интересно:'; ?></h2>
     <div class="post-list">
         <?php
         $random_posts = new WP_Query(array(
-            'posts_per_page' => 4,
+            'posts_per_page' => 2,
             'post_type' => 'post',
             'orderby' => 'rand',
             'post__not_in' => array(get_the_ID()),
