@@ -63,6 +63,7 @@ function register_theme_menus() {
     register_nav_menus(array(
         'sidebar-menu' => __('Боковое меню', 'dev_blog_theme'),
         'additional-menu' => __('Дополнительное меню', 'dev_blog_theme'),
+        'block-menu' => __('Блок меню', 'dev_blog_theme'),
     ));
 }
 add_action('init', 'register_theme_menus');
