@@ -86,7 +86,8 @@ class Bootstrap_5_Nav_Walker extends Walker_Nav_Menu {
         'Процессы' => 'bi bi-diagram-3',
         'Разработка' => 'bi bi-code-square',
         'Мысли' => 'bi bi-lightbulb',
-        'Практика' => 'bi bi-clipboard-check'
+        'Практика' => 'bi bi-clipboard-check',
+        'Автор' => 'bi-pen',
     ];
 
     function start_lvl(&$output, $depth = 0, $args = null): void
