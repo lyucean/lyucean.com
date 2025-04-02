@@ -62,6 +62,7 @@ add_action('wp_enqueue_scripts', 'theme_enqueue_scripts');
 function register_theme_menus() {
     register_nav_menus(array(
         'sidebar-menu' => __('Боковое меню', 'dev_blog_theme'),
+        'additional-menu' => __('Дополнительное меню', 'dev_blog_theme'),
     ));
 }
 add_action('init', 'register_theme_menus');
@@ -80,7 +81,11 @@ class Bootstrap_5_Nav_Walker extends Walker_Nav_Menu {
         'Инструменты' => 'bi bi-tools',
         'Проекты' => 'bi bi-kanban',
         'Подписаться' => 'bi bi-bell',
-        'Обо мне' => 'bi bi-person-vcard'
+        'Обо мне' => 'bi bi-person-vcard',
+        'Процессы' => 'bi bi-diagram-3',
+        'Разработка' => 'bi bi-code-square',
+        'Мысли' => 'bi bi-lightbulb',
+        'Практика' => 'bi bi-clipboard-check'
     ];
 
     function start_lvl(&$output, $depth = 0, $args = null): void
