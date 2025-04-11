@@ -42,7 +42,7 @@
                 <!-- Добавляем описание -->
                 <div class="text-center mb-4">
                     <small class="text-secondary">
-                        <?php echo esc_html(get_bloginfo('description')); ?>
+                        Мой путь ИТ-директора: Житейским языком о технологиях и методологиях, открыто и честно
                     </small>
                 </div>
 
