@@ -14,8 +14,15 @@
 </div>
 
 <?php
+
+// Определяем текущую страницу пагинации
+$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+
 // Определяем параметры сортировки
-$args = array('posts_per_page' => get_option('posts_per_page'));
+$args = array(
+    'posts_per_page' => get_option('posts_per_page'),
+    'paged' => $paged // Добавляем параметр paged для пагинации
+);
 
 $sort = isset($_GET['sort']) ? $_GET['sort'] : 'latest';
 
