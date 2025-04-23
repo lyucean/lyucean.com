@@ -1,13 +1,13 @@
 </main>
 <?php wp_footer(); ?>
-<footer class="py-4 mt-5 w-100">
-    <div class="container-fluid">
+<footer class="py-5 mt-5 w-100 footer-custom">
+    <div class="container">
         <div class="row">
             <div class="col-12">
                 <!-- Социальные сети  -->
                 <div class="d-flex justify-content-center gap-4 mb-4">
                     <a href="https://www.instagram.com/lyucean"
-                       class="btn text-secondary"
+                       class="social-icon instagram-icon"
                        target="_blank"
                        rel="noopener noreferrer"
                        aria-label="Instagram">
@@ -15,7 +15,7 @@
                     </a>
 
                     <a href="https://t.me/lyucean"
-                       class="btn text-secondary"
+                       class="social-icon telegram-icon"
                        target="_blank"
                        rel="noopener noreferrer"
                        aria-label="Telegram">
@@ -23,7 +23,7 @@
                     </a>
 
                     <a href="mailto:lyucean@gmail.com"
-                       class="btn text-secondary"
+                       class="social-icon email-icon"
                        target="_blank"
                        rel="noopener noreferrer"
                        aria-label="Email">
@@ -31,7 +31,7 @@
                     </a>
 
                     <a href="<?php bloginfo('rss2_url'); ?>"
-                       class="btn text-secondary"
+                       class="social-icon rss-icon"
                        target="_blank"
                        rel="noopener noreferrer"
                        aria-label="RSS Feed">
@@ -41,20 +41,19 @@
 
                 <!-- Добавляем описание -->
                 <div class="text-center mb-4">
-                    <small class="text-secondary">
+                    <p class="footer-description">
                         Мой путь ИТ-директора: Житейским языком о технологиях и методологиях, открыто и честно
-                    </small>
+                    </p>
                 </div>
 
-                <div class="text-center mt-4">
-                    <small class="text-secondary">
+                <div class="text-center">
+                    <p class="footer-copyright">
                         © Валентин Панченко, <?php echo date('Y'); ?>
-                    </small>
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 </footer>
-
 </body>
 </html>

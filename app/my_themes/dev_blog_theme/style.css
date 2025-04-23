@@ -134,18 +134,69 @@ header .logo {
 /* ==========================================================================
    Футер (footer.php)
    ========================================================================== */
+
+/* Общие стили для футера */
+.footer-custom {
+    border-top: 1px solid var(--bs-border-color);
+}
+
+/* Стили для иконок социальных сетей */
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+.social-icon i {
+    font-size: 1.2rem;
+}
+
+/* Фирменные цвета для иконок */
+.instagram-icon {
+    color: #E1306C;
+}
+.telegram-icon {
+    color: #0088cc;
+}
+.email-icon {
+    color: #D44638;
+}
+.rss-icon {
+    color: #ee802f;
+}
+
+/* Стили для текста */
+.footer-description {
+    color: #6c757d;
+    font-size: 0.95rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+.footer-copyright {
+    color: #adb5bd;
+    font-size: 0.85rem;
+    margin-top: 20px;
+}
+
+
 footer {
-    background-color: var(--bs-gray-200);
+    /*background-color: var(--bs-gray-200);*/
 }
 [data-bs-theme="dark"] footer {
     background-color: var(--bs-dark);
+    border-top: none;
 }
 
-footer a.btn:hover {
+footer a.social-icon:hover {
     background-color: var(--bs-gray-300);
 }
-[data-bs-theme="dark"] footer a.btn:hover {
-    background-color: var(--bs-gray-700);
+[data-bs-theme="dark"] footer a.social-icon:hover {
+    background-color: var(--bs-gray-800);
 }
 
 /* ==========================================================================
