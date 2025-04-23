@@ -223,6 +223,7 @@ footer a.social-icon:hover {
 
 [data-bs-theme="dark"] .block-menu-desktop .sidebar-nav{
     background-color: var(--bs-dark);
+    box-shadow: none !important;
 }
 
 /* ==========================================================================
@@ -278,6 +279,10 @@ footer a.social-icon:hover {
 /* Темная тема для карточек */
 [data-bs-theme="dark"] .front-page .articles .card {
     background-color: var(--bs-dark);
+    border: 1px solid var(--bs-dark) !important;
+}
+[data-bs-theme="dark"] .front-page .articles .card:hover {
+    border: 1px solid var(--bs-gray-700) !important;
 }
 
 /* Панель сортировки */
@@ -397,6 +402,11 @@ footer a.social-icon:hover {
     background-color: var(--bs-body-bg);
     color: var(--bs-body-color);
 }
+
+[data-bs-theme="dark"] .single-post article {
+    border: 1px solid var(--bs-dark) !important;
+}
+
 
 .single-post .card {
     background-color: var(--bs-body-bg);
@@ -569,6 +579,11 @@ footer a.social-icon:hover {
     padding: 1.5rem 2rem;
     font-size: 1.125rem;
 }
+
+[data-bs-theme="dark"] .related-posts {
+    border: 1px solid var(--bs-dark) !important;
+}
+
 
 .related-posts h2 {
     font-size: 1.5rem;
