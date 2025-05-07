@@ -281,3 +281,6 @@ require_once get_template_directory() . '/blocks/summary-block.php';
 
 // Подключим наш блок с конвертацией в Html
 require_once get_template_directory() . '/blocks/static-html-export.php';
+
+// Подключим наш блок с разрывом страницы
+require_once get_template_directory() . '/blocks/article-divider-block.php';

@@ -2,3 +2,4 @@
 /app/wordpress
 /app/.env
 /backup/*
+/.env
