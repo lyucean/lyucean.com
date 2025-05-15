@@ -765,7 +765,7 @@ footer a.social-icon:hover {
 }
 
 /* Цитаты */
-.article-content blockquote p {
+.article-content  p {
     margin-bottom: 0;
 }
 
@@ -821,13 +821,46 @@ footer a.social-icon:hover {
 }
 
 /* Цитаты */
-.article-content blockquote {
-    border-left: 4px solid #3b49df;
-    margin: 1.5em 0;
-    padding: 0.5em 0 0.5em 1em;
-    font-style: italic;
-    background: rgba(59, 73, 223, 0.1);
+blockquote {
+    border-left: 4px solid var(--bs-success);
+    background: rgba(var(--bs-success-rgb), 0.05);
+    padding: 1em 1em;
+    font-style: normal;
+    font-size: 0.9em;
+    margin: 1.2rem 0;
     border-radius: 0 0.375rem 0.375rem 0;
+    box-shadow: inset 0 1px 3px rgba(var(--bs-tertiary-bg-rgb), var(--bs-bg-opacity));
+}
+
+blockquote p {
+    margin-bottom: 0.5em;
+    color: var(--bs-body-color);
+    font-size: 1.05em;
+    line-height: 1.7;
+}
+
+blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+blockquote p strong {
+    color: var(--bs-emphasis-color);
+}
+
+/* Авторство цитаты */
+blockquote p:last-child:not(:first-child) {
+    font-size: 0.8em;
+    color: var(--bs-secondary-color);
+    text-align: right;
+    margin-top: 0.75em;
+    border-top: 1px solid var(--bs-border-color);
+    padding-top: 0.75em;
+}
+
+/* Темная тема */
+[data-bs-theme="dark"] blockquote {
+    background: rgba(var(--bs-success-rgb), 0.15);
+    border-left-color: var(--bs-success-border-subtle);
 }
 
 /* Горизонтальная линия */
@@ -859,9 +892,6 @@ footer a.social-icon:hover {
 [data-bs-theme="dark"] .article-content pre,
 [data-bs-theme="dark"] .article-content code {
     background: #2d333b;
-}
-[data-bs-theme="dark"].article-content blockquote {
-    background: rgba(59, 73, 223, 0.05);
 }
 
 /* Для больших планшетов */
@@ -918,9 +948,9 @@ footer a.social-icon:hover {
 
     /* Мобильные цитаты */
     .article-content blockquote {
-        margin: 1em -1rem;
-        padding: 0.5em 1em 0.5em 1em;
         border-radius: 0;
+        padding: 10px 10px;
+        margin: 1.5rem -.4rem;
     }
 
     /* Мобильные списки */
