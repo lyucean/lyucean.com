@@ -767,6 +767,7 @@ footer a.social-icon:hover {
 /* Цитаты */
 .article-content  p {
     margin-bottom: 0;
+    margin-bottom: .5rem;
 }
 
 /* подпись к изображению */
