@@ -63,12 +63,13 @@ class Bootstrap_5_Nav_Walker extends Walker_Nav_Menu {
         'Ресурсы' => 'bi bi-book',
         'Инструменты' => 'bi bi-tools',
         'Проекты' => 'bi bi-kanban',
-        'Подписаться' => 'bi bi-bell',
+        'Письма' => 'bi bi-bell',
         'Обо мне' => 'bi bi-person-vcard',
         'Процессы' => 'bi bi-diagram-3',
         'Разработка' => 'bi bi-code-square',
         'Мысли' => 'bi bi-lightbulb',
         'Практика' => 'bi bi-clipboard-check',
+        'Менторинг' => 'bi bi-mortarboard',
         'Автор' => 'bi-pen',
     ];
 
