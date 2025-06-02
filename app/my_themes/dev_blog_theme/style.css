@@ -209,8 +209,8 @@ footer a.social-icon:hover {
 .block-menu-desktop .sidebar-nav{
     border-radius: 0.375rem;
     border: none !important;
-    box-shadow: 0 0 0 0.5px var(--bs-border-color) !important;
     background-color: var(--bs-white);
+    box-shadow: -1px 5px 35px -9px rgba(0, 0, 0, .15);
 }
 .front-menu-desktop .sidebar-nav .nav-link:hover,
 .block-menu-desktop .sidebar-nav .nav-link:hover {
@@ -260,6 +260,7 @@ footer a.social-icon:hover {
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     border: 1px solid var(--bs-border-color) !important;
     background-color: var(--bs-white);
+    box-shadow: -1px 5px 35px -9px rgba(0, 0, 0, .2);
 }
 
 .front-page .articles .card-img-wrapper {
@@ -401,6 +402,7 @@ footer a.social-icon:hover {
     border: 1px solid var(--bs-border-color) !important;
     background-color: var(--bs-body-bg);
     color: var(--bs-body-color);
+    box-shadow: -1px 5px 35px -9px rgba(0, 0, 0, .2);
 }
 
 [data-bs-theme="dark"] .single-post article {
@@ -576,8 +578,9 @@ footer a.social-icon:hover {
     border: 1px solid var(--bs-border-color) !important;
     background-color: var(--bs-body-bg);
     color: var(--bs-body-color);
-    padding: 1.5rem 2rem;
+    padding: 2rem 2rem;
     font-size: 1.125rem;
+    box-shadow: -1px 5px 35px -9px rgba(0, 0, 0, .05);
 }
 
 [data-bs-theme="dark"] .related-posts {
@@ -737,7 +740,8 @@ footer a.social-icon:hover {
     font-size: 1.125rem;
     line-height: 1.8;
     color: var(--bs-body-color);
-    padding: 2rem 4rem;
+    padding: 2rem 4rem 4rem 4rem;
+    box-shadow: -1px 5px 35px -9px rgba(0, 0, 0, .2);
 }
 
 /* Заголовки */
