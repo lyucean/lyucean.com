@@ -746,21 +746,106 @@ footer a.social-icon:hover {
 
 /* Заголовки */
 .article-content h1 {
-    font-size: 2.5rem;
+    font-size: 2.5rem;      /* 40px при базовом размере 16px */
     font-weight: 800;
-    margin-bottom: .5em;
+    margin: 1.5em 0 0.5em;
+    line-height: 1.2;
 }
 
 .article-content h2 {
-    font-size: 2rem;
+    font-size: 2rem;        /* 32px */
     font-weight: 700;
-    margin: 1em 0 0.5em;
+    margin: 1.4em 0 0.5em;
+    line-height: 1.25;
 }
 
 .article-content h3 {
-    font-size: 1.5rem;
+    font-size: 1.5rem;      /* 24px */
     font-weight: 600;
-    margin: 0.8em 0 0.5em;
+    margin: 1.3em 0 0.5em;
+    line-height: 1.3;
+}
+
+.article-content h4 {
+    font-size: 1.25rem;     /* 20px */
+    font-weight: 600;
+    margin: 1.2em 0 0.5em;
+    line-height: 1.35;
+}
+
+.article-content h5 {
+    font-size: 1.125rem;    /* 18px */
+    font-weight: 600;
+    margin: 1.1em 0 0.5em;
+    line-height: 1.4;
+}
+
+.article-content h6 {
+    font-size: 1rem;        /* 16px */
+    font-weight: 600;
+    margin: 1em 0 0.5em;
+    line-height: 1.4;
+    color: var(--bs-secondary);
+}
+
+/* Адаптивность для заголовков */
+@media screen and (max-width: 768px) {
+    .article-content h1 {
+        font-size: 2rem;      /* 32px */
+        margin: 1.2em 0 0.4em;
+    }
+
+    .article-content h2 {
+        font-size: 1.75rem;   /* 28px */
+        margin: 1.1em 0 0.4em;
+    }
+
+    .article-content h3 {
+        font-size: 1.5rem;    /* 24px */
+        margin: 1em 0 0.4em;
+    }
+
+    .article-content h4 {
+        font-size: 1.25rem;   /* 20px */
+        margin: 0.9em 0 0.4em;
+    }
+
+    .article-content h5 {
+        font-size: 1.125rem;  /* 18px */
+        margin: 0.8em 0 0.4em;
+    }
+
+    .article-content h6 {
+        font-size: 1rem;      /* 16px */
+        margin: 0.7em 0 0.4em;
+    }
+}
+
+/* Для малых экранов */
+@media screen and (max-width: 576px) {
+    .article-content h1 {
+        font-size: 1.75rem;   /* 28px */
+    }
+
+    .article-content h2 {
+        font-size: 1.5rem;    /* 24px */
+    }
+
+    .article-content h3 {
+        font-size: 1.25rem;   /* 20px */
+    }
+
+    .article-content h4 {
+        font-size: 1.125rem;  /* 18px */
+    }
+
+    .article-content h5 {
+        font-size: 1rem;      /* 16px */
+    }
+
+    .article-content h6 {
+        font-size: 0.9375rem; /* 15px */
+    }
 }
 
 /* Блоки кода */
