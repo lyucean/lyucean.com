@@ -748,7 +748,7 @@ footer a.social-icon:hover {
 .article-content h1 {
     font-size: 2.5rem;      /* 40px при базовом размере 16px */
     font-weight: 800;
-    margin: 1.5em 0 0.5em;
+    margin: 0 0 0.5em;
     line-height: 1.2;
 }
 
