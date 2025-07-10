@@ -285,3 +285,6 @@ require_once get_template_directory() . '/blocks/static-html-export.php';
 
 // Подключим наш блок с разрывом страницы
 require_once get_template_directory() . '/blocks/article-divider-block.php';
+
+// Подключим спойлер в выпадающее меню форматирования
+require_once get_template_directory() . '/blocks/spoiler-block.php';
