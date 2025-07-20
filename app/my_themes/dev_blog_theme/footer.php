@@ -4,6 +4,16 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
+
+                <!-- Добавляем описание -->
+                <div class="text-center mb-4">
+                    <p class="footer-description">
+                        Блог ИТ-директора о том, как не поехать кукухой в мире технологий.
+                        <br/>
+                        Практические советы и откровенные истории без воды и розовых соплей.
+                    </p>
+                </div>
+
                 <!-- Социальные сети  -->
                 <div class="d-flex justify-content-center gap-4 mb-4">
                     <a href="https://www.instagram.com/lyucean"
@@ -39,18 +49,12 @@
                     </a>
                 </div>
 
-                <!-- Добавляем описание -->
-                <div class="text-center mb-4">
-                    <p class="footer-description">
-                        Мой путь ИТ-директора: Житейским языком о технологиях и методологиях, открыто и честно
-                    </p>
-                </div>
-
                 <div class="text-center">
                     <p class="footer-copyright">
                         © Валентин Панченко, <?php echo date('Y'); ?>
                     </p>
                 </div>
+
             </div>
         </div>
     </div>
