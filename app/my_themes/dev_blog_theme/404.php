@@ -52,4 +52,10 @@
     </div>
 </div>
 
+<script>
+    setTimeout(function() {
+        ym(89564639,'reachGoal','404');
+    }, 1000);
+</script>
+
 <?php get_footer(); ?>
