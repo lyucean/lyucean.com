@@ -1397,3 +1397,7 @@ figure.aligncenter figcaption {
         padding: 0 0.375rem;
     }
 }
+
+.text-purple {
+    color: #6610f2;
+}
