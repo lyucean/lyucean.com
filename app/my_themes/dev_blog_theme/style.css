@@ -1051,7 +1051,7 @@ blockquote p:last-child:not(:first-child) {
 
     /* Мобильные таблицы */
     .article-content table {
-        margin: 1em -1rem;
+        margin: 0;
         width: calc(100% + 2rem);
     }
 
@@ -1400,4 +1400,19 @@ figure.aligncenter figcaption {
 
 .text-purple {
     color: #6610f2;
+}
+
+/* Стили для таблицы */
+.wp-block-table .article-content th {
+    background: var(--bs-border-color);
+    font-size: 0.8rem;
+}
+.wp-block-table thead {
+    border-bottom: 1px solid;
+}
+.wp-block-table .article-content th,
+.wp-block-table .article-content td {
+    padding: 0.15em 0.25em;
+    border: 1px solid var(--bs-border-color);
+    font-size: 0.8rem;
 }
