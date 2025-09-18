@@ -977,6 +977,9 @@ blockquote p:last-child:not(:first-child) {
 .article-content th {
     background: #f6f8fa;
 }
+[data-bs-theme="dark"] .article-content th {
+    background: var(--bs-border-color);
+}
 
 /* Темная тема */
 [data-bs-theme="dark"] .article-content pre,
