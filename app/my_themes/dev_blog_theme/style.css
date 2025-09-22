@@ -226,26 +226,6 @@ footer a.social-icon:hover {
     box-shadow: none !important;
 }
 
-/* Стиль для пункта "Ищу работу" */
-.front-menu-desktop .sidebar-nav .nav-link[href*="find-work"],
-.block-menu-desktop .sidebar-nav .nav-link[href*="find-work"] {
-    background: var(--bs-green) !important;
-    color: white !important;
-}
-
-.front-menu-desktop .sidebar-nav .nav-link[href*="find-work"]:hover,
-.block-menu-desktop .sidebar-nav .nav-link[href*="find-work"]:hover {
-    background: var(--bs-success-text-emphasis) !important; /* Немного темнее при наведении */
-    color: white !important;
-}
-
-/* Для темной темы */
-[data-bs-theme="dark"] .front-menu-desktop .sidebar-nav .nav-link[href*="find-work"],
-[data-bs-theme="dark"] .block-menu-desktop .sidebar-nav .nav-link[href*="find-work"] {
-    background: var(--bs-green) !important;
-    color: white !important;
-}
-
 /* ==========================================================================
    Мобильное меню (front-menu-mobile.php)
    ========================================================================== */
