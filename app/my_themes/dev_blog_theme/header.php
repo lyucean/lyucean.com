@@ -36,7 +36,7 @@
                                 <span class="input-group-text bg-transparent border-end-0 opacity-50">
                                     <i class="bi bi-search"></i>
                                 </span>
-                                <input class="form-control border-start-0 ps-0 opacity-50"
+                                <input class="form-control border-start-0 ps-0"
                                        type="search"
                                        placeholder=" Поищем?"
                                        aria-label="Search"
