@@ -1,28 +1,78 @@
 <?php
-// Подключим переменные
-// Функция для загрузки переменных из .env файла с использованием parse_ini_file
-function load_env_with_ini($env_file_path) {
-    if (!file_exists($env_file_path)) {
-        print_r("Файл .env не найден по пути: {$env_file_path}");
-        return;
-    }
+// Регистрация страницы настроек
+function register_telegram_settings_page() {
+    add_menu_page(
+        'Настройки Telegram', // Название страницы
+        'Telegram',           // Название меню
+        'manage_options',     // Уровень доступа
+        'telegram-settings',  // Уникальный slug страницы
+        'render_telegram_settings_page', // Функция для отображения страницы
+        'dashicons-email-alt', // Иконка меню
+        100                    // Позиция в меню
+    );
+}
+add_action('admin_menu', 'register_telegram_settings_page');
 
-    $variables = parse_ini_file($env_file_path);
-    if ($variables === false) {
-        print_r("Ошибка при парсинге .env файла: {$env_file_path}");
-        return;
-    }
-
-    foreach ($variables as $key => $value) {
-        // Загружаем переменные в глобальные массивы
-        $_ENV[$key] = $value;
-        $_SERVER[$key] = $value;
-    }
+// Отображение страницы настроек
+function render_telegram_settings_page() {
+    ?>
+    <div class="wrap">
+        <h1>Настройки Telegram</h1>
+        <form method="post" action="options.php">
+            <?php
+            // Регистрируем настройки
+            settings_fields('telegram_settings_group');
+            // Выводим настройки
+            do_settings_sections('telegram-settings');
+            // Кнопка сохранения
+            submit_button();
+            ?>
+        </form>
+    </div>
+    <?php
 }
 
-$env_file_path = __DIR__ . '/.env'; // Путь к файлу .env
-load_env_with_ini($env_file_path);
-die($_ENV['TELEGRAM_ALERT_CHAT_ID']);
+// Регистрация настроек
+function register_telegram_settings() {
+    // Регистрируем группу настроек
+    register_setting('telegram_settings_group', 'telegram_alert_token');
+    register_setting('telegram_settings_group', 'telegram_alert_chat_id');
+
+    // Добавляем секцию настроек
+    add_settings_section(
+        'telegram_settings_section',
+        'Основные настройки Telegram',
+        function () {
+            echo '<p>Введите данные для подключения к Telegram.</p>';
+        },
+        'telegram-settings'
+    );
+
+    // Поле для токена бота
+    add_settings_field(
+        'telegram_alert_token',
+        'Telegram Bot Token',
+        function () {
+            $value = get_option('telegram_alert_token', '');
+            echo '<input type="text" name="telegram_alert_token" value="' . esc_attr($value) . '" class="regular-text">';
+        },
+        'telegram-settings',
+        'telegram_settings_section'
+    );
+
+    // Поле для ID чата
+    add_settings_field(
+        'telegram_alert_chat_id',
+        'Telegram Chat ID',
+        function () {
+            $value = get_option('telegram_alert_chat_id', '');
+            echo '<input type="text" name="telegram_alert_chat_id" value="' . esc_attr($value) . '" class="regular-text">';
+        },
+        'telegram-settings',
+        'telegram_settings_section'
+    );
+}
+add_action('admin_init', 'register_telegram_settings');
 
 // Обработчик AJAX для кнопки "Спасибо"
 function handle_thank_you() {
@@ -73,9 +123,15 @@ add_action('wp_ajax_nopriv_thank_you', 'handle_thank_you'); // Для неавт
 
 // Функция для отправки уведомлений в Telegram
 function send_telegram_notification($post_id, $thank_count) {
-    // Получаем токен бота и ID чата из переменных окружения
-    $telegram_token = $_ENV['TELEGRAM_ALERT_TOKEN'];
-    $chat_id = $_ENV['TELEGRAM_ALERT_CHAT_ID'];
+    // Получаем токен бота и ID чата из настроек WordPress
+    $telegram_token = get_option('telegram_alert_token', null);
+    $chat_id = get_option('telegram_alert_chat_id', null);
+
+    // Проверяем, что переменные заданы
+    if (!$telegram_token || !$chat_id) {
+        error_log("Telegram: не удалось отправить уведомление, так как токен или chat_id отсутствуют.");
+        return;
+    }
 
     // Получаем заголовок статьи
     $post_title = get_the_title($post_id);
