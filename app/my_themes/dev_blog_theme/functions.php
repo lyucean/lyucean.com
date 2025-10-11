@@ -289,3 +289,6 @@ require_once get_template_directory() . '/blocks/article-divider-block.php';
 
 // Подключим спойлер в выпадающее меню форматирования
 require_once get_template_directory() . '/blocks/spoiler-block.php';
+
+// Подключим блок кнопки Спасибо
+require_once get_template_directory() . '/blocks/thank-block.php';
