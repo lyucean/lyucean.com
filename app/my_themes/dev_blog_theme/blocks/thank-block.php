@@ -37,7 +37,7 @@ function handle_thank_you() {
     // Возвращаем новое значение
     wp_send_json_success([
         'count' => $new_count,
-        'message' => "Пожалуйста! За статью сказали спасибо {$new_count} раз."
+        'message' => "Спасибо, что поддержал(а)! За эту статью сказали спасибо уже {$new_count} раз."
     ]);
 }
 add_action('wp_ajax_thank_you', 'handle_thank_you');

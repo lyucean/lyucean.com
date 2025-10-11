@@ -12,7 +12,7 @@ jQuery(document).ready(function ($) {
         success: function (response) {
             if (response.success) {
                 // Если пользователь уже поблагодарил
-                $('#thankYouMessage').text('Вы уже поблагодарили меня за эту статью.');
+                $('#thankYouMessage').html('Ты уже поблагодарил(а) меня за эту статью <i class="bi bi-heart text-danger"></i>');
                 $('#thankYouBtn').hide(); // Отключаем кнопку
             }
         }
@@ -38,7 +38,7 @@ jQuery(document).ready(function ($) {
                 }
             },
             error: function () {
-                alert('Произошла ошибка. Попробуйте еще раз.');
+                alert('Произошла ошибка. Попробуй еще раз.');
             }
         });
     });
