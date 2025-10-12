@@ -47,7 +47,7 @@
                                                 </small>
                                                 <small class="text-white bg-dark bg-opacity-50 px-2 py-1 rounded">
                                                     <i class="bi bi-book"></i>
-                                                    <?php echo get_post_views(get_the_ID()) ?: rand(100, 200); ?>
+                                                    <?php echo get_post_views(get_the_ID()); ?>
                                                 </small>
                                                 <small class="text-white bg-dark bg-opacity-50 px-2 py-1 rounded">
                                                     <i class="bi bi-hand-thumbs-up"></i>
