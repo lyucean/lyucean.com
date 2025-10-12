@@ -25,7 +25,7 @@
 
         <!-- Основное содержимое -->
         <main class="col-12 col-lg-10">
-            <article class="rounded mb-4"><!-- Убрали класс bg-white -->
+            <article class="rounded mb-4">
 
                 <!-- Шапка статьи с изображением -->
                 <div class="card border-0">
@@ -103,18 +103,8 @@
                 </div>
             </article>
 
-            <!-- Блок с кнопками -->
-            <div class="post-actions text-center my-4">
-                <!-- Скрытое поле для передачи post_id -->
-                <input type="hidden" id="postIdHidden" value="<?php echo get_the_ID(); ?>">
-
-                <button id="thankYouBtn" class="btn btn-secondary me-2">
-                    Сказать спасибо <i class="bi bi-hand-thumbs-up"></i>
-                </button>
-
-                <!-- Сообщение о благодарности -->
-                <p id="thankYouMessage" class="mt-3 text-secondary"></p>
-            </div>
+            <!-- Блок с вопросом -->
+            <?php get_template_part('template-parts/posts', 'feetback'); ?>
 
             <!-- Блок со случайными статьями -->
             <?php get_template_part('template-parts/posts', 'related'); ?>

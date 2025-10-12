@@ -1420,20 +1420,64 @@ figure.aligncenter figcaption {
     font-size: 0.8rem;
 }
 
-/* Стили для кнопки спасибо */
-.post-actions {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
+/* ==========================================================================
+   Блок случайных постов (posts-related.php)
+   ========================================================================== */
+.feedback-post {
+    color: var(--bs-body-color);
+    padding: 2rem 2rem;
+    font-size: 1.125rem;
 }
 
-.post-actions .btn {
-    font-size: 1rem;
+
+.feedback-post h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--bs-body-color);
+    margin-top: .4rem;
+}
+
+.feedback-post button {
     padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+    font-size: 1rem;
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 
-.post-actions .btn:hover {
+.feedback-post button:hover {
     transform: scale(1.05);
+}
+
+/* Для планшетов */
+@media screen and (max-width: 992px) {
+    .feedback-post {
+        padding: 1.25rem 1.5rem;
+    }
+    .feedback-post h2 {
+        font-size: 1.3rem;
+        margin-bottom: 0.75rem;
+    }
+}
+
+/* Мобильная версия */
+@media screen and (max-width: 768px) {
+    .feedback-post {
+        padding: 1rem 1.25rem;
+    }
+}
+
+/* Для малых экранов */
+@media screen and (max-width: 576px) {
+    .feedback-post {
+        padding: 1rem;
+    }
+}
+
+/* Для очень маленьких экранов */
+@media screen and (max-width: 480px) {
+    .feedback-post {
+        padding: 0.75rem;
+    }
+    .feedback-post h2 {
+        margin-bottom: 0.5rem;
+    }
 }
