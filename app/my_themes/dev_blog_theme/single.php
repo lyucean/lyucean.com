@@ -51,7 +51,8 @@
                                                 </small>
                                                 <small class="text-white bg-dark bg-opacity-50 px-2 py-1 rounded">
                                                     <i class="bi bi-hand-thumbs-up"></i>
-                                                    <?php echo get_post_meta(get_the_ID(), 'thank_you_count', true) ?: 0; ?>
+                                                    <?php echo get_post_meta(get_the_ID(), 'feedback_yes_count', true) ?: 0; ?>
+                                                    / <?php echo get_post_meta(get_the_ID(), 'feedback_no_count', true) ?: 0; ?>
                                                 </small>
                                             </div>
                                         </div>
