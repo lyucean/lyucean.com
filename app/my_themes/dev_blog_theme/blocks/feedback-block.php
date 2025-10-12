@@ -108,11 +108,14 @@ function save_feedback() {
     $total_no = get_post_meta($post_id, $no_count_key, true) ?: 0;
     $total_feedback = $total_yes + $total_no;
 
+    // Получаем IP-адрес пользователя
+    $user_ip = $_SERVER['REMOTE_ADDR'];
+
     // Отправляем уведомление в Telegram
     $post_title = get_the_title($post_id);
     $post_url = get_permalink($post_id);
     $feedback_text = $feedback === 'yes' ? 'Да' : 'Нет';
-    send_telegram_feedback($post_title, $post_url, $feedback_text, $total_feedback);
+    send_telegram_feedback($post_title, $post_url, $feedback_text, $total_feedback, $user_ip);
 
     // Возвращаем сообщение
     $message = $feedback === 'yes'
@@ -127,7 +130,7 @@ add_action('wp_ajax_save_feedback', 'save_feedback');
 add_action('wp_ajax_nopriv_save_feedback', 'save_feedback'); // Для неавторизованных пользователей
 
 // Функция для отправки уведомлений в Telegram
-function send_telegram_feedback($post_title, $post_url, $feedback, $total_feedback) {
+function send_telegram_feedback($post_title, $post_url, $feedback, $total_feedback, $user_ip) {
     // Получаем токен бота и ID чата из настроек WordPress
     $telegram_token = get_option('telegram_alert_token', null);
     $chat_id = get_option('telegram_alert_chat_id', null);
@@ -143,6 +146,7 @@ function send_telegram_feedback($post_title, $post_url, $feedback, $total_feedba
     $message .= "Статья: [{$post_title}]({$post_url})\n";
     $message .= "Ответ: *{$feedback}*\n";
     $message .= "Общее количество ответов: *{$total_feedback}*";
+    $message .= "IP пользователя: *{$user_ip}*";
 
     // URL для отправки сообщения через Telegram Bot API
     $url = "https://api.telegram.org/bot{$telegram_token}/sendMessage";
