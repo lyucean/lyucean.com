@@ -72,7 +72,8 @@ class Bootstrap_5_Nav_Walker extends Walker_Nav_Menu {
         'Менторинг' => 'bi bi-mortarboard',
         'Автор' => 'bi-pen',
         'Ищу работу' => 'bi bi-fire text-danger',
-        'Мои правила' => 'bi bi bi-shield-check',
+        'Мои правила' => 'bi bi-shield-check',
+        'Мои принципы' => 'bi bi-shield-check text-success',
     ];
 
     function start_lvl(&$output, $depth = 0, $args = null): void
