@@ -4,3 +4,4 @@
 /backup/*
 /.env
 /app/my_themes/dev_blog_theme/blocks/.env
+.DS_Store
