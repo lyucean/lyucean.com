@@ -296,3 +296,13 @@ require_once get_template_directory() . '/blocks/spoiler-block.php';
 
 // Подключим блок кнопок обратной связи
 require_once get_template_directory() . '/blocks/feedback-block.php';
+
+// Отключаем автоматическую замену дефисов на тире
+function disable_wptexturize() {
+    remove_filter('the_content', 'wptexturize');
+    remove_filter('the_excerpt', 'wptexturize');
+    remove_filter('the_title', 'wptexturize');
+    remove_filter('comment_text', 'wptexturize');
+    remove_filter('widget_text_content', 'wptexturize');
+}
+add_action('init', 'disable_wptexturize', 5); // Приоритет 5 - выполняется раньше стандартных фильтров
