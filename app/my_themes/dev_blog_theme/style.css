@@ -962,29 +962,41 @@ blockquote p:last-child:not(:first-child) {
 }
 
 /* Таблицы */
-.article-content table {
+.article-content table,
+.wp-block-table table {
     width: 100%;
     border-collapse: collapse;
     margin: 1.5em 0;
 }
 
 .article-content th,
-.article-content td {
-    padding: 0.75em;
+.article-content td,
+.wp-block-table th,
+.wp-block-table td {
+    padding: 0.5rem 0.75rem;
     border: 1px solid var(--bs-border-color);
+    font-size: 0.875rem;
+    text-align: left;
+    vertical-align: top;
 }
 
-.article-content th {
-    background: #f6f8fa;
-}
-[data-bs-theme="dark"] .article-content th {
-    background: var(--bs-border-color);
+.article-content th,
+.wp-block-table th {
+    background: #e1dbdb;
+    font-weight: 600;
 }
 
-/* Темная тема */
-[data-bs-theme="dark"] .article-content pre,
-[data-bs-theme="dark"] .article-content code {
-    background: #2d333b;
+.wp-block-table thead {
+    border-bottom: 2px solid var(--bs-border-color);
+}
+
+[data-bs-theme="dark"] .article-content th,
+[data-bs-theme="dark"] .wp-block-table th {
+    background: var(--bs-gray-800);
+}
+
+[data-bs-theme="dark"] .article-content .wp-block-table.is-style-stripes tbody tr:nth-child(odd){
+    background: rgba(73, 80, 87, 0.3);
 }
 
 /* Для больших планшетов */
