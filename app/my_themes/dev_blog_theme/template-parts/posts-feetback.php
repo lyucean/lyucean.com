@@ -1,4 +1,4 @@
-<div class="feedback-post mb-4">
+<div class="feedback-post pt-5 pb-4">
     <!-- Скрытое поле для передачи post_id -->
     <input type="hidden" id="postIdHidden" value="<?php echo get_the_ID(); ?>">
 
