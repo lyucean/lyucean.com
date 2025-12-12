@@ -107,6 +107,9 @@
             <!-- Блок с вопросом -->
             <?php get_template_part('template-parts/posts', 'feetback'); ?>
 
+            <!-- Блок с телеграм-каналом -->
+            <?php get_template_part('template-parts/posts', 'telegram'); ?>
+
             <!-- Блок со случайными статьями -->
             <?php get_template_part('template-parts/posts', 'related'); ?>
 
