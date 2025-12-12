@@ -64,3 +64,9 @@ if (has_nav_menu('block-menu')) : ?>
         </nav>
     </div>
 <?php endif; ?>
+
+<div class="text-center text-md-start mt-3 d-grid">
+    <a href="https://t.me/cio_kitchen" target="_blank" class="btn btn-primary telegram-btn">
+        <i class="bi bi-telegram"></i> Подписаться
+    </a>                        
+</div>
