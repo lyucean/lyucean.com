@@ -69,7 +69,7 @@ class Bootstrap_5_Nav_Walker extends Walker_Nav_Menu {
         'Разработка' => 'bi bi-code-square',
         'Мысли' => 'bi bi-lightbulb',
         'Практика' => 'bi bi-clipboard-check',
-        'Менторинг' => 'bi bi-mortarboard',
+        'Менторинг' => 'bi bi-mortarboard text-primary',
         'Автор' => 'bi-pen',
         'Скорая помощь' => 'bi bi-fire text-danger',
         'ИТ Скорая' => 'bi bi-activity text-danger', // добавлена подходящая иконка
