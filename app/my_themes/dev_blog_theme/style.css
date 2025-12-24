@@ -100,7 +100,7 @@ header .logo {
         right: 0;
         width: calc(100% - 1.5rem);
         height: 4px;
-        background-color: var(--bs-body-color);
+        background-color: var(--bs-success);
         opacity: 10%;
         transform: scaleX(0);
         transition: transform 0.3s ease;
@@ -123,9 +123,12 @@ header .logo {
 }
 
 [data-bs-theme="dark"] {
-    header .logo::before,
+    header .logo::before{
+        background-color: var(--bs-danger);
+        opacity: 20%;
+    }
     header .logo::after {
-        background-color: var(--bs-body-color);
+        background-color: var(--bs-success);
         opacity: 20%;
     }
 }

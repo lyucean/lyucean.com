@@ -265,25 +265,26 @@ function activate_new_year_features() {
             if (!document.getElementById("snowContainer")) return;
             const container = document.getElementById("snowContainer");
             const snowflakes = ["❄", "❅", "❆"];
-            const count = window.innerWidth > 768 ? 30 : 15;
+            // Сократили количество на 30%
+            const count = window.innerWidth > 768 ? 21 : 10;
             
             function createSnowflake() {
                 const snowflake = document.createElement("div");
                 snowflake.className = "snowflake";
                 snowflake.textContent = snowflakes[Math.floor(Math.random() * snowflakes.length)];
                 snowflake.style.left = Math.random() * 100 + "%";
-                // Медленнее падение: 8-12 секунд вместо 2-5
-                snowflake.style.animationDuration = (Math.random() * 4 + 8) + "s";
+                // Замедлили в 2-3 раза: 16-36 секунд
+                snowflake.style.animationDuration = (Math.random() * 20 + 16) + "s";
                 snowflake.style.animationDelay = Math.random() * 2 + "s";
                 snowflake.style.setProperty("--snow-drift", (Math.random() * 50 - 25) + "px");
                 snowflake.style.fontSize = (Math.random() * 0.5 + 0.8) + "em";
                 container.appendChild(snowflake);
                 
-                // Увеличиваем время жизни снежинки
+                // Увеличиваем время жизни снежинки пропорционально скорости падения
                 setTimeout(() => {
                     snowflake.remove();
                     createSnowflake();
-                }, 12000);
+                }, 36000);
             }
             
             for (let i = 0; i < count; i++) {
