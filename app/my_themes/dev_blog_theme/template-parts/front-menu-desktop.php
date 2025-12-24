@@ -66,7 +66,9 @@ if (has_nav_menu('block-menu')) : ?>
 <?php endif; ?>
 
 <div class="text-center text-md-start mt-3 d-grid">
-    <a href="https://t.me/cio_kitchen" target="_blank" class="btn btn-primary telegram-btn">
-        <i class="bi bi-telegram"></i> Подписаться
+    <a href="https://t.me/cio_kitchen" target="_blank" class="btn telegram-btn">
+        <i class="bi bi-telegram text-primary"></i> Подписаться
     </a>                        
 </div>
+
+<?php do_action('after_telegram_button'); ?>

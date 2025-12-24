@@ -24,8 +24,8 @@
                         
                         <!-- Кнопка справа -->
                         <div class="col-12 col-md-auto text-center text-md-start">
-                            <a href="https://t.me/cio_kitchen" target="_blank" class="btn btn-primary telegram-btn">
-                                <i class="bi bi-telegram"></i> Подписаться
+                            <a href="https://t.me/cio_kitchen" target="_blank" class="btn telegram-btn">
+                                <i class="bi bi-telegram text-primary "></i> Подписаться 
                             </a>
                         </div>
                     </div>

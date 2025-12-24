@@ -22,6 +22,9 @@
 
                     <!-- Логотип -->
                     <a class="navbar-brand fw-bold fs-4 ps-md-4 ms-md-3 logo" href="<?=esc_url(home_url('/'));  ?>">
+                        <?php if (function_exists('activate_new_year_features')): ?>
+                            <i class="bi bi-tree-fill text-success logo-tree-icon"></i>
+                        <?php endif; ?>
                         <?=get_bloginfo('name')?>
                     </a>
                 </div>

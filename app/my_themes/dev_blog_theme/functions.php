@@ -297,6 +297,9 @@ require_once get_template_directory() . '/blocks/spoiler-block.php';
 // Подключим блок кнопок обратной связи
 require_once get_template_directory() . '/blocks/feedback-block.php';
 
+// Подключим новогодние фишки (закомментируйте эту строку, чтобы отключить)
+require_once get_template_directory() . '/blocks/new-year-features.php';
+
 // Отключаем автоматическую замену дефисов на тире
 function disable_wptexturize() {
     remove_filter('the_content', 'wptexturize');
