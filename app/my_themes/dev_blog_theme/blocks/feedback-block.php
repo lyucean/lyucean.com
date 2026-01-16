@@ -251,7 +251,12 @@ function send_telegram_comment($post_title, $post_url, $comment, $user_ip) {
 
 // Подключение скрипта для работы блока "Эта статья была полезна?"
 function enqueue_feedback_script() {
-    wp_enqueue_script('feedback-script', get_template_directory_uri() . '/blocks/feedback-block.js', array('jquery'), null, true);
+    // Получаем путь к файлу скрипта
+    $script_path = get_template_directory() . '/blocks/feedback-block.js';
+    // Получаем время последней модификации файла для версии (чтобы избежать кеширования)
+    $version = file_exists($script_path) ? date('Ymd.His', filemtime($script_path)) : '1.0';
+    
+    wp_enqueue_script('feedback-script', get_template_directory_uri() . '/blocks/feedback-block.js', array('jquery'), $version, true);
 
     // Передаем данные в скрипт
     wp_localize_script('feedback-script', 'feedbackData', array(
