@@ -128,7 +128,7 @@ header .logo {
         opacity: 20%;
     }
     header .logo::after {
-        background-color: var(--bs-success);
+        background-color: var(--bs-danger);
         opacity: 20%;
     }
 }
