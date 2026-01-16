@@ -81,49 +81,68 @@ function save_feedback() {
         wp_send_json_error('Invalid post ID');
     }
 
-    if (!isset($_POST['feedback']) || !in_array($_POST['feedback'], ['yes', 'no'])) {
+    if (!isset($_POST['feedback']) || !in_array($_POST['feedback'], ['yes', 'no', 'comment'])) {
         wp_send_json_error('Invalid feedback');
     }
 
     $post_id = intval($_POST['post_id']);
     $feedback = sanitize_text_field($_POST['feedback']);
+    $comment = isset($_POST['comment']) ? sanitize_textarea_field($_POST['comment']) : '';
 
     // Ключи для хранения данных
     $yes_count_key = 'feedback_yes_count';
     $no_count_key = 'feedback_no_count';
+    $comment_count_key = 'feedback_comment_count';
 
-    // Увеличиваем счетчик "Да" или "Нет"
+    // Увеличиваем счетчик в зависимости от типа ответа
     if ($feedback === 'yes') {
         $current_yes_count = get_post_meta($post_id, $yes_count_key, true) ?: 0;
         $new_yes_count = $current_yes_count + 1;
         update_post_meta($post_id, $yes_count_key, $new_yes_count);
-    } else {
+    } else if ($feedback === 'no') {
         $current_no_count = get_post_meta($post_id, $no_count_key, true) ?: 0;
         $new_no_count = $current_no_count + 1;
         update_post_meta($post_id, $no_count_key, $new_no_count);
+    } else if ($feedback === 'comment') {
+        $current_comment_count = get_post_meta($post_id, $comment_count_key, true) ?: 0;
+        $new_comment_count = $current_comment_count + 1;
+        update_post_meta($post_id, $comment_count_key, $new_comment_count);
     }
 
     // Получаем общее количество ответов
     $total_yes = get_post_meta($post_id, $yes_count_key, true) ?: 0;
     $total_no = get_post_meta($post_id, $no_count_key, true) ?: 0;
-    $total_feedback = $total_yes + $total_no;
+    $total_comment = get_post_meta($post_id, $comment_count_key, true) ?: 0;
+    $total_feedback = $total_yes + $total_no + $total_comment;
 
     // Получаем IP-адрес пользователя
     $user_ip = $_SERVER['REMOTE_ADDR'];
 
-    // Отправляем уведомление в Telegram
+    // Получаем данные статьи
     $post_title = get_the_title($post_id);
     $post_url = get_permalink($post_id);
-    $feedback_text = $feedback === 'yes' ? 'Да' : 'Нет';
+
+    // Определяем текст ответа
+    $feedback_text = '';
+    if ($feedback === 'yes') {
+        $feedback_text = 'Да';
+    } else if ($feedback === 'no') {
+        $feedback_text = 'Нет';
+    } else if ($feedback === 'comment') {
+        $feedback_text = 'Комментарий';
+    }
+
+    // Отправляем первое сообщение в Telegram с ответом
     send_telegram_feedback($post_title, $post_url, $feedback_text, $total_feedback, $user_ip);
 
-    // Возвращаем сообщение
-    $message = $feedback === 'yes'
-            ? "Спасибо за ваш ответ! Мы рады, что статья была полезна."
-            : "Спасибо за ваш ответ! Мы учтем ваши замечания.";
+    // Если есть комментарий, отправляем его отдельным сообщением
+    if (!empty($comment)) {
+        send_telegram_comment($post_title, $post_url, $comment, $user_ip);
+    }
 
+    // Возвращаем сообщение
     wp_send_json_success([
-            'message' => $message
+        'message' => 'Спасибо за ваш ответ!'
     ]);
 }
 add_action('wp_ajax_save_feedback', 'save_feedback');
@@ -145,7 +164,73 @@ function send_telegram_feedback($post_title, $post_url, $feedback, $total_feedba
     $message = "📢 *Новый ответ на статью!*\n\n";
     $message .= "Статья: [{$post_title}]({$post_url})\n";
     $message .= "Ответ: *{$feedback}*\n";
-    $message .= "Общее количество ответов: *{$total_feedback}*";
+    $message .= "Общее количество ответов: *{$total_feedback}*\n";
+    $message .= "IP пользователя: *{$user_ip}*";
+
+    // URL для отправки сообщения через Telegram Bot API
+    $url = "https://api.telegram.org/bot{$telegram_token}/sendMessage";
+
+    // Параметры запроса
+    $args = [
+            'body' => [
+                    'chat_id' => $chat_id,
+                    'text' => $message,
+                    'parse_mode' => 'Markdown', // Используем Markdown для форматирования
+            ],
+    ];
+
+    // Отправляем запрос
+    $response = wp_remote_post($url, $args);
+}
+
+// Обработчик AJAX для отправки только комментария (когда ответ уже отправлен)
+function save_feedback_comment() {
+    // Проверяем, что запрос пришел через AJAX
+    if (!isset($_POST['post_id']) || !is_numeric($_POST['post_id'])) {
+        wp_send_json_error('Invalid post ID');
+    }
+
+    if (!isset($_POST['comment']) || empty(trim($_POST['comment']))) {
+        wp_send_json_error('Comment is required');
+    }
+
+    $post_id = intval($_POST['post_id']);
+    $comment = sanitize_textarea_field($_POST['comment']);
+
+    // Получаем IP-адрес пользователя
+    $user_ip = $_SERVER['REMOTE_ADDR'];
+
+    // Получаем данные статьи
+    $post_title = get_the_title($post_id);
+    $post_url = get_permalink($post_id);
+
+    // Отправляем комментарий в Telegram отдельным сообщением
+    send_telegram_comment($post_title, $post_url, $comment, $user_ip);
+
+    // Возвращаем успех
+    wp_send_json_success([
+        'message' => 'Комментарий отправлен'
+    ]);
+}
+add_action('wp_ajax_save_feedback_comment', 'save_feedback_comment');
+add_action('wp_ajax_nopriv_save_feedback_comment', 'save_feedback_comment'); // Для неавторизованных пользователей
+
+// Функция для отправки комментария в Telegram отдельным сообщением
+function send_telegram_comment($post_title, $post_url, $comment, $user_ip) {
+    // Получаем токен бота и ID чата из настроек WordPress
+    $telegram_token = get_option('telegram_alert_token', null);
+    $chat_id = get_option('telegram_alert_chat_id', null);
+
+    // Проверяем, что переменные заданы
+    if (!$telegram_token || !$chat_id) {
+        error_log("Telegram: не удалось отправить комментарий, так как токен или chat_id отсутствуют.");
+        return;
+    }
+
+    // Формируем сообщение для Telegram
+    $message = "💬 *Комментарий к статье*\n\n";
+    $message .= "Статья: [{$post_title}]({$post_url})\n\n";
+    $message .= "*Комментарий:*\n{$comment}\n\n";
     $message .= "IP пользователя: *{$user_ip}*";
 
     // URL для отправки сообщения через Telegram Bot API
