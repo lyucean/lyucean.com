@@ -51,7 +51,7 @@
 
                 <div class="text-center">
                     <p class="footer-copyright">
-                        © Валентин Панченко, <?php echo date('Y'); ?>
+                        © Валентин Панченко, <?php echo get_deployment_version(); ?>
                     </p>
                 </div>
 

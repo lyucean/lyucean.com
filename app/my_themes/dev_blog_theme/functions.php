@@ -237,6 +237,16 @@ function get_unique_post_views($post_id) {
     return empty($unique_views) ? 0 : $unique_views;
 }
 
+// Функция для получения версии деплоя (дата модификации functions.php)
+function get_deployment_version() {
+    $functions_file = get_template_directory() . '/functions.php';
+    if (file_exists($functions_file)) {
+        $timestamp = filemtime($functions_file);
+        return date('d.m.Y H:i', $timestamp);
+    }
+    return date('d.m.Y H:i'); // fallback на текущую дату и время, если файл не найден
+}
+
 // Опционально: функция для очистки старых IP-адресов (можно вызывать по крону)
 function cleanup_viewed_ips() {
     $args = array(
