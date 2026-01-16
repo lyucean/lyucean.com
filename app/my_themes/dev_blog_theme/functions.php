@@ -239,12 +239,19 @@ function get_unique_post_views($post_id) {
 
 // Функция для получения версии деплоя (дата модификации functions.php)
 function get_deployment_version() {
+    // Устанавливаем часовой пояс Москвы
+    $moscow_timezone = new DateTimeZone('Europe/Moscow');
+    
     $functions_file = get_template_directory() . '/functions.php';
     if (file_exists($functions_file)) {
         $timestamp = filemtime($functions_file);
-        return date('d.m.Y H:i', $timestamp);
+        $date = new DateTime('@' . $timestamp);
+        $date->setTimezone($moscow_timezone);
+        return $date->format('d.m.Y H:i');
     }
-    return date('d.m.Y H:i'); // fallback на текущую дату и время, если файл не найден
+    // fallback на текущую дату и время по московскому времени
+    $date = new DateTime('now', $moscow_timezone);
+    return $date->format('d.m.Y H:i');
 }
 
 // Опционально: функция для очистки старых IP-адресов (можно вызывать по крону)
