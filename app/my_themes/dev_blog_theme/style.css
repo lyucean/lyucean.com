@@ -11,6 +11,32 @@ Text Domain: dev_blog_theme
 */
 
 /* ==========================================================================
+   Переопределение Bootstrap переменных
+   ========================================================================== */
+:root {
+    /* Фон сайта - теплый кремовый */
+    --bs-body-tertiary-bg: rgb(255, 250, 239);
+    --bs-dark: #31373d;
+    --bs-gray-700: #3c4249;
+}
+
+[data-bs-theme="dark"] {
+    /* Темная тема - фон остается стандартным */
+    --bs-body-tertiary-bg: var(--bs-body-bg);
+}
+
+/* Переопределение класса bg-body-tertiary напрямую */
+body.bg-body-tertiary,
+.bg-body-tertiary {
+    background-color: rgb(255, 250, 239) !important;
+}
+
+[data-bs-theme="dark"] body.bg-body-tertiary,
+[data-bs-theme="dark"] .bg-body-tertiary {
+    background-color: rgba(var(--bs-tertiary-bg-rgb), var(--bs-bg-opacity)) !important;
+}
+
+/* ==========================================================================
    Хедер (header.php)
    ========================================================================== */
 
