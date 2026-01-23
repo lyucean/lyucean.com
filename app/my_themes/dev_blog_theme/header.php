@@ -36,7 +36,7 @@
                     <div class="col-md-7">
                         <form class="d-flex" role="search" method="get" action="<?php echo esc_url(home_url('/')); ?>">
                             <div class="input-group">
-                                <span class="input-group-text bg-transparent border-end-0 opacity-50">
+                                <span class="input-group-text border-end-0">
                                     <i class="bi bi-search"></i>
                                 </span>
                                 <input class="form-control border-start-0 ps-0"
