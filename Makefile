@@ -89,6 +89,19 @@ else
 	@echo "Команда init может быть запущена только в окружении development. Текущее окружение: $(ENVIRONMENT)"
 endif
 
+sync: ## Быстрое обновление: БД и файлы с прода (без пересборки контейнеров)
+ifeq ($(ENVIRONMENT), development)
+	@echo "$(PURPLE) Быстрое обновление проекта с прода $(RESET)"
+	@$(MAKE) docker-up-mysql
+	@$(MAKE) fresh-backup
+	@$(MAKE) update-backup
+	@$(MAKE) update-dump
+	@$(MAKE) update-urls
+	@echo "$(PURPLE) Обновление завершено! $(RESET)"
+else
+	@echo "Команда sync может быть запущена только в окружении development. Текущее окружение: $(ENVIRONMENT)"
+endif
+
 fresh-backup:
 	@if [ ! -f "./backup/$(BACKUP_DATETIME)_LS.sql" ] || [ ! -f "./backup/$(BACKUP_DATETIME)_LS.file.gz" ]; then \
 		echo "$(PURPLE) Запуск команды 'make backup-db и backup-file' на удаленном сервере $(RESET)"; \
