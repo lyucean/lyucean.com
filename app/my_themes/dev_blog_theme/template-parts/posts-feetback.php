@@ -27,22 +27,21 @@
 </div>
 
 <!-- Модальное окно для комментария -->
-<div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade feedback-modal" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="feedbackModalLabel">Оставить комментарий</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="feedbackModalLabel">Помоги мне стать лучше</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
             </div>
             <div class="modal-body">
+                <p class="feedback-modal-intro">Что тебе не хватило в статье? На что ты бы хотел обратить внимание? У меня уже 14&nbsp;000 посещений — и я хочу знать тебя, мой читатель, ближе.</p>
                 <form id="feedbackForm">
                     <input type="hidden" id="selectedFeedback" value="">
                     <div class="mb-3">
-                        <label for="feedbackComment" class="form-label">
-                            Поделись своими мыслями: что можно улучшить, что было непонятно, или просто оставь комментарий к статье
-                        </label>
-                        <textarea class="form-control" id="feedbackComment" rows="5" placeholder="Твой комментарий (необязательно)"></textarea>
-                        <small class="form-text text-muted">Поле необязательное, можешь просто нажать "Отправить"</small>
+                        <label for="feedbackComment" class="form-label">Твой комментарий</label>
+                        <textarea class="form-control" id="feedbackComment" rows="4" placeholder="Напиши, что на душе (необязательно)"></textarea>
+                        <small class="form-text text-muted">Можешь просто нажать «Отправить»</small>
                     </div>
                     <div id="feedbackModalMessage" class="alert d-none" role="alert"></div>
                 </form>

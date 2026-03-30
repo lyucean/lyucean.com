@@ -75,7 +75,7 @@ $query = new WP_Query($args);
                                 </a>
                             <?php endif; ?>
                             <!-- Счетчики просмотров -->
-                            <?php if (is_user_logged_in()) : ?>
+                            <?php //if (is_user_logged_in()) : ?>
                                 <div class="position-absolute top-0 start-0 p-2">
                                     <div class="d-flex gap-2">
                                         <?php if (get_post_meta(get_the_ID(), 'feedback_yes_count', true)) : ?>
@@ -104,7 +104,7 @@ $query = new WP_Query($args);
                                         </small>
                                     </div>
                                 </div>
-                            <?php endif; ?>
+                            <?php // endif; ?>
 
                         </div>
 

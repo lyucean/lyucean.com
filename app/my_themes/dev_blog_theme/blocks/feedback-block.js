@@ -73,12 +73,7 @@ jQuery(document).ready(function ($) {
         $('#selectedFeedback').val(selectedFeedbackType);
         
         // Обновляем заголовок модалки в зависимости от типа
-        let modalTitle = '';
-        if (selectedFeedbackType === 'yes') {
-            modalTitle = 'Статья была полезна! 💚';
-        } else if (selectedFeedbackType === 'no') {
-            modalTitle = 'Статья не зашла 😔';
-        }
+        let modalTitle = 'Помоги мне стать лучше';
         $('#feedbackModalLabel').text(modalTitle);
         
         // Очищаем форму
@@ -98,7 +93,7 @@ jQuery(document).ready(function ($) {
         $('#selectedFeedback').val(selectedFeedbackType);
         
         // Обновляем заголовок модалки
-        $('#feedbackModalLabel').text('Оставить комментарий 💬');
+        $('#feedbackModalLabel').text('Помоги мне стать лучше');
         
         // Очищаем форму при открытии
         $('#feedbackComment').val('');

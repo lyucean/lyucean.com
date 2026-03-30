@@ -1518,6 +1518,57 @@ figure.aligncenter figcaption {
     }
 }
 
+/* Модальное окно обратной связи — в дизайне сайта */
+.feedback-modal .modal-dialog {
+    max-width: 520px;
+}
+
+.feedback-modal .modal-content {
+    border-radius: 0.75rem;
+    border: 1px solid var(--bs-border-color);
+    background-color: rgb(255, 250, 239);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+.feedback-modal .modal-header {
+    border-bottom-color: var(--bs-border-color);
+    padding: 1.25rem 1.5rem;
+}
+
+.feedback-modal .modal-title {
+    font-weight: 700;
+    color: var(--bs-body-color);
+}
+
+.feedback-modal .modal-body {
+    padding: 0 1.5rem 1.25rem;
+}
+
+.feedback-modal-intro {
+    color: var(--bs-body-color);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+}
+
+.feedback-modal .modal-footer {
+    border-top-color: var(--bs-border-color);
+    padding: 1rem 1.5rem 1.25rem;
+}
+
+.feedback-modal .form-control {
+    background-color: #fff !important;
+    border-radius: 0.5rem;
+}
+
+[data-bs-theme="dark"] .feedback-modal .modal-content {
+    background-color: var(--bs-body-bg);
+}
+
+[data-bs-theme="dark"] .feedback-modal .form-control {
+    background-color: var(--bs-gray-800) !important;
+}
+
 /* ==========================================================================
    Блок телеграм-канала (posts-telegram.php)
    ========================================================================== */

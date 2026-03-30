@@ -38,15 +38,15 @@
                                     <span class="text-white-50"><?php echo get_the_date(); ?></span>
 
                                     <!-- Счетчики просмотров -->
-                                    <?php if (is_user_logged_in()) : ?>
-                                        <div class="position-absolute top-0 end-0 p-2">
+                                    <?php // if (is_user_logged_in()) : ?>
+                                        <div class="position-absolute bottom-0 end-0 p-2" style="padding: 12px !important;">
                                             <div class="d-flex gap-2">
                                                 <small class="text-white bg-dark bg-opacity-50 px-2 py-1 rounded">
                                                     <i class="bi bi-star"></i>
                                                     <?php echo get_unique_post_views(get_the_ID()); ?>
                                                 </small>
                                                 <small class="text-white bg-dark bg-opacity-50 px-2 py-1 rounded">
-                                                    <i class="bi bi-book"></i>
+                                                    <i class="bi bi-person-standing"></i>
                                                     <?php echo get_post_views(get_the_ID()); ?>
                                                 </small>
                                                 <small class="text-white bg-dark bg-opacity-50 px-2 py-1 rounded">
@@ -56,7 +56,7 @@
                                                 </small>
                                             </div>
                                         </div>
-                                    <?php endif; ?>
+                                    <?php // endif; ?>
 
                                     <?php
                                     $tags = get_the_tags();
