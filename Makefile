@@ -103,7 +103,7 @@ else
 	@echo "Команда sync может быть запущена только в окружении development. Текущее окружение: $(ENVIRONMENT)"
 endif
 
-sync-db: ## Только БД с прода: дамп на сервере + scp SQL, без архива файлов и без распаковки wp-content
+sync-db: ## Только БД с прода: дамп на сервере + rsync SQL, без архива файлов и без распаковки wp-content
 ifeq ($(ENVIRONMENT), development)
 	@echo "$(PURPLE) Обновление только БД с прода $(RESET)"
 	@$(MAKE) docker-up-mysql
