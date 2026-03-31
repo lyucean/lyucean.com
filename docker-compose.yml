@@ -46,8 +46,9 @@ services:
     container_name: lyucean_blog_wp_dev
     image: wordpress:latest
     restart: unless-stopped
+    # На Mac 80 часто занят (Apache, другой стек) — хост-порт задаётся WORDPRESS_DEV_PORT
     ports:
-      - "80:80"  # Пробрасываем порт 8080 на хосте к порту 80 внутри контейнера
+      - "${WORDPRESS_DEV_PORT:-8080}:80"
     environment:
       WORDPRESS_DB_HOST: mysql_dev
       WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
@@ -67,6 +68,8 @@ services:
     container_name: lyucean_blog_mysql_dev
     image: mariadb:10.5  # Используем MariaDB вместо MySQL
     platform: linux/arm64  # Указываем платформу для ARM
+    # Большие строки в wp_posts (Gutenberg): 1G, иначе extended INSERT обрывается и даёт ERROR 1064
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --max-allowed-packet=1G
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: ${WORDPRESS_DB_NAME}
@@ -75,8 +78,9 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
       - lyucean-mysql-data:/var/lib/mysql
+    # 3306 на Mac часто занят локальным MySQL/MAMP — с хоста подключайся к ${MYSQL_DEV_PORT:-3307}
     ports:
-      - "3306:3306"
+      - "${MYSQL_DEV_PORT:-3307}:3306"
     networks:
       - web
     profiles:

@@ -35,6 +35,7 @@ restart: docker-down docker-up
 
 docker-up: ## Поднимем все контейнеры
 	@echo "$(PURPLE) Поднимем все контейнеры $(RESET)"
+	@docker network inspect web >/dev/null 2>&1 || docker network create web
 	docker compose $(ENV) $(PROFILE) up -d
 
 docker-build: ## Соберём все контейнеры
@@ -52,7 +53,7 @@ docker-down: ## Остановим контейнеры
 # Команды для работы с дампами на продакшене ----------------------------------------------------------------------------
 backup-db:  ## Снимем дамп с БД
 	@echo "$(PURPLE) Снимем дамп с БД $(RESET)"
-	@docker compose $(ENV) exec mysql sh -c 'exec mysqldump -u root -p"${MYSQL_ROOT_PASSWORD}" "${WORDPRESS_DB_NAME}"' > "${BACKUPS_FOLDER}/$(BACKUP_DATETIME)_LS.sql"
+	@docker compose $(ENV) exec mysql sh -c 'exec mysqldump -u root -p"${MYSQL_ROOT_PASSWORD}" --default-character-set=utf8mb4 --single-transaction --quick --routines --max-allowed-packet=512M --skip-extended-insert "${WORDPRESS_DB_NAME}"' > "${BACKUPS_FOLDER}/$(BACKUP_DATETIME)_LS.sql"
 
 backup-file:  ## Снимем дамп файлов с папки wordpress
 	@echo "$(PURPLE) Создадим архив файлов $(RESET)"
@@ -67,7 +68,7 @@ backup-file:  ## Снимем дамп файлов с папки wordpress
 import-backup:  ## Импорт БД из сегодняшнего дампа (удобно восстанавливать, если что-то сломал в настройках)
 	@echo "$(PURPLE) Импорт БД из дампа $(RESET)"
 	@if [ -f "${BACKUPS_FOLDER}/$(BACKUP_DATETIME)_LS.sql" ]; then \
-		docker compose $(ENV) exec -T mysql sh -c 'exec mysql -u root -p"$(MYSQL_ROOT_PASSWORD)" "$(WORDPRESS_DB_NAME)"' < "${BACKUPS_FOLDER}/$(BACKUP_DATETIME)_LS.sql"; \
+		docker compose $(ENV) exec -T mysql sh -c 'exec mysql --default-character-set=utf8mb4 --max-allowed-packet=1G --binary-mode -u root -p"$(MYSQL_ROOT_PASSWORD)" "$(WORDPRESS_DB_NAME)"' < "${BACKUPS_FOLDER}/$(BACKUP_DATETIME)_LS.sql"; \
 	else \
 		echo "Дампа за сегодня нет!"; \
 	fi
@@ -102,6 +103,18 @@ else
 	@echo "Команда sync может быть запущена только в окружении development. Текущее окружение: $(ENVIRONMENT)"
 endif
 
+sync-db: ## Только БД с прода: дамп на сервере + scp SQL, без архива файлов и без распаковки wp-content
+ifeq ($(ENVIRONMENT), development)
+	@echo "$(PURPLE) Обновление только БД с прода $(RESET)"
+	@$(MAKE) docker-up-mysql
+	@$(MAKE) fetch-db-backup
+	@$(MAKE) update-dump
+	@$(MAKE) update-urls
+	@echo "$(PURPLE) БД обновлена $(RESET)"
+else
+	@echo "Команда sync-db может быть запущена только в окружении development. Текущее окружение: $(ENVIRONMENT)"
+endif
+
 fresh-backup:
 	@if [ ! -f "./backup/$(BACKUP_DATETIME)_LS.sql" ] || [ ! -f "./backup/$(BACKUP_DATETIME)_LS.file.gz" ]; then \
 		echo "$(PURPLE) Запуск команды 'make backup-db и backup-file' на удаленном сервере $(RESET)"; \
@@ -110,17 +123,24 @@ fresh-backup:
 		echo "$(PURPLE) Все необходимые файлы уже существуют локально, пропускаем скачивание бэкапа $(RESET)"; \
 	fi
 
+# Только SQL: снимает дамп на проде и кладёт в ./backup (архив wp-content не трогаем)
+fetch-db-backup: docker-up-mysql
+	@mkdir -p backup
+	@echo "$(PURPLE) Снимаем дамп на сервере и скачиваем SQL $(RESET)"
+	sshpass -p"${SSH_PASSWORD}" ssh ${SSH_USER}@${SSH_HOST} "cd ${SSH_FOLDER} && make backup-db"
+	sshpass -p"${SSH_PASSWORD}" rsync -avP -e "ssh -o StrictHostKeyChecking=no" ${SSH_USER}@${SSH_HOST}:${BACKUPS_FOLDER}/$(BACKUP_DATETIME)_LS.sql ./backup/
+
 fetch-backup: fresh-backup docker-up-mysql
 	@mkdir -p backup
 	@if [ ! -f "./backup/$(BACKUP_DATETIME)_LS.sql" ]; then \
 		echo "$(PURPLE) Скачиваем дамп с удаленного сервера $(RESET)"; \
-		sshpass -p"${SSH_PASSWORD}" scp ${SSH_USER}@${SSH_HOST}:${BACKUPS_FOLDER}/$(BACKUP_DATETIME)_LS.sql ./backup; \
+		sshpass -p"${SSH_PASSWORD}" rsync -avP -e "ssh -o StrictHostKeyChecking=no" ${SSH_USER}@${SSH_HOST}:${BACKUPS_FOLDER}/$(BACKUP_DATETIME)_LS.sql ./backup; \
 	else \
 		echo "$(PURPLE) Дамп БД уже существует локально, пропускаем скачивание $(RESET)"; \
 	fi
 	@if [ ! -f "./backup/$(BACKUP_DATETIME)_LS.file.gz" ]; then \
 		echo "$(PURPLE) Скачиваем архив с удаленного сервера $(RESET)"; \
-		sshpass -p"${SSH_PASSWORD}" scp ${SSH_USER}@${SSH_HOST}:${BACKUPS_FOLDER}/${BACKUP_DATETIME}_LS.file.gz ./backup; \
+		sshpass -p"${SSH_PASSWORD}" rsync -avP -e "ssh -o StrictHostKeyChecking=no" ${SSH_USER}@${SSH_HOST}:${BACKUPS_FOLDER}/${BACKUP_DATETIME}_LS.file.gz ./backup; \
 	else \
 		echo "$(PURPLE) Архив файлов уже существует локально, пропускаем скачивание $(RESET)"; \
 	fi
@@ -135,9 +155,16 @@ docker-up-mysql: ## Поднимем базу данных для разрабо
 	@echo "$(PURPLE) Поднимем базу данных $(RESET)"
 	docker compose $(ENV) $(PROFILE) up -d mysql_dev
 
+# Путь к дампу: DUMP_SQL=./backup/foo.sql или по умолчанию сегодняшний, иначе последний *_LS.sql
 update-dump:  ## Импорт БД из дампа
 	@echo "$(PURPLE) Импорт БД из дампа $(RESET)"
-	@docker compose $(ENV) exec -T mysql_dev sh -c 'exec mysql -u root -p"$(MYSQL_ROOT_PASSWORD)" "$(WORDPRESS_DB_NAME)"' < ./backup/$(BACKUP_DATETIME)_LS.sql;
+	@DUMP_FILE="$(DUMP_SQL)"; \
+	[ -z "$$DUMP_FILE" ] && DUMP_FILE="$$DUMP_SQL"; \
+	if [ -z "$$DUMP_FILE" ] || [ ! -f "$$DUMP_FILE" ]; then DUMP_FILE="./backup/$(BACKUP_DATETIME)_LS.sql"; fi; \
+	if [ ! -f "$$DUMP_FILE" ]; then DUMP_FILE=$$(ls -t ./backup/*_LS.sql 2>/dev/null | head -1); fi; \
+	if [ -z "$$DUMP_FILE" ] || [ ! -f "$$DUMP_FILE" ]; then echo "Нет файла дампа: положите backup/YYYY-MM-DD_LS.sql или задайте DUMP_SQL="; exit 1; fi; \
+	echo "$(PURPLE) Файл: $$DUMP_FILE $(RESET)"; \
+	docker compose $(ENV) exec -T mysql_dev sh -c 'exec mysql --default-character-set=utf8mb4 --max-allowed-packet=1G --binary-mode -u root -p"$(MYSQL_ROOT_PASSWORD)" "$(WORDPRESS_DB_NAME)"' < "$$DUMP_FILE"
 
 update-urls:
 	@echo "$(PURPLE) Обновление URL-адресов WordPress для окружения $(ENVIRONMENT)... $(RESET)"
