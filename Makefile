@@ -10,6 +10,12 @@ ENV = --env-file app/.env
 # Дата время
 BACKUP_DATETIME := $(shell date '+%Y-%m-%d')
 
+# Экспорт статей WordPress через REST API
+WP_EXPORT_URL ?= $(LOCAL_URL)
+WP_EXPORT_DIR ?= ./wp-articles
+WP_EXPORT_STATUS ?= publish
+WP_EXPORT_PER_PAGE ?= 100
+
 # Добавим красоты и чтоб наши команды было видно в теле скрипта
 PURPLE = \033[1;35m $(shell date +"%H:%M:%S") --
 RESET = --\033[0m
@@ -185,3 +191,14 @@ endif
 logs: ## Показать логи WordPress контейнера (последние 100 строк)
 	@echo "$(PURPLE) Просмотр логов WordPress контейнера $(RESET)"
 	docker compose $(ENV) $(PROFILE) logs --tail=300 -f wordpress
+
+wp-export-posts: ## Выгрузить статьи WordPress в JSON в папку WP_EXPORT_DIR
+	@echo "$(PURPLE) Экспорт статей из $(WP_EXPORT_URL) в $(WP_EXPORT_DIR) $(RESET)"
+	@mkdir -p "$(WP_EXPORT_DIR)"
+	@python3 ./tools/wp_export_posts.py \
+		--base-url "$(WP_EXPORT_URL)" \
+		--output-dir "$(WP_EXPORT_DIR)" \
+		--status "$(WP_EXPORT_STATUS)" \
+		--per-page "$(WP_EXPORT_PER_PAGE)" \
+		$(if $(WP_EXPORT_USER),--username "$(WP_EXPORT_USER)") \
+		$(if $(WP_EXPORT_APP_PASSWORD),--app-password "$(WP_EXPORT_APP_PASSWORD)")
