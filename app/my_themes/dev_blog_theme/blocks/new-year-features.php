@@ -23,17 +23,14 @@ function send_telegram_wishes($wishes, $user_ip) {
     // URL для отправки сообщения через Telegram Bot API
     $url = "https://api.telegram.org/bot{$telegram_token}/sendMessage";
     
-    // Параметры запроса
-    $args = array(
-        'body' => array(
-            'chat_id' => $chat_id,
-            'text' => $message,
+    dev_blog_telegram_curl_post(
+        $url,
+        array(
+            'chat_id'    => $chat_id,
+            'text'       => $message,
             'parse_mode' => 'Markdown',
-        ),
+        )
     );
-    
-    // Отправляем запрос
-    wp_remote_post($url, $args);
 }
 
 // AJAX обработчик для отправки пожеланий

@@ -314,6 +314,9 @@ require_once get_template_directory() . '/blocks/article-divider-block.php';
 // Подключим спойлер в выпадающее меню форматирования
 require_once get_template_directory() . '/blocks/spoiler-block.php';
 
+// Исходящий cURL к api.telegram.org (прокси из админки или TELEGRAM_HTTP_PROXY)
+require_once get_template_directory() . '/telegram-outbound.php';
+
 // Подключим блок кнопок обратной связи
 require_once get_template_directory() . '/blocks/feedback-block.php';
 
