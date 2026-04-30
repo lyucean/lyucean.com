@@ -77,20 +77,12 @@ $query = new WP_Query($args);
                             <!-- Счетчики просмотров -->
                             <?php //if (is_user_logged_in()) : ?>
                                 <div class="position-absolute top-0 start-0 p-2">
-                                    <div class="d-flex gap-2">
-                                        <?php if (get_post_meta(get_the_ID(), 'feedback_yes_count', true)) : ?>
-                                            <small class="text-white bg-success bg-opacity-60 px-2 py-1 rounded">
-                                                <i class="bi bi-hand-thumbs-up"></i>
-                                                <?php echo get_post_meta(get_the_ID(), 'feedback_yes_count', true); ?>
-                                            </small>
-                                        <?php endif; ?>
-                                        <?php if (get_post_meta(get_the_ID(), 'feedback_no_count', true)) : ?>
-                                        <small class="text-white bg-danger bg-opacity-60 px-2 py-1 rounded">
-                                            <i class="bi bi-hand-thumbs-down"></i>
-                                            <?php echo get_post_meta(get_the_ID(), 'feedback_no_count', true); ?>
-                                        </small>
-                                        <?php endif; ?>
-                                    </div>
+                                    <small class="text-white bg-dark bg-opacity-50 px-2 py-1 rounded">
+                                        <i class="bi bi-hand-thumbs-up"></i>
+                                        <?php echo (int) (get_post_meta(get_the_ID(), 'feedback_yes_count', true) ?: 0); ?>
+                                        <span class="text-white-50"> / </span>
+                                        <?php echo (int) (get_post_meta(get_the_ID(), 'feedback_no_count', true) ?: 0); ?>
+                                    </small>
                                 </div>
                                 <div class="position-absolute top-0 end-0 p-2">
                                     <div class="d-flex gap-2">

@@ -2,6 +2,17 @@ jQuery(document).ready(function ($) {
     const postId = $('#postIdHidden').val();
     let selectedFeedbackType = '';
 
+    function updateFeedbackHeroCounts(yes, no) {
+        const $y = $('#feedback-hero-yes');
+        const $n = $('#feedback-hero-no');
+        if ($y.length) {
+            $y.text(parseInt(yes, 10) || 0);
+        }
+        if ($n.length) {
+            $n.text(parseInt(no, 10) || 0);
+        }
+    }
+
     // Фразы для "Да", "Нет" и "Комментарий"
     const yesMessages = [
         "О, живой человек! Спасибо, что не бот! 🤖",
@@ -157,6 +168,9 @@ jQuery(document).ready(function ($) {
             success: function (response) {
                 if (response.success) {
                     feedbackSent = true; // Помечаем, что ответ отправлен
+                    if (response.data && typeof response.data.yes_count !== 'undefined') {
+                        updateFeedbackHeroCounts(response.data.yes_count, response.data.no_count);
+                    }
                 } else {
                     // Тихо логируем ошибку, не показываем пользователю
                     console.error('Ошибка отправки feedback:', response.data);
@@ -247,6 +261,9 @@ jQuery(document).ready(function ($) {
             },
             success: function (response) {
                 if (response.success) {
+                    if (response.data && typeof response.data.yes_count !== 'undefined') {
+                        updateFeedbackHeroCounts(response.data.yes_count, response.data.no_count);
+                    }
                     // Выбираем случайную фразу в зависимости от ответа
                     let randomMessage;
                     if (feedback === 'yes') {

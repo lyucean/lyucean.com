@@ -279,9 +279,11 @@ function save_feedback() {
         send_telegram_comment($post_title, $post_url, $comment, $user_ip);
     }
 
-    // Возвращаем сообщение
+    // Счётчики для обновления UI без перезагрузки страницы
     wp_send_json_success([
-        'message' => 'Спасибо за ваш ответ!'
+        'message'   => 'Спасибо за ваш ответ!',
+        'yes_count' => (int) $total_yes,
+        'no_count'  => (int) $total_no,
     ]);
 }
 add_action('wp_ajax_save_feedback', 'save_feedback');

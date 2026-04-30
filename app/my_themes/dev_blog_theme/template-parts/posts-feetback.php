@@ -35,7 +35,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
             </div>
             <div class="modal-body">
-                <p class="feedback-modal-intro">Что тебе не хватило в статье? На что ты бы хотел обратить внимание? У меня уже 14&nbsp;000 посещений — и я хочу знать тебя, мой читатель, ближе.</p>
+                <p class="feedback-modal-intro">Что в статье было не так или не хватило? Напиши, если есть идеи. Уже больше четырнадцати тысяч заходов, и мне хочется понимать вас лучше, не по цифрам, а по делу.</p>
                 <form id="feedbackForm">
                     <input type="hidden" id="selectedFeedback" value="">
                     <div class="mb-3">

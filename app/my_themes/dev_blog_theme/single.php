@@ -26,6 +26,7 @@
         <!-- Основное содержимое -->
         <main class="col-12 col-lg-10">
             <article class="rounded mb-4">
+                <?php $tags = get_the_tags(); ?>
 
                 <!-- Шапка статьи с изображением -->
                 <div class="card border-0">
@@ -51,15 +52,15 @@
                                                 </small>
                                                 <small class="text-white bg-dark bg-opacity-50 px-2 py-1 rounded">
                                                     <i class="bi bi-hand-thumbs-up"></i>
-                                                    <?php echo get_post_meta(get_the_ID(), 'feedback_yes_count', true) ?: 0; ?>
-                                                    / <?php echo get_post_meta(get_the_ID(), 'feedback_no_count', true) ?: 0; ?>
+                                                    <span id="feedback-hero-yes"><?php echo (int) (get_post_meta(get_the_ID(), 'feedback_yes_count', true) ?: 0); ?></span>
+                                                    <span class="text-white-50"> / </span>
+                                                    <span id="feedback-hero-no"><?php echo (int) (get_post_meta(get_the_ID(), 'feedback_no_count', true) ?: 0); ?></span>
                                                 </small>
                                             </div>
                                         </div>
                                     <?php // endif; ?>
 
                                     <?php
-                                    $tags = get_the_tags();
                                     if ($tags) :
                                         foreach ($tags as $tag) : ?>
                                             <a href="<?php echo get_tag_link($tag->term_id); ?>"
@@ -77,6 +78,12 @@
                         <!-- Если нет изображения, показываем обычный заголовок -->
                         <div class="p-4">
                             <h1 class="h2 fw-bold text-center mb-3"><?php the_title(); ?></h1>
+                            <p class="text-center text-secondary small mb-3">
+                                <i class="bi bi-hand-thumbs-up"></i>
+                                <span id="feedback-hero-yes"><?php echo (int) (get_post_meta(get_the_ID(), 'feedback_yes_count', true) ?: 0); ?></span>
+                                <span class="text-secondary"> / </span>
+                                <span id="feedback-hero-no"><?php echo (int) (get_post_meta(get_the_ID(), 'feedback_no_count', true) ?: 0); ?></span>
+                            </p>
                             <div class="text-center mb-4">
                                 <div class="d-inline-flex flex-wrap align-items-center">
                                     <span class="text-secondary fs-6 me-2"><?php echo get_the_date(); ?></span>
