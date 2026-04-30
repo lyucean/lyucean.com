@@ -41,13 +41,13 @@
                     <div class="mb-3">
                         <label for="feedbackComment" class="form-label">Твой комментарий</label>
                         <textarea class="form-control" id="feedbackComment" rows="4" placeholder="Напиши, что на душе (необязательно)"></textarea>
-                        <small class="form-text text-muted">Можешь просто нажать «Отправить»</small>
+                        <p class="feedback-modal-hint mb-0">Можешь просто нажать «Отправить»</p>
                     </div>
                     <div id="feedbackModalMessage" class="alert d-none" role="alert"></div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Отмена</button>
                 <button type="button" class="btn btn-primary" id="sendFeedbackBtn">Отправить</button>
             </div>
         </div>
