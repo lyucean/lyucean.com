@@ -221,14 +221,15 @@ header .logo {
     margin-bottom: 1rem;
 }
 
+/* Тень задаём здесь, не через Bootstrap .shadow-sm (у неё box-shadow с !important, hover не мог перебить). */
 .footer-web-projects__card {
+    box-shadow: var(--bs-box-shadow-sm);
     transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
 .footer-web-projects__card:hover {
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
     border-color: rgba(0, 0, 0, 0.08);
-    box-shadow: -1px 5px 35px -9px rgba(0, 0, 0, .2);
+    box-shadow: -1px 5px 35px -9px rgba(0, 0, 0, 0.2);
 }
 
 .footer-web-projects__card-link {

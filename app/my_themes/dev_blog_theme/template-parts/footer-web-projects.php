@@ -41,7 +41,7 @@ $footer_web_projects = [
         <div class="row g-3 g-md-4">
             <?php foreach ($footer_web_projects as $project) : ?>
                 <div class="col-12 col-md-6">
-                    <div class="footer-web-projects__card card h-100 border-0 shadow-sm p-4 position-relative bg-body">
+                    <div class="footer-web-projects__card card h-100 border-0 p-4 position-relative bg-body">
                         <a
                             href="<?php echo esc_url($project['url']); ?>"
                             class="footer-web-projects__card-link stretched-link text-decoration-none"
