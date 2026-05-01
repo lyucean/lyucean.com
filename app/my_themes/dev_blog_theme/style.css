@@ -209,6 +209,74 @@ header .logo {
 }
 
 
+/* Блок «Мои проекты» (template-parts/footer-web-projects.php) */
+
+.footer-web-projects__heading {
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #868e96;
+    margin-bottom: 1rem;
+}
+
+.footer-web-projects__card {
+    transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-web-projects__card:hover {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: -1px 5px 35px -9px rgba(0, 0, 0, .2);
+}
+
+.footer-web-projects__card-link {
+    display: block;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--bs-body-color);
+    text-decoration: none;
+    margin-bottom: 0.4rem;
+    position: relative;
+    z-index: 2;
+}
+
+.footer-web-projects__card-desc {
+    font-size: 0.875rem;
+    line-height: 1.45;
+    color: #6c757d;
+    position: relative;
+    z-index: 2;
+}
+
+[data-bs-theme="dark"] .footer-web-projects__heading {
+    color: var(--bs-secondary-color);
+}
+
+[data-bs-theme="dark"] .footer-web-projects__card {
+    background-color: var(--bs-gray-800);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: none;
+}
+
+[data-bs-theme="dark"] .footer-web-projects__card:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+[data-bs-theme="dark"] .footer-web-projects__card-link {
+    color: var(--bs-body-color);
+}
+
+[data-bs-theme="dark"] .footer-web-projects__card-link:hover {
+    color: var(--bs-success);
+}
+
+[data-bs-theme="dark"] .footer-web-projects__card-desc {
+    color: #adb5bd;
+}
+
 footer {
     /*background-color: var(--bs-gray-200);*/
 }

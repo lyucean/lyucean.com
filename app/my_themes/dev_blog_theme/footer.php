@@ -5,6 +5,8 @@
         <div class="row">
             <div class="col-12">
 
+                <?php get_template_part('template-parts/footer', 'web-projects'); ?>
+
                 <!-- Добавляем описание -->
                 <div class="text-center mb-4">
                     <p class="footer-description">

@@ -1,6 +1,28 @@
 <?php
 // Используется для добавления функций и подключения стилей/скриптов.
 
+/**
+ * Версия для query string у style.css: максимальный mtime среди ключевых файлов темы.
+ * Иначе при правках только PHP (футер, шаблоны) номер не менялся бы, и CDN/браузер отдавали бы старый CSS.
+ */
+function dev_blog_theme_get_asset_version() {
+    $dir = get_stylesheet_directory();
+    $paths = array(
+        $dir . '/style.css',
+        $dir . '/functions.php',
+        $dir . '/footer.php',
+        $dir . '/header.php',
+        $dir . '/template-parts/footer-web-projects.php',
+    );
+    $max = 0;
+    foreach ($paths as $path) {
+        if (is_readable($path)) {
+            $max = max($max, (int) filemtime($path));
+        }
+    }
+    return $max > 0 ? date('Ymd.His', $max) : '1.0';
+}
+
 // Подключаем стили и скрипты
 function dev_blog_theme_enqueue_styles() {
     // Подключаем Poppins для логотипа
@@ -13,10 +35,7 @@ function dev_blog_theme_enqueue_styles() {
     // Bootstrap JS
     wp_enqueue_script('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js', array(), null, true);
 
-    // Получаем путь к файлу style.css
-    $style_path = get_stylesheet_directory() . '/style.css';
-    // Получаем время последней модификации файла. Будет выглядеть как: 20241125.170600
-    $version = date('Ymd.His', filemtime($style_path));
+    $version = dev_blog_theme_get_asset_version();
 
     // Подключаем стили темы с версией
     wp_enqueue_style('dev_blog_theme-style', get_stylesheet_uri(), array(), $version);
