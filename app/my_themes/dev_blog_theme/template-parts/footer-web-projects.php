@@ -11,14 +11,14 @@ if (! defined('ABSPATH')) {
 
 $footer_web_projects = [
     [
-        'url'  => 'https://abxtest.com',
-        'host' => 'abxtest.com',
-        'desc' => 'ABX-тесты аудио: лечит аудиофилию на ранних стадиях.',
-    ],
-    [
         'url'  => 'https://haccpro.ru',
         'host' => 'haccpro.ru',
         'desc' => 'SaaS по ХАССП: первая в России платформа для ХАССП полного цикла.',
+    ],
+    [
+        'url'  => 'https://logtail.ru',
+        'host' => 'logtail.ru',
+        'desc' => 'Logtail - логи приложений в одном месте: приём, хранение, поиск в реальном времени.',
     ],
     [
         'url'  => 'https://sovpadem.ru',
@@ -26,9 +26,9 @@ $footer_web_projects = [
         'desc' => 'Тесты предпочтений для пар: проходите вместе, смотрите, где совпали.',
     ],
     [
-        'url'  => 'https://logtail.ru',
-        'host' => 'logtail.ru',
-        'desc' => 'Logtail - логи приложений в одном месте: приём, хранение, поиск в реальном времени.',
+        'url'  => 'https://abxtest.com',
+        'host' => 'abxtest.com',
+        'desc' => 'ABX-тесты аудио: лечит аудиофилию на ранних стадиях.',
     ],
 ];
 ?>
