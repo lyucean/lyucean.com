@@ -18,10 +18,10 @@ $footer_web_projects = [
     [
         'url'  => 'https://logtail.ru',
         'host' => 'logtail.ru',
-        'desc' => 'Logtail - логи приложений в одном месте: приём, хранение, поиск в реальном времени.',
+        'desc' => 'Логи приложений в одном месте: приём, хранение, поиск в реальном времени.',
     ],
     [
-        'url'  => 'https://sovpadem.ru',
+        'url'  => 'https://sovpadem.ru', 
         'host' => 'sovpadem.ru',
         'desc' => 'Тесты предпочтений для пар: проходите вместе, смотрите, где совпали.',
     ],
@@ -33,7 +33,7 @@ $footer_web_projects = [
 ];
 ?>
 <!-- dev_blog_theme: footer-web-projects (единый источник блока «Мои проекты») -->
-<section class="footer-web-projects mb-4 mb-md-5" aria-labelledby="footer-web-projects-heading">
+<section class="footer-web-projects mb-4" aria-labelledby="footer-web-projects-heading">
     <div class="footer-web-projects__panel mx-auto rounded-3 px-3 px-md-4 py-4">
         <h2 id="footer-web-projects-heading" class="footer-web-projects__heading">
             <?php echo esc_html('Мои проекты'); ?>
@@ -42,17 +42,17 @@ $footer_web_projects = [
             <?php foreach ($footer_web_projects as $project) : ?>
                 <div class="col-12 col-md-6">
                     <div class="footer-web-projects__card card h-100 border-0 p-4 position-relative bg-body">
-                        <a
-                            href="<?php echo esc_url($project['url']); ?>"
-                            class="footer-web-projects__card-link stretched-link text-decoration-none"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            <?php echo esc_html($project['host']); ?>
-                        </a>
-                        <p class="footer-web-projects__card-desc mb-0">
+                        <span class="footer-web-projects__card-host d-block position-relative z-1"><?php echo esc_html($project['host']); ?></span>
+                        <p class="footer-web-projects__card-desc mb-0 position-relative z-1">
                             <?php echo esc_html($project['desc']); ?>
                         </p>
+                        <a class="stretched-link"
+                           href="<?php echo esc_url($project['url']); ?>"
+                           rel="noopener noreferrer"
+                           target="_blank"
+                           aria-label="<?php echo esc_attr($project['host'] . '. ' . $project['desc']); ?>">
+                            <span class="visually-hidden"><?php echo esc_html($project['host']); ?></span>
+                        </a>
                     </div>
                 </div>
             <?php endforeach; ?>

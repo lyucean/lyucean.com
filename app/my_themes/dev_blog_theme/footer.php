@@ -7,15 +7,6 @@
 
                 <?php get_template_part('template-parts/footer', 'web-projects'); ?>
 
-                <!-- Добавляем описание -->
-                <div class="text-center mb-4">
-                    <p class="footer-description">
-                        Заметки технологического лидера и практикующего визионера: продукты, команды, инфраструктура и рост бизнеса через IT.
-                        <br/>
-                        Практические советы и откровенные истории без воды и розовых соплей.
-                    </p>
-                </div>
-
                 <!-- Социальные сети  -->
                 <div class="d-flex justify-content-center gap-4 mb-4">
                     <a href="https://www.instagram.com/lyucean"
