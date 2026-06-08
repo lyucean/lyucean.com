@@ -50,11 +50,12 @@
                                                     <i class="bi bi-person-standing"></i>
                                                     <?php echo get_post_views(get_the_ID()); ?>
                                                 </small>
+                                                <?php $feedback_counts = dev_blog_get_feedback_display_counts( get_the_ID() ); ?>
                                                 <small class="text-white bg-dark bg-opacity-50 px-2 py-1 rounded">
                                                     <i class="bi bi-hand-thumbs-up"></i>
-                                                    <span id="feedback-hero-yes"><?php echo (int) (get_post_meta(get_the_ID(), 'feedback_yes_count', true) ?: 0); ?></span>
+                                                    <span id="feedback-hero-yes"><?php echo (int) $feedback_counts['display_yes']; ?></span>
                                                     <span class="text-white-50"> / </span>
-                                                    <span id="feedback-hero-no"><?php echo (int) (get_post_meta(get_the_ID(), 'feedback_no_count', true) ?: 0); ?></span>
+                                                    <span id="feedback-hero-no"><?php echo (int) $feedback_counts['display_no']; ?></span>
                                                 </small>
                                             </div>
                                         </div>
@@ -78,11 +79,12 @@
                         <!-- Если нет изображения, показываем обычный заголовок -->
                         <div class="p-4">
                             <h1 class="h2 fw-bold text-center mb-3"><?php the_title(); ?></h1>
+                            <?php $feedback_counts = dev_blog_get_feedback_display_counts( get_the_ID() ); ?>
                             <p class="text-center text-secondary small mb-3">
                                 <i class="bi bi-hand-thumbs-up"></i>
-                                <span id="feedback-hero-yes"><?php echo (int) (get_post_meta(get_the_ID(), 'feedback_yes_count', true) ?: 0); ?></span>
+                                <span id="feedback-hero-yes"><?php echo (int) $feedback_counts['display_yes']; ?></span>
                                 <span class="text-secondary"> / </span>
-                                <span id="feedback-hero-no"><?php echo (int) (get_post_meta(get_the_ID(), 'feedback_no_count', true) ?: 0); ?></span>
+                                <span id="feedback-hero-no"><?php echo (int) $feedback_counts['display_no']; ?></span>
                             </p>
                             <div class="text-center mb-4">
                                 <div class="d-inline-flex flex-wrap align-items-center">

@@ -213,6 +213,65 @@ function register_telegram_settings() {
 }
 add_action('admin_init', 'register_telegram_settings');
 
+/**
+ * Счётчики фидбека для отображения: слева да + комментарии, справа нет.
+ *
+ * @param int $post_id ID поста.
+ * @return array{yes:int, no:int, comment:int, display_yes:int, display_no:int}
+ */
+function dev_blog_get_feedback_display_counts( $post_id ) {
+    $yes     = (int) ( get_post_meta( $post_id, 'feedback_yes_count', true ) ?: 0 );
+    $no      = (int) ( get_post_meta( $post_id, 'feedback_no_count', true ) ?: 0 );
+    $comment = (int) ( get_post_meta( $post_id, 'feedback_comment_count', true ) ?: 0 );
+
+    return array(
+        'yes'         => $yes,
+        'no'          => $no,
+        'comment'     => $comment,
+        'display_yes' => $yes + $comment,
+        'display_no'  => $no,
+    );
+}
+
+/**
+ * Telegram после ответа клиенту — иначе admin-ajax.php висит на cURL до 70 с.
+ *
+ * @param string $post_title      .
+ * @param string $post_url        .
+ * @param string $feedback_text   .
+ * @param int    $total_feedback  .
+ * @param string $user_ip         .
+ * @param string $comment         .
+ */
+function dev_blog_schedule_feedback_telegram( $post_title, $post_url, $feedback_text, $total_feedback, $user_ip, $comment = '' ) {
+    add_action(
+        'shutdown',
+        static function () use ( $post_title, $post_url, $feedback_text, $total_feedback, $user_ip, $comment ) {
+            send_telegram_feedback( $post_title, $post_url, $feedback_text, $total_feedback, $user_ip );
+            if ( $comment !== '' ) {
+                send_telegram_comment( $post_title, $post_url, $comment, $user_ip );
+            }
+        },
+        999
+    );
+}
+
+/**
+ * @param string $post_title .
+ * @param string $post_url   .
+ * @param string $comment    .
+ * @param string $user_ip    .
+ */
+function dev_blog_schedule_feedback_comment_telegram( $post_title, $post_url, $comment, $user_ip ) {
+    add_action(
+        'shutdown',
+        static function () use ( $post_title, $post_url, $comment, $user_ip ) {
+            send_telegram_comment( $post_title, $post_url, $comment, $user_ip );
+        },
+        999
+    );
+}
+
 // Обработчик AJAX для сохранения ответа
 function save_feedback() {
     // Проверяем, что запрос пришел через AJAX
@@ -271,19 +330,15 @@ function save_feedback() {
         $feedback_text = 'Комментарий';
     }
 
-    // Отправляем первое сообщение в Telegram с ответом
-    send_telegram_feedback($post_title, $post_url, $feedback_text, $total_feedback, $user_ip);
+    dev_blog_schedule_feedback_telegram( $post_title, $post_url, $feedback_text, $total_feedback, $user_ip, $comment );
 
-    // Если есть комментарий, отправляем его отдельным сообщением
-    if (!empty($comment)) {
-        send_telegram_comment($post_title, $post_url, $comment, $user_ip);
-    }
+    $counts = dev_blog_get_feedback_display_counts( $post_id );
 
     // Счётчики для обновления UI без перезагрузки страницы
     wp_send_json_success([
         'message'   => 'Спасибо за ваш ответ!',
-        'yes_count' => (int) $total_yes,
-        'no_count'  => (int) $total_no,
+        'yes_count' => $counts['display_yes'],
+        'no_count'  => $counts['display_no'],
     ]);
 }
 add_action('wp_ajax_save_feedback', 'save_feedback');
@@ -342,12 +397,14 @@ function save_feedback_comment() {
     $post_title = get_the_title($post_id);
     $post_url = get_permalink($post_id);
 
-    // Отправляем комментарий в Telegram отдельным сообщением
-    send_telegram_comment($post_title, $post_url, $comment, $user_ip);
+    dev_blog_schedule_feedback_comment_telegram( $post_title, $post_url, $comment, $user_ip );
 
-    // Возвращаем успех
+    $counts = dev_blog_get_feedback_display_counts( $post_id );
+
     wp_send_json_success([
-        'message' => 'Комментарий отправлен'
+        'message'   => 'Комментарий отправлен',
+        'yes_count' => $counts['display_yes'],
+        'no_count'  => $counts['display_no'],
     ]);
 }
 add_action('wp_ajax_save_feedback_comment', 'save_feedback_comment');

@@ -77,11 +77,12 @@ $query = new WP_Query($args);
                             <!-- Счетчики просмотров -->
                             <?php //if (is_user_logged_in()) : ?>
                                 <div class="position-absolute top-0 start-0 p-2">
+                                    <?php $feedback_counts = dev_blog_get_feedback_display_counts( get_the_ID() ); ?>
                                     <small class="text-white bg-dark bg-opacity-50 px-2 py-1 rounded">
                                         <i class="bi bi-hand-thumbs-up"></i>
-                                        <?php echo (int) (get_post_meta(get_the_ID(), 'feedback_yes_count', true) ?: 0); ?>
+                                        <?php echo (int) $feedback_counts['display_yes']; ?>
                                         <span class="text-white-50"> / </span>
-                                        <?php echo (int) (get_post_meta(get_the_ID(), 'feedback_no_count', true) ?: 0); ?>
+                                        <?php echo (int) $feedback_counts['display_no']; ?>
                                     </small>
                                 </div>
                                 <div class="position-absolute top-0 end-0 p-2">

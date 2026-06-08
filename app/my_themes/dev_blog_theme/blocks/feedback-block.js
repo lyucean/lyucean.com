@@ -205,6 +205,9 @@ jQuery(document).ready(function ($) {
             },
             success: function (response) {
                 if (response.success) {
+                    if (response.data && typeof response.data.yes_count !== 'undefined') {
+                        updateFeedbackHeroCounts(response.data.yes_count, response.data.no_count);
+                    }
                     messageDiv.removeClass('d-none alert-danger').addClass('alert-success');
                     messageDiv.text('Спасибо за комментарий!');
 
