@@ -1,3 +1,5 @@
+<?php get_template_part('template-parts/services', 'cta'); ?>
+
 <!-- Панель сортировки -->
 <div class="sort-panel">
     <nav class="sort-nav">

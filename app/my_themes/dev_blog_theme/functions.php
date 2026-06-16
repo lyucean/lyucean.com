@@ -13,6 +13,10 @@ function dev_blog_theme_get_asset_version() {
         $dir . '/footer.php',
         $dir . '/header.php',
         $dir . '/template-parts/footer-web-projects.php',
+        $dir . '/template-parts/services-cta.php',
+        $dir . '/front-page.php',
+        $dir . '/blocks/services-cta-block.php',
+        $dir . '/blocks/services-cta-block.js',
     );
     $max = 0;
     foreach ($paths as $path) {
@@ -338,6 +342,9 @@ require_once get_template_directory() . '/telegram-outbound.php';
 
 // Подключим блок кнопок обратной связи
 require_once get_template_directory() . '/blocks/feedback-block.php';
+
+// Баннер «Проекты и консалтинг»: форма заявки → Telegram
+require_once get_template_directory() . '/blocks/services-cta-block.php';
 
 // Подключим новогодние фишки (закомментируйте эту строку, чтобы отключить)
 // require_once get_template_directory() . '/blocks/new-year-features.php';

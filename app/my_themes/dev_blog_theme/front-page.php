@@ -1,14 +1,14 @@
 <?php get_header(); ?>
 
-<div class="front-page container-xl">
-    <div class="row g-4">
+<div class="front-page container-xl pt-md-1">
+    <div class="row gx-4 align-items-start">
         <!-- Левая колонка с десктопным меню -->
         <div class="col-md-2 d-none d-md-block">
             <?php get_template_part('template-parts/front', 'menu-desktop'); ?>
         </div>
 
         <!-- Правая колонка с контентом -->
-        <div class="col-12 col-md-9 mt-1">
+        <div class="col-12 col-md-9 front-page__content">
             <?php get_template_part('template-parts/front', 'content'); ?>
         </div>
 

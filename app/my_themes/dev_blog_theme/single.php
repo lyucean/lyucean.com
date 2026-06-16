@@ -113,6 +113,8 @@
                 </div>
             </article>
 
+            <?php get_template_part('template-parts/services', 'cta'); ?>
+
             <!-- Блок с вопросом -->
             <?php get_template_part('template-parts/posts', 'feetback'); ?>
 
