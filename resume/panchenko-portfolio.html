@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Панченко Валентин - Портфолио CIO</title>
+  <style>
+    @page { size: 297mm 210mm; margin: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      color: #1a1d26;
+      background: #fff;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .slide {
+      width: 297mm;
+      height: 210mm;
+      page-break-after: always;
+      padding: 14mm 18mm;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .slide:last-child { page-break-after: auto; }
+
+    .slide-dark {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 55%, #1a2744 100%);
+      color: #f8fafc;
+    }
+    .slide-light { background: #fff; }
+
+    .ph {
+      border: 2px dashed #94a3b8;
+      background: #f1f5f9;
+      color: #64748b;
+      font-size: 7.5pt;
+      line-height: 1.35;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8px;
+      border-radius: 8px;
+    }
+    .slide-dark .ph {
+      border-color: #475569;
+      background: rgba(255,255,255,0.06);
+      color: #94a3b8;
+    }
+
+    h1.name {
+      font-size: 36pt;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+    }
+    .role {
+      font-size: 13pt;
+      font-weight: 600;
+      margin-top: 8px;
+      opacity: 0.9;
+    }
+    .contacts {
+      margin-top: 14px;
+      font-size: 9pt;
+      line-height: 1.7;
+      opacity: 0.85;
+    }
+
+    h2.slide-title {
+      font-size: 20pt;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+    .slide-dark h2.slide-title { color: #f8fafc; }
+    h3.sub {
+      font-size: 9pt;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #64748b;
+      margin-bottom: 10px;
+    }
+    .slide-dark h3.sub { color: #94a3b8; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; flex: 1; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; flex: 1; }
+    .grid-4 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; flex: 1; }
+
+    .card {
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 10px 12px;
+      border: 1px solid #e2e8f0;
+    }
+    .card h4 {
+      font-size: 9.5pt;
+      font-weight: 700;
+      color: #1e3a5f;
+      margin-bottom: 6px;
+    }
+    .card ul {
+      padding-left: 14px;
+      font-size: 8pt;
+      color: #334155;
+      line-height: 1.45;
+    }
+    .card li { margin-bottom: 2px; }
+
+    .metric-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 10px 0;
+    }
+    .metric {
+      background: #1e3a5f;
+      color: #fff;
+      border-radius: 10px;
+      padding: 12px 10px;
+      text-align: center;
+    }
+    .metric .val {
+      font-size: 22pt;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+    .metric .lbl {
+      font-size: 7pt;
+      opacity: 0.85;
+      margin-top: 4px;
+      line-height: 1.3;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      flex: 1;
+    }
+    .step {
+      border-top: 3px solid #1e3a5f;
+      padding-top: 8px;
+    }
+    .step .num {
+      font-size: 18pt;
+      font-weight: 800;
+      color: #1e3a5f;
+      opacity: 0.25;
+    }
+    .step h4 {
+      font-size: 9pt;
+      font-weight: 700;
+      margin: 4px 0;
+      color: #0f172a;
+    }
+    .step p, .step ul {
+      font-size: 7.5pt;
+      color: #475569;
+      line-height: 1.4;
+    }
+    .step ul { padding-left: 12px; margin-top: 4px; }
+
+    .quote {
+      margin-top: auto;
+      font-size: 8.5pt;
+      font-style: italic;
+      color: #64748b;
+      padding-top: 8px;
+      border-top: 1px solid #e2e8f0;
+    }
+    .slide-dark .quote {
+      color: #94a3b8;
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .cover-grid {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 20px;
+      align-items: start;
+      flex: 1;
+    }
+    .photo {
+      width: 100px;
+      height: 100px;
+      border-radius: 10px;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      font-size: 7.5pt;
+    }
+    .tag {
+      background: #e2e8f0;
+      color: #334155;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    .timeline {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      justify-content: center;
+    }
+    .tl-item {
+      display: grid;
+      grid-template-columns: 70px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 8px 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .tl-year {
+      font-weight: 800;
+      font-size: 9pt;
+      color: #1e3a5f;
+    }
+    .tl-body h4 { font-size: 9.5pt; font-weight: 700; }
+    .tl-body p { font-size: 8pt; color: #475569; margin-top: 2px; }
+
+    .ecosystem {
+      display: grid;
+      grid-template-columns: 1fr 120px 1fr;
+      gap: 10px;
+      align-items: center;
+      flex: 1;
+    }
+    .eco-center {
+      background: #1e3a5f;
+      color: #fff;
+      border-radius: 50%;
+      width: 110px;
+      height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 7.5pt;
+      font-weight: 700;
+      line-height: 1.3;
+      margin: 0 auto;
+    }
+
+    .footer-page {
+      position: absolute;
+      bottom: 10mm;
+      right: 18mm;
+      font-size: 7pt;
+      color: #94a3b8;
+    }
+    .slide-dark .footer-page { color: #64748b; }
+
+    .blog-ref {
+      font-size: 7.5pt;
+      color: #2b4acb;
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- SLIDE 1 -->
+<section class="slide slide-dark">
+  <div class="cover-grid">
+    <img class="photo" src="assets/photo.png" alt="Валентин Панченко">
+    <div>
+      <h1 class="name">ВАЛЕНТИН<br>ПАНЧЕНКО</h1>
+      <div class="role">IT-директор (CIO)<br>Цифровая трансформация · FMCG · E-commerce · SaaS</div>
+      <div class="contacts">
+        +7 (926) 295-70-65 · lyucean@gmail.com<br>
+        telegram: @lyucean · lyucean.com
+      </div>
+    </div>
+  </div>
+  <div class="ph" style="height: 55mm; margin-top: 12px;">
+    [ФОН: приглушённое фото dark store / склада / производства food, opacity 20%]
+  </div>
+  <p class="quote">IT как часть операционки, не сервисная функция</p>
+  <div class="footer-page">1 / 16</div>
+</section>
+
+<!-- SLIDE 2 -->
+<section class="slide slide-light">
+  <h2 class="slide-title">Решаю задачи бизнеса</h2>
+  <h3 class="sub">Стратегия · Команда · Рост · Продукты</h3>
+  <div class="grid-4">
+    <div class="card">
+      <h4>Цифровая трансформация</h4>
+      <ul>
+        <li>Карта процессов и приоритеты</li>
+        <li>Roadmap с ROI</li>
+        <li>ERP, WMS, BI, интеграции</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Масштабирование IT</h4>
+      <ul>
+        <li>Команда с нуля, 30+ человек</li>
+        <li>P&L, бюджет, подрядчики</li>
+        <li>Предсказуемые релизы</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Рост через технологии</h4>
+      <ul>
+        <li>E-commerce 12 → 800 млн ₽</li>
+        <li>Склад до 2600 зак/сутки</li>
+        <li>Data-driven, unit-экономика</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Запуск продуктов</h4>
+      <ul>
+        <li>От гипотезы до продакшна</li>
+        <li>B2B SaaS HACCPro</li>
+        <li>Первые платящие клиенты</li>
+      </ul>
+    </div>
+  </div>
+  <p class="quote">Строю IT, которое ускоряет бизнес, а не тормозит его · lyucean.com</p>
+  <div class="footer-page">2 / 16</div>
+</section>
+
+<!-- SLIDE 3 -->
+<section class="slide slide-light">
+  <h2 class="slide-title">Стратегические задачи</h2>
+  <h3 class="sub">От аудита до измеримого результата</h3>
+  <div class="steps">
+    <div class="step">
+      <div class="num">01</div>
+      <h4>Аудит</h4>
+      <ul>
+        <li>Карта IT и процессов</li>
+        <li>Интервью с ключевыми ролями</li>
+        <li>Риски и узкие места</li>
+      </ul>
+    </div>
+    <div class="step">
+      <div class="num">02</div>
+      <h4>Приоритеты</h4>
+      <ul>
+        <li>Quick wins 30-60 дней</li>
+        <li>Проекты с ROI</li>
+        <li>Согласование с собственником</li>
+      </ul>
+    </div>
+    <div class="step">
+      <div class="num">03</div>
+      <h4>Roadmap</h4>
+      <ul>
+        <li>ERP / WMS / интеграции</li>
+        <li>Команда и бюджет</li>
+        <li>Этапы 6-12 месяцев</li>
+      </ul>
+    </div>
+    <div class="step">
+      <div class="num">04</div>
+      <h4>Результат</h4>
+      <ul>
+        <li>×60 рост e-com за 3 года</li>
+        <li>2600 заказов/сутки</li>
+        <li>99,98% uptime</li>
+      </ul>
+    </div>
+  </div>
+  <div class="ph" style="height: 28mm; margin-top: 8px;">
+    [СХЕМА: timeline roadmap или доска с этапами трансформации]
+  </div>
+  <p class="quote">Сначала карта, потом системы. Не наоборот.</p>
+  <div class="footer-page">3 / 16</div>
+</section>
+
+<!-- SLIDE 4 -->
+<section class="slide slide-light">
+  <h2 class="slide-title">Команда</h2>
+  <h3 class="sub">Создание, развитие, единый организм</h3>
+  <div class="grid-3">
+    <div class="card">
+      <h4>Найм и структура</h4>
+      <ul>
+        <li>IT-функция с нуля, 30+</li>
+        <li>Dev, аналитика, инфра, поддержка</li>
+        <li>Vendor management</li>
+      </ul>
+      <div class="ph" style="height: 35mm; margin-top: 8px;">[ФОТО: команда / стендап / open space]</div>
+    </div>
+    <div class="card">
+      <h4>Развитие</h4>
+      <ul>
+        <li>Agile, Scrum, Kanban</li>
+        <li>PDP для ключевых людей</li>
+        <li>Меньше зависимости от одного гения</li>
+      </ul>
+      <div class="ph" style="height: 35mm; margin-top: 8px;">[СХЕМА: упрощённый органиграмм IT, 5-7 блоков]</div>
+    </div>
+    <div class="card">
+      <h4>Результат</h4>
+      <ul>
+        <li>Предсказуемые релизы</li>
+        <li>Команда держит рост ×10</li>
+        <li>IT не падает при пиках</li>
+      </ul>
+      <div class="ph" style="height: 35mm; margin-top: 8px;">[ГРАФИК: снижение time-to-market релизов]</div>
+    </div>
+  </div>
+  <div class="footer-page">4 / 16</div>
+</section>
+
+<!-- SLIDE 5 -->
+<section class="slide slide-light">
+  <h2 class="slide-title">E-commerce проекты</h2>
+  <h3 class="sub">Ешь Деревенское · FMCG · dark store</h3>
+  <div class="metric-row">
+    <div class="metric"><div class="val">×60</div><div class="lbl">рост e-com<br>за 3 года</div></div>
+    <div class="metric"><div class="val">800</div><div class="lbl">млн ₽<br>пик оборота</div></div>
+    <div class="metric"><div class="val">+40%</div><div class="lbl">мобильные<br>заказы</div></div>
+    <div class="metric"><div class="val">12→800</div><div class="lbl">млн ₽<br>траектория</div></div>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <h4>Платформа</h4>
+      <ul>
+        <li>Web + mobile (PWA, Flutter)</li>
+        <li>Личные кабинеты курьеров</li>
+        <li>Интеграции с доставкой</li>
+        <li>Колл-центр, RFM, NPS</li>
+      </ul>
+    </div>
+    <div>
+      <div class="ph" style="height: 42mm; margin-bottom: 8px;">[ФОТО: скрин мобильного приложения / сайта food e-com]</div>
+      <div class="ph" style="height: 42mm;">[ФОТО: дашборд Power BI, цифры размыты]</div>
+    </div>
+  </div>
+  <p class="blog-ref">Блог: data-driven управление · lyucean.com/data-driven-management</p>
+  <div class="footer-page">5 / 16</div>
+</section>
+
+<!-- SLIDE 6 -->
+<section class="slide slide-light">
+  <h2 class="slide-title">Склад и операционка</h2>
+  <h3 class="sub">WMS · сборка · логистика</h3>
+  <div class="grid-2">
+    <div>
+      <div class="card" style="margin-bottom: 8px;">
+        <h4>WMS Dark store</h4>
+        <ul>
+          <li>ТСД + собственные приложения</li>
+          <li>Производительность сборки ×3</li>
+          <li>До 2600 заказов в сутки</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Процессы</h4>
+        <ul>
+          <li>Автозакупки: -50% ручного труда</li>
+          <li>Склад + 1С + e-com в одном контуре</li>
+          <li>Метрики в реальном времени</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="ph" style="height: 50mm; margin-bottom: 8px;">[ФОТО: склад dark store, стеллажи, ТСД в руке]</div>
+      <div class="ph" style="height: 50mm;">[СХЕМА: заказ → сборка → отгрузка → 1С]</div>
+    </div>
+  </div>
+  <p class="blog-ref">Блог: операционная дисциплина · lyucean.com/operational-discipline</p>
+  <div class="footer-page">6 / 16</div>
+</section>
+
+<!-- SLIDE 7 -->
+<section class="slide slide-light">
+  <h2 class="slide-title">ERP и корпоративные системы</h2>
+  <h3 class="sub">Единый контур данных</h3>
+  <div class="ecosystem">
+    <div class="card">
+      <h4>1С</h4>
+      <ul>
+        <li>Комплексная автоматизация</li>
+        <li>Бухгалтерия, ЗУП</li>
+        <li>Управленческий учёт</li>
+      </ul>
+      <h4 style="margin-top:8px;">CRM</h4>
+      <ul><li>Битрикс24, AmoCRM</li></ul>
+    </div>
+    <div class="eco-center">Единый контур:<br>от заказа<br>до P&L</div>
+    <div class="card">
+      <h4>Интеграции</h4>
+      <ul>
+        <li>WMS, сайт, доставка</li>
+        <li>Минус двойной ввод</li>
+        <li>Power BI для собственника</li>
+      </ul>
+      <div class="metric" style="margin-top:10px; background:#0f172a;">
+        <div class="val" style="font-size:16pt;">-25%</div>
+        <div class="lbl">IT-затраты при росте бизнеса</div>
+      </div>
+    </div>
+  </div>
+  <div class="ph" style="height: 22mm; margin-top: 8px;">[СХЕМА: 1С в центре, стрелки к WMS, сайт, BI, CRM]</div>
+  <div class="footer-page">7 / 16</div>
+</section>
+
+<!-- SLIDE 8 -->
+<section class="slide slide-light">
+  <h2 class="slide-title">Цифровая трансформация</h2>
+  <h3 class="sub">Четыре опоры · один результат</h3>
+  <div class="grid-4">
+    <div class="card">
+      <h4>E-commerce + Mobile</h4>
+      <ul><li>Платформа, приложения</li><li>Курьеры, доставка</li><li>×60 оборот</li></ul>
+    </div>
+    <div class="card">
+      <h4>ERP + 1С</h4>
+      <ul><li>Учёт, ЗУП, КА</li><li>Интеграции</li><li>Один источник правды</li></ul>
+    </div>
+    <div class="card">
+      <h4>WMS + Склад</h4>
+      <ul><li>Dark store, ТСД</li><li>×3 сборка</li><li>2600 зак/сутки</li></ul>
+    </div>
+    <div class="card">
+      <h4>BI + AI</h4>
+      <ul><li>Power BI, RFM</li><li>Unit-экономика</li><li>AI в процессах</li></ul>
+    </div>
+  </div>
+  <div class="metric-row">
+    <div class="metric"><div class="val">30+</div><div class="lbl">IT-команда</div></div>
+    <div class="metric"><div class="val">99,98%</div><div class="lbl">uptime</div></div>
+    <div class="metric"><div class="val">CI/CD</div><div class="lbl">предсказуемые релизы</div></div>
+    <div class="metric"><div class="val">DR</div><div class="lbl">отказоустойчивость</div></div>
+  </div>
+  <div class="ph" style="height: 30mm;">[ИНФОГРАФИКА: экосистема систем, иконки 1С, склада, телефона, графика]</div>
+  <div class="footer-page">8 / 16</div>
+</section>
+
+<!-- SLIDE 9 -->
+<section class="slide slide-light">
+  <h2 class="slide-title">Автоматизация и AI</h2>
+  <h3 class="sub">Не хайп, а узкие места с ROI</h3>
+  <div class="grid-4">
+    <div class="card">
+      <h4>Склад</h4>
+      <ul><li>ТСД, WMS</li><li>Задачи сборщикам</li><li>Метрики смены</li></ul>
+    </div>
+    <div class="card">
+      <h4>Логистика</h4>
+      <ul><li>Курьеры, маршруты</li><li>Интеграции доставки</li><li>SLA отгрузки</li></ul>
+    </div>
+    <div class="card">
+      <h4>Учёт</h4>
+      <ul><li>1С, обмены</li><li>Минус ручной ввод</li><li>Аудит изменений</li></ul>
+    </div>
+    <div class="card">
+      <h4>AI</h4>
+      <ul><li>Сначала схема процесса</li><li>RAG, агенты, MCP</li><li>Черновик, не автопилот</li></ul>
+    </div>
+  </div>
+  <div class="grid-2" style="margin-top:8px;">
+    <div class="ph" style="height: 45mm;">[СХЕМА: событие → контекст → черновик → человек → система, из статьи AI-first]</div>
+    <div class="card">
+      <h4>Подход из блога lyucean.com</h4>
+      <ul>
+        <li>AI-first: архитектура работы, не кнопка в углу</li>
+        <li>RAG: регламенты, которые реально ищут</li>
+        <li>Потоковые агенты: события и алерты</li>
+        <li>MCP: интеграции, не копипаст в чат</li>
+      </ul>
+      <p class="blog-ref">lyucean.com/ai-first-company · /rag/ · /streaming-agents/ · /mcp/</p>
+    </div>
+  </div>
+  <div class="footer-page">9 / 16</div>
+</section>
+
+<!-- SLIDE 10 -->
+<section class="slide slide-light">
+  <h2 class="slide-title">HACCPro · собственный B2B SaaS</h2>
+  <h3 class="sub">ХАССП · food · регуляторика</h3>
+  <div class="grid-2">
+    <div>
+      <div class="card" style="margin-bottom:8px;">
+        <ul>
+          <li>От гипотезы до продакшна и платящих клиентов</li>
+          <li>SaaS multi-tenant, безопасность данных</li>
+          <li>Регуляторика + операционка в одном ЛК</li>
+          <li>Внедрения: общепит, гостиницы, мясо, БАДы</li>
+          <li>Продукт в стабильной эксплуатации</li>
+        </ul>
+      </div>
+      <div class="metric-row" style="grid-template-columns: 1fr 1fr;">
+        <div class="metric"><div class="val">B2B</div><div class="lbl">SaaS модель</div></div>
+        <div class="metric"><div class="val">food</div><div class="lbl">домен ХАССП</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="ph" style="height: 55mm; margin-bottom:8px;">[ФОТО: скрин личного кабинета HACCPro, haccpro.ru]</div>
+      <div class="ph" style="height: 40mm;">[ФОТО: производственная кухня / цех food, контекст продукта]</div>
+    </div>
+  </div>
+  <div class="footer-page">10 / 16</div>
+</section>
+
+<!-- SLIDE 11 -->
+<section class="slide slide-light">
+  <h2 class="slide-title">Опыт руководства</h2>
+  <h3 class="sub">12+ лет · operating business</h3>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-year">2025-н.в.</div>
+      <div class="tl-body">
+        <h4>HACCPro · CIO / собственный B2B SaaS</h4>
+        <p>SaaS в проде у клиентов, активная разработка завершена</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2025</div>
+      <div class="tl-body">
+        <h4>Мир сварки · CIO (проектный этап)</h4>
+        <p>Аудит, roadmap, IT для выхода в Казахстан, 1С, CI/CD</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2016-24</div>
+      <div class="tl-body">
+        <h4>Ешь Деревенское · CIO · FMCG e-com</h4>
+        <p>12→800 млн ₽, команда 30+, WMS, 1С, exit бизнеса</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2013-16</div>
+      <div class="tl-body">
+        <h4>Тибсер · IT-директор / сооснователь</h4>
+        <p>MVP за 2 мес, 17-25 тыс. польз./мес, exit, система работает</p>
+      </div>
+    </div>
+  </div>
+  <div class="ph" style="height: 18mm; margin-top: 6px;">[ЛОГОТИПЫ компаний вдоль timeline, если есть права на использование]</div>
+  <div class="footer-page">11 / 16</div>
+</section>
+
+<!-- SLIDE 12 -->
+<section class="slide slide-light">
+  <h2 class="slide-title">Образование и обучение</h2>
+  <div class="grid-2">
+    <div>
+      <div class="card" style="margin-bottom:8px;">
+        <h4>2013 · Магистр</h4>
+        <p style="font-size:8pt;color:#475569;">Системный анализ и управление, МУНиХ «Дубна»</p>
+      </div>
+      <div class="card">
+        <h4>2011 · Бакалавр</h4>
+        <p style="font-size:8pt;color:#475569;">Ядерная физика, МУНиХ «Дубна»<br>Теория вероятностей, системный анализ, моделирование</p>
+      </div>
+      <div class="ph" style="height: 35mm; margin-top:8px;">[ФОТО: диплом / университет / иконки сертификатов]</div>
+    </div>
+    <div>
+      <div class="card">
+        <h4>Курсы</h4>
+        <ul>
+          <li>2021 Skillbox · Менеджер проектов</li>
+          <li>2020 Управленческий учёт 1С:КА и ERP</li>
+          <li>2018 Google Analytics Advanced</li>
+          <li>2017 Антистартап · А. Морейнис</li>
+        </ul>
+      </div>
+      <div class="card" style="margin-top:8px;">
+        <h4>Постоянное обучение</h4>
+        <ul>
+          <li>Блог lyucean.com для IT-лидеров</li>
+          <li>ITIL, Agile, PMBOK</li>
+          <li>AI, RAG, потоковые агенты на практике</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-page">12 / 16</div>
+</section>
+
+<!-- SLIDE 13 -->
+<section class="slide slide-light">
+  <h2 class="slide-title">Дополнительно</h2>
+  <h3 class="sub">Экспертиза · публичность · отрасли</h3>
+  <div class="grid-3">
+    <div class="card">
+      <h4>Кросс-отраслевой опыт</h4>
+      <ul>
+        <li>FMCG, food, e-commerce</li>
+        <li>Производство, дистрибуция</li>
+        <li>SaaS, билеты, терминалы</li>
+      </ul>
+      <div class="ph" style="height: 40mm; margin-top:8px;">[КОЛЛАЖ: иконки еда, склад, e-com, облако]</div>
+    </div>
+    <div class="card">
+      <h4>Блог lyucean.com</h4>
+      <ul>
+        <li>Data-driven управление</li>
+        <li>Операционная дисциплина</li>
+        <li>AI-first, RAG, MCP</li>
+        <li>Потоковые агенты</li>
+      </ul>
+      <div class="ph" style="height: 40mm; margin-top:8px;">[СКРИН: главная lyucean.com или список статей]</div>
+    </div>
+    <div class="card">
+      <h4>Как работаю</h4>
+      <ul>
+        <li>На площадке: склад, цех, люди</li>
+        <li>На цифрах: ROI, unit-экономика</li>
+        <li>С людьми: добучаю, не рублю</li>
+      </ul>
+      <div class="ph" style="height: 40mm; margin-top:8px;">[ФОТО: на складе / у доски со схемой]</div>
+    </div>
+  </div>
+  <div class="footer-page">13 / 16</div>
+</section>
+
+<!-- SLIDE 14 -->
+<section class="slide slide-light">
+  <h2 class="slide-title">Зоны ответственности CIO</h2>
+  <h3 class="sub">Стратегия и системы</h3>
+  <div class="card" style="margin-bottom:10px;">
+    <h4>Управление</h4>
+    <div class="tags">
+      <span class="tag">IT-стратегия</span>
+      <span class="tag">Цифровая трансформация</span>
+      <span class="tag">P&L</span>
+      <span class="tag">Бюджет</span>
+      <span class="tag">Команда 30+</span>
+      <span class="tag">Vendor management</span>
+      <span class="tag">Roadmap + ROI</span>
+      <span class="tag">ITIL</span>
+      <span class="tag">Agile</span>
+    </div>
+  </div>
+  <div class="card">
+    <h4>Системы и технологии</h4>
+    <div class="tags">
+      <span class="tag">1С:ERP</span>
+      <span class="tag">1С:КА</span>
+      <span class="tag">WMS</span>
+      <span class="tag">Битрикс24</span>
+      <span class="tag">Power BI</span>
+      <span class="tag">E-commerce</span>
+      <span class="tag">DevOps</span>
+      <span class="tag">CI/CD</span>
+      <span class="tag">ИБ</span>
+      <span class="tag">AI в процессах</span>
+      <span class="tag">RAG</span>
+      <span class="tag">Интеграции</span>
+    </div>
+  </div>
+  <p class="quote">На стыке бизнеса и технологий. Не только «держать серверы».</p>
+  <div class="footer-page">14 / 16</div>
+</section>
+
+<!-- SLIDE 15 -->
+<section class="slide slide-light">
+  <h2 class="slide-title">Философия управления IT</h2>
+  <h3 class="sub">Из практики и блога</h3>
+  <div class="grid-3">
+    <div class="card">
+      <h4>Data-driven</h4>
+      <p style="font-size:8pt;color:#475569;line-height:1.45;">
+        Не «купили Power BI», а 5-12 метрик-правды, владельцы, ритм разбора отклонений.
+        Цифра должна перестать врать, потом AI.
+      </p>
+      <p class="blog-ref">lyucean.com/data-driven-management</p>
+    </div>
+    <div class="card">
+      <h4>Операционная дисциплина</h4>
+      <p style="font-size:8pt;color:#475569;line-height:1.45;">
+        Стандарты + ритм + ответственность + прозрачность + петля исправлений.
+        Handover смены, не хаос в ERP.
+      </p>
+      <p class="blog-ref">lyucean.com/operational-discipline</p>
+    </div>
+    <div class="card">
+      <h4>AI-first (практично)</h4>
+      <p style="font-size:8pt;color:#475569;line-height:1.45;">
+        Событие → контекст → черновик → человек на воротах → запись в систему.
+        Метрики поведения, не только лицензии.
+      </p>
+      <p class="blog-ref">lyucean.com/ai-first-company</p>
+    </div>
+  </div>
+  <div class="ph" style="height: 45mm; margin-top: 10px;">
+    [ФОТО: выступление / запись подкаста / рабочий момент с ноутбуком и lyucean.com на экране]
+  </div>
+  <div class="footer-page">15 / 16</div>
+</section>
+
+<!-- SLIDE 16 -->
+<section class="slide slide-dark">
+  <div class="cover-grid">
+    <img class="photo" src="assets/photo.png" alt="Валентин Панченко">
+    <div>
+      <h1 class="name" style="font-size:28pt;">Контакты</h1>
+      <div class="role" style="margin-top:16px;">
+        Валентин Панченко<br>IT-директор (CIO)
+      </div>
+      <div class="contacts" style="font-size:11pt;margin-top:20px;">
+        +7 (926) 295-70-65<br>
+        lyucean@gmail.com<br>
+        telegram: @lyucean<br>
+        lyucean.com
+      </div>
+      <p style="font-size:9pt;margin-top:16px;opacity:0.8;">
+        Москва · гибрид · FMCG / производство / дистрибуция<br>
+        от 450 000 ₽ на руки
+      </p>
+    </div>
+  </div>
+  <div class="ph" style="height: 50mm; margin-top: 16px; max-width: 120px;">
+    [QR-код на lyucean.com/resume или Telegram @lyucean]
+  </div>
+  <div class="footer-page">16 / 16</div>
+</section>
+
+</body>
+</html>
