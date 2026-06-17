@@ -8,10 +8,13 @@ on:
   pull_request:
     branches: [ "main" ]
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: production  # использовать среду "production"
+    environment: production
 
     steps:
       - name: "Инициализация репозитория"
@@ -23,29 +26,29 @@ jobs:
           echo "WORDPRESS_DB_USER=${{ secrets.WORDPRESS_DB_USER }}" >> .env
           echo "WORDPRESS_DB_PASSWORD=${{ secrets.WORDPRESS_DB_PASSWORD }}" >> .env
           echo "MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" >> .env
-          
           echo "ENVIRONMENT=${{ vars.ENVIRONMENT }}" >> .env
           echo "WORDPRESS_DEBUG=${{ vars.WORDPRESS_DEBUG }}" >> .env
           echo "BACKUPS_FOLDER=${{ vars.BACKUPS_FOLDER }}" >> .env
 
-      - name: "Создадим каталог проекта"
-        uses: appleboy/ssh-action@master
+      - name: "Создадим каталог проекта на сервере"
+        uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
-          script: mkdir -p /home/user/lyucean.com
+          script_stop: true
+          script: mkdir -p /var/www/lyucean.com
 
-      - name: "Скопируйте .env в папку проекта."
-        run: mv .env ./app || ls ./app
+      - name: "Скопируйте .env в папку проекта"
+        run: mkdir -p app && mv -f .env app/.env
 
-      - name: "Скопируйте файлы приложения на удаленный сервер."
-        uses: appleboy/scp-action@master
+      - name: "Скопируйте файлы приложения на удаленный сервер"
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
           source: "./*"
           target: "/var/www/lyucean.com"
@@ -54,29 +57,29 @@ jobs:
     name: "Запуск контейнера"
     runs-on: ubuntu-latest
     needs: [deploy]
-    environment: production  # использовать среду "production"
+    environment: production
     steps:
-      - name: "Создадим веб-сеть и запустите docker compose."
-        uses: appleboy/ssh-action@master
+      - name: "Создадим веб-сеть и запустите docker compose"
+        uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
+          script_stop: true
           script: |
-            set -e  # остановка при любой ошибке
-            echo "🚀 Начинаем развертывание..."
-            echo "🌐 Проверяем и создаем сеть Docker..."
+            set -e
+            echo "Начинаем развертывание..."
             docker network ls | grep web || docker network create web
             cd /var/www/lyucean.com/
-            echo "🔐 Настраиваем права доступа..."
+            echo "Настраиваем права доступа..."
             chown -R www-data:www-data ./app/wordpress ./app/my_plugins ./app/my_themes
             find ./app/wordpress ./app/my_plugins ./app/my_themes -type d -exec chmod 755 {} \;
             find ./app/wordpress ./app/my_plugins ./app/my_themes -type f -exec chmod 644 {} \;
-            echo "🔄 Запускаем обновление..."
+            echo "Запускаем обновление..."
             make update
-            echo "🔍 Проверяем статус контейнеров..."
-            docker compose ps || exit 1
+            echo "Проверяем статус контейнеров..."
+            docker compose ps
 
   test:
     name: "Проверим, что наш блог запущен"
@@ -86,7 +89,7 @@ jobs:
       - name: Check website
         uses: wei/curl@v1
         with:
-          args:  https://lyucean.com/
+          args: https://lyucean.com/
 
   alert:
     name: Alert

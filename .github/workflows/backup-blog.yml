@@ -2,27 +2,31 @@ name: Backup Blog
 
 on:
   schedule:
-    - cron: '0 3 * * *' # Запускать каждый день в полночь UTC
+    - cron: '0 3 * * *'
   push:
     paths:
-      - ".github/workflows/backup.yml"
+      - ".github/workflows/backup-blog.yml"
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   backup-db:
     name: "Бекап БД"
     runs-on: ubuntu-latest
-    environment: production  # использовать среду "production"
+    environment: production
     steps:
       - name: "Подготовка репозитория"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: "Снимем дамп БД"
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
+          script_stop: true
           script: |
             cd /var/www/lyucean.com/
             make backup-db
@@ -30,18 +34,19 @@ jobs:
   backup-file:
     name: "Бекап файлов"
     runs-on: ubuntu-latest
-    environment: production  # использовать среду "production"
+    environment: production
     steps:
       - name: "Подготовка репозитория"
         uses: actions/checkout@v4
 
       - name: "Создаём архив"
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
+          script_stop: true
           script: |
             cd /var/www/lyucean.com/
             make backup-file
