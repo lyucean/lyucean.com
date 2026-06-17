@@ -162,10 +162,10 @@ function dev_blog_render_services_cta_modal() {
                         data-bs-dismiss="modal"
                         aria-label="Закрыть"></button>
                 <div class="modal-body services-cta-modal__body">
-                    <p class="services-cta-modal__eyebrow">Сейчас есть слот</p>
-                    <h2 class="services-cta-modal__title" id="servicesCtaModalLabel">Обсудить проект</h2>
+                    <p class="services-cta-modal__eyebrow">Открыт к проектам</p>
+                    <h2 class="services-cta-modal__title" id="servicesCtaModalLabel">Обсудить задачу</h2>
                     <p class="services-cta-modal__intro">
-                        Оставьте контакт и пару слов о задаче. Отвечу лично - телефон, Telegram или почта, как удобнее.
+                        Оставьте контакт и кратко опишите задачу. Отвечу лично - как удобнее связаться.
                     </p>
                     <form id="servicesCtaForm" novalidate>
                         <div class="visually-hidden" aria-hidden="true">
@@ -194,7 +194,7 @@ function dev_blog_render_services_cta_modal() {
                                           name="message"
                                           rows="4"
                                           required
-                                          placeholder="IT-аудит, консалтинг, разработка - в двух словах"></textarea>
+                                          placeholder="Аудит, стратегия, part-time CIO - в двух словах"></textarea>
                             </div>
                         </div>
                         <div id="servicesCtaModalMessage" class="alert d-none services-cta-modal__alert" role="alert"></div>

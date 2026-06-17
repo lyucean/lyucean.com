@@ -1,6 +1,6 @@
 <?php
 /**
- * Баннер: проекты и консалтинг.
+ * Баннер CIO в стиле бокового меню (block-menu-desktop).
  *
  * @package dev_blog_theme
  */
@@ -9,29 +9,24 @@ if (! defined('ABSPATH')) {
     exit;
 }
 ?>
-<section class="services-cta" aria-label="Проекты и консалтинг">
-    <div class="services-cta__panel rounded-3">
-        <div class="services-cta__inner">
-            <div class="services-cta__body">
-                <p class="services-cta__eyebrow">Сейчас есть слот</p>
-                <h2 class="services-cta__title">IT-аудит, консалтинг, разработка под ключ</h2>
-                <p class="services-cta__text">
-                    12+ лет CIO: IT-функция и цифровой продукт с нуля - стратегия, команда, архитектура, масштабирование.
-                    FMCG · e-commerce · SaaS · удалённо.
-                </p>
-            </div>
-            <div class="services-cta__actions">
-                <button type="button"
-                        class="btn btn-primary services-cta__btn services-cta__open-btn"
-                        data-bs-toggle="modal"
-                        data-bs-target="#servicesCtaModal">
-                    Оставить заявку
-                </button>
-                <p class="services-cta__hint mb-0">
-                    Свяжусь сам · телефон, Telegram или почта
-                </p>
-            </div>
-        </div>
-    </div>
+<section class="services-cta block-menu-desktop" aria-label="Консалтинг CIO">
+    <nav class="nav flex-column flex-md-row flex-md-wrap align-items-md-center sidebar-nav services-cta__nav rounded-3">
+        <span class="nav-link services-cta__intro">
+            <span class="services-cta__copy">
+                <span class="services-cta__status" aria-hidden="true">
+                    <span class="visually-hidden">Сейчас есть слот</span>
+                </span>
+                <span class="services-cta__title">Открыт к проектам</span>
+                <span class="services-cta__desc">CIO · стратегия · команда · продукт с нуля</span>
+            </span>
+        </span>
+        <button type="button"
+                class="nav-link services-cta__open-btn"
+                data-bs-toggle="modal"
+                data-bs-target="#servicesCtaModal">
+            <i class="bi bi-chat-left-text" aria-hidden="true"></i>
+            Обсудить задачу
+        </button>
+    </nav>
 </section>
 <?php dev_blog_render_services_cta_modal(); ?>
