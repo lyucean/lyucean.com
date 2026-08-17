@@ -9,6 +9,7 @@ ENV = --env-file app/.env
 
 # Дата время
 BACKUP_DATETIME := $(shell date '+%Y-%m-%d')
+PINGZEN_BACKUP_URL ?= https://pingzen.dev/api/v1/ping/eHu7lT5s-H8CaydTWt6SiQ/lyuceancom-backup
 
 # Экспорт статей WordPress через REST API
 WP_EXPORT_URL ?= $(LOCAL_URL)
@@ -70,6 +71,15 @@ backup-file:  ## Снимем дамп файлов с папки wordpress
 		--exclude='app/wordpress/wp-content/upgrade/' \
 		--exclude='app/wordpress/wp-content/plugins/*/cache/' \
 		--exclude='app/wordpress/wp-content/backups' -C ./app/wordpress .
+
+backup-prune:  ## Удалить бэкапы блога старше 7 дней
+	@echo "$(PURPLE) Удаление бэкапов блога старше 7 дней в $(BACKUPS_FOLDER) $(RESET)"
+	@mkdir -p "$(BACKUPS_FOLDER)"
+	@find "$(BACKUPS_FOLDER)" -maxdepth 1 -type f \( -name '*_LS.sql' -o -name '*_LS.file.gz' \) -mtime +7 -print -delete
+
+backup-notify-pingzen:  ## Отправить heartbeat в PingZen после успешного бэкапа
+	@echo "$(PURPLE) PingZen heartbeat (lyuceancom-backup) $(RESET)"
+	@curl -fsS -X POST --connect-timeout 15 --max-time 30 "$(PINGZEN_BACKUP_URL)" >/dev/null
 
 import-backup:  ## Импорт БД из сегодняшнего дампа (удобно восстанавливать, если что-то сломал в настройках)
 	@echo "$(PURPLE) Импорт БД из дампа $(RESET)"
