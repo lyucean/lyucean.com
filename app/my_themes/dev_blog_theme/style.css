@@ -429,7 +429,7 @@ header .logo {
 .front-tags {
     margin-top: 1.35rem;
     margin-bottom: 0.25rem;
-    padding: 0 1rem 0 calc(1rem + 1em + 0.5rem);
+    padding: 0 1rem 0 calc(1rem);
 }
 
 .front-tags__list {
@@ -460,7 +460,7 @@ header .logo {
 
 .front-menu-mobile .front-tags {
     margin-top: 1.5rem;
-    padding: 0 1rem 0 calc(1rem + 1em + 0.5rem);
+    padding: 0 1rem 0 calc(1rem);
 }
 
 [data-bs-theme="dark"] .front-tags__link:hover {
