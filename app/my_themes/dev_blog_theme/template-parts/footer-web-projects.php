@@ -1,6 +1,6 @@
 <?php
 /**
- * Блок «Мои проекты» в футере: карточки ссылок на внешние проекты.
+ * Блок «Мои проекты» в футере.
  *
  * @package dev_blog_theme
  */
@@ -13,49 +13,45 @@ $footer_web_projects = [
     [
         'url'  => 'https://haccpro.ru',
         'host' => 'haccpro.ru',
-        'desc' => 'SaaS по ХАССП: первая в России платформа для ХАССП полного цикла.',
+        'desc' => 'SaaS по ХАССП полного цикла.',
     ],
     [
         'url'  => 'https://logtail.ru',
         'host' => 'logtail.ru',
-        'desc' => 'Логи приложений в одном месте: приём, хранение, поиск в реальном времени.',
+        'desc' => 'Логи приложений: приём, поиск, realtime.',
     ],
     [
-        'url'  => 'https://sovpadem.ru', 
+        'url'  => 'https://sovpadem.ru',
         'host' => 'sovpadem.ru',
-        'desc' => 'Тесты предпочтений для пар: проходите вместе, смотрите, где совпали.',
+        'desc' => 'Тесты предпочтений для пар.',
     ],
     [
         'url'  => 'https://abxtest.com',
         'host' => 'abxtest.com',
-        'desc' => 'ABX-тесты аудио: лечит аудиофилию на ранних стадиях.',
+        'desc' => 'ABX-тесты аудио против аудиофилии.',
     ],
 ];
 ?>
-<!-- dev_blog_theme: footer-web-projects (единый источник блока «Мои проекты») -->
-<section class="footer-web-projects mb-4" aria-labelledby="footer-web-projects-heading">
-    <div class="footer-web-projects__panel mx-auto rounded-3 px-3 px-md-4 py-4">
+<section class="footer-web-projects" aria-labelledby="footer-web-projects-heading">
+    <div class="footer-web-projects__panel">
         <h2 id="footer-web-projects-heading" class="footer-web-projects__heading">
             <?php echo esc_html('Мои проекты'); ?>
         </h2>
-        <div class="row g-3 g-md-4">
+        <ul class="footer-web-projects__grid">
             <?php foreach ($footer_web_projects as $project) : ?>
-                <div class="col-12 col-md-6">
-                    <div class="footer-web-projects__card card h-100 border-0 p-4 position-relative bg-body">
-                        <span class="footer-web-projects__card-host d-block position-relative z-1"><?php echo esc_html($project['host']); ?></span>
-                        <p class="footer-web-projects__card-desc mb-0 position-relative z-1">
-                            <?php echo esc_html($project['desc']); ?>
-                        </p>
-                        <a class="stretched-link"
-                           href="<?php echo esc_url($project['url']); ?>"
-                           rel="noopener noreferrer"
-                           target="_blank"
-                           aria-label="<?php echo esc_attr($project['host'] . '. ' . $project['desc']); ?>">
-                            <span class="visually-hidden"><?php echo esc_html($project['host']); ?></span>
-                        </a>
-                    </div>
-                </div>
+                <li class="footer-web-projects__item">
+                    <a class="footer-web-projects__link"
+                       href="<?php echo esc_url($project['url']); ?>"
+                       rel="noopener noreferrer"
+                       target="_blank">
+                        <span class="footer-web-projects__host-row">
+                            <span class="footer-web-projects__host"><?php echo esc_html($project['host']); ?></span>
+                            <i class="bi bi-arrow-up-right footer-web-projects__ext" aria-hidden="true"></i>
+                        </span>
+                        <span class="footer-web-projects__desc"><?php echo esc_html($project['desc']); ?></span>
+                    </a>
+                </li>
             <?php endforeach; ?>
-        </div>
+        </ul>
     </div>
 </section>

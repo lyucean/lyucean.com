@@ -4,55 +4,49 @@
     <div class="row">
         <!-- Левая боковая панель -->
         <aside class="col-lg-1 d-none d-lg-block">
-            <div class="sticky-top d-flex flex-column align-items-end">
-                <a href="/" class="btn rounded-3 p-2 fs-4 border-0 shadow-none" title="На главную">
-                    <i class="bi bi-house"></i>
+            <div class="sticky-top d-flex flex-column align-items-end post-side-nav">
+                <a href="<?php echo esc_url(home_url('/')); ?>" class="post-side-nav__btn" title="На главную">
+                    <i class="bi bi-house" aria-hidden="true"></i>
+                    <span class="visually-hidden">На главную</span>
                 </a>
-                <a href="javascript:history.back()" class="btn rounded-3 p-2 fs-4 border-0 shadow-none" title="Назад">
-                    <i class="bi bi-arrow-left"></i>
+                <a href="javascript:history.back()" class="post-side-nav__btn" title="Назад">
+                    <i class="bi bi-arrow-left" aria-hidden="true"></i>
+                    <span class="visually-hidden">Назад</span>
                 </a>
             </div>
         </aside>
+
         <!-- Основное содержимое -->
         <main class="col-12 col-lg-10">
-            <!-- Если нет изображения, показываем обычный заголовок -->
-            <?php if (!has_post_thumbnail()) : ?>
-                <div class="row">
-                    <h1 class="h1 fw-bold text-center mb-3"><?php the_title(); ?></h1>
-                </div>
-            <?php endif; ?>
-            <article class="rounded mb-4">
-                <!-- Шапка страницы с изображением -->
-                <div class="card border-0">
-                    <?php if (has_post_thumbnail()) : ?>
-                        <div class="header-image-container rounded-top">
-                            <?php the_post_thumbnail('large', ['class' => 'card-img rounded-top']); ?>
-                            <div class="header-blur-overlay"></div>
-                            <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                <h1 class="card-title text-white text-center mb-3"><?php the_title(); ?></h1>
-                            </div>
+            <article class="post-shell mb-4">
+                <?php if (has_post_thumbnail()) : ?>
+                    <div class="post-hero">
+                        <div class="post-hero__cover post-hero__cover--page">
+                            <?php the_post_thumbnail('large', [
+                                'class' => 'post-hero__img',
+                                'alt'   => esc_attr(get_the_title()),
+                            ]); ?>
                         </div>
-                    <?php endif; ?>
-                </div>
+                    </div>
+                <?php endif; ?>
 
-                <!-- Содержимое страницы -->
                 <div class="article-content">
+                    <header class="post-header">
+                        <h1 class="post-header__title"><?php the_title(); ?></h1>
+                    </header>
                     <?php the_content(); ?>
                 </div>
-
             </article>
         </main>
 
         <!-- Правая боковая панель -->
         <aside class="col-lg-1 d-none d-lg-block">
             <div class="sticky-bottom d-flex align-items-start">
-                <button id="scrollTopBtn" class="btn rounded-3 p-2 fs-4 border-0 shadow-none opacity-0"
+                <button id="scrollTopBtn" class="post-side-nav__btn opacity-0"
                         type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#"
-                        aria-expanded="false"
                         title="Наверх">
-                    <i class="bi bi-arrow-up"></i>
+                    <i class="bi bi-arrow-up" aria-hidden="true"></i>
+                    <span class="visually-hidden">Наверх</span>
                 </button>
             </div>
         </aside>

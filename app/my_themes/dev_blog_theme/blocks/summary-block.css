@@ -1,39 +1,44 @@
-
-/* Стилизация блока "Краткое описание статьи" */
+/* Summary: графитный callout, не bootstrap-primary */
 .summary {
-    background: rgba(var(--bs-primary-rgb), 0.05);
-    border-left: 4px solid var(--bs-primary);
-    padding: 20px 25px;
-    margin: 2rem 0;
-    border-radius: 0 0.375rem 0.375rem 0;
-    color: var(--bs-body-color);
+    background: rgba(28, 27, 25, 0.035);
+    border-left: 2px solid var(--ly-ink, #1c1b19);
+    padding: 1.15rem 1.25rem 1.2rem;
+    margin: 1.75rem 0;
+    border-radius: 0 var(--ly-radius, 0.25rem) var(--ly-radius, 0.25rem) 0;
+    color: var(--ly-ink, var(--bs-body-color));
 }
 
 .summary::before {
     content: "О чём эта статья?";
     display: block;
+    font-weight: 650;
     font-weight: 600;
-    font-size: 1.25rem;
-    margin-bottom: 0.75rem;
-    color: var(--bs-heading-color);
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.55rem;
+    color: var(--ly-ink, var(--bs-heading-color));
 }
 
 .summary p {
     font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 0.5rem;
+    color: var(--ly-ink-muted, #6a6d6a);
 }
 
-/* Адаптивность для мобильных устройств */
+.summary p:last-child {
+    margin-bottom: 0;
+}
+
 @media screen and (max-width: 768px) {
     .summary {
-        padding: 10px 10px;
-        margin: 1.5rem -.4rem;
+        padding: 1rem;
+        margin: 1.25rem 0;
     }
 
     .summary::before {
-        font-size: 1.1rem;
-        margin-bottom: 0.5rem;
+        font-size: 1rem;
+        margin-bottom: 0.45rem;
     }
 
     .summary p {
@@ -41,14 +46,11 @@
     }
 }
 
-/* Специфичные стили для светлой темы */
-[data-bs-theme="light"] .summary {
-    background: rgba(var(--bs-primary-rgb), 0.05);
-    border-left-color: var(--bs-primary);
+[data-bs-theme="dark"] .summary {
+    background: rgba(240, 238, 234, 0.05);
+    border-left-color: var(--ly-accent, #c8c2b8);
 }
 
-/* Специфичные стили для темной темы */
-[data-bs-theme="dark"] .summary {
-    background: rgba(var(--bs-primary-rgb), 0.15);
-    border-left-color: var(--bs-primary-border-subtle);
+[data-bs-theme="dark"] .summary p {
+    color: var(--ly-ink-muted);
 }

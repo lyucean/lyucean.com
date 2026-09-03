@@ -1,32 +1,24 @@
-<div class="feedback-post pt-5 pb-4">
-    <!-- Скрытое поле для передачи post_id -->
-    <input type="hidden" id="postIdHidden" value="<?php echo get_the_ID(); ?>">
+<?php
+/**
+ * Блок «Эта статья была полезна?»
+ *
+ * @package dev_blog_theme
+ */
+?>
+<section class="post-after feedback-post" aria-labelledby="feedback-title">
+    <input type="hidden" id="postIdHidden" value="<?php echo (int) get_the_ID(); ?>">
 
-    <div class="container">
-        <div class="row justify-content-center align-items-center text-center">
-            <!-- Вопрос -->
-            <div id="feedback-title" class="col-12 col-lg-auto mb-3 mb-lg-0">
-                <h2>Эта статья была полезна?</h2>
-            </div>
-            <!-- Кнопки выбора -->
-            <div class="col-12 col-lg-auto">
-                <button id="feedback-yesBtn" class="btn btn-success me-2" data-feedback="yes">
-                    Да
-                </button>
-                <button id="feedback-noBtn" class="btn btn-danger me-2" data-feedback="no">
-                    Нет
-                </button>
-                <button id="feedback-commentBtn" class="btn btn-primary" data-feedback="comment">
-                    Комментарий
-                </button>
-            </div>
-            <!-- Сообщение после выбора -->
-            <p id="feedback-message" class="mt-3 text-secondary"></p>
+    <div class="feedback-post__row">
+        <h2 class="feedback-post__title" id="feedback-title">Эта статья была полезна?</h2>
+        <div class="feedback-post__actions" role="group" aria-label="Оценка статьи">
+            <button id="feedback-yesBtn" class="feedback-post__btn" type="button" data-feedback="yes">Да</button>
+            <button id="feedback-noBtn" class="feedback-post__btn" type="button" data-feedback="no">Нет</button>
+            <button id="feedback-commentBtn" class="feedback-post__btn feedback-post__btn--accent" type="button" data-feedback="comment">Комментарий</button>
         </div>
     </div>
-</div>
+    <p id="feedback-message" class="feedback-post__message"></p>
+</section>
 
-<!-- Модальное окно для комментария -->
 <div class="modal fade feedback-modal" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -48,7 +40,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Отмена</button>
-                <button type="button" class="btn btn-primary" id="sendFeedbackBtn">Отправить</button>
+                <button type="button" class="btn btn-dark" id="sendFeedbackBtn">Отправить</button>
             </div>
         </div>
     </div>

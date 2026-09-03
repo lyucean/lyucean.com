@@ -1,6 +1,6 @@
 <!-- Панель сортировки -->
 <div class="sort-panel">
-    <nav class="sort-nav">
+    <nav class="sort-nav" aria-label="Сортировка статей">
         <a href="?sort=latest" class="sort-link <?php echo (!isset($_GET['sort']) || $_GET['sort'] === 'latest') ? 'active' : ''; ?>">
             Новые
         </a>
@@ -53,90 +53,49 @@ $query = new WP_Query($args);
 <!-- Основной контейнер для статей -->
 <div class="articles">
     <!-- Сетка статей: 1 колонка на мобильных, 2 колонки на десктопах -->
-    <div class="row row-cols-1 row-cols-md-2 g-3">
+    <div class="row row-cols-1 row-cols-md-2 g-4">
         <?php if ($query->have_posts()) : while ($query->have_posts()) : $query->the_post(); ?>
-            <!-- Колонка для отдельной статьи -->
             <div class="col">
-                <!-- Карточка статьи -->
-                <article class="card h-100 border-0">
-                        <div class="position-relative">
-                            <!-- Изображение статьи (если есть) -->
-                            <?php if (has_post_thumbnail()) : ?>
-                                <a href="<?php the_permalink(); ?>" class="card-img-wrapper text-decoration-none">
-                                    <img src="<?php the_post_thumbnail_url('large'); ?>"
-                                         class="card-img-top"
-                                         alt="<?php the_title(); ?>">
-                                </a>
-                            <?php else: ?>
-                                <a href="<?php the_permalink(); ?>"
-                                   class="card-img-wrapper text-decoration-none">
-                                    <div class="placeholder-img"
-                                         style="background-image: url('data:image/svg+xml,<?php echo rawurlencode(get_random_pattern()); ?>')"></div>
-                                </a>
-                            <?php endif; ?>
-                            <!-- Счетчики просмотров -->
-                            <?php //if (is_user_logged_in()) : ?>
-                                <div class="position-absolute top-0 start-0 p-2">
-                                    <?php $feedback_counts = dev_blog_get_feedback_display_counts( get_the_ID() ); ?>
-                                    <small class="text-white bg-dark bg-opacity-50 px-2 py-1 rounded">
-                                        <i class="bi bi-hand-thumbs-up"></i>
-                                        <?php echo (int) $feedback_counts['display_yes']; ?>
-                                        <span class="text-white-50"> / </span>
-                                        <?php echo (int) $feedback_counts['display_no']; ?>
-                                    </small>
-                                </div>
-                                <div class="position-absolute top-0 end-0 p-2">
-                                    <div class="d-flex gap-2">
-                                        <small class="text-white bg-dark bg-opacity-50 px-2 py-1 rounded">
-                                            <i class="bi bi-star"></i>
-                                            <?php echo get_unique_post_views(get_the_ID()); ?>
-                                        </small>
-                                        <small class="text-white bg-dark bg-opacity-50 px-2 py-1 rounded">
-                                            <i class="bi bi-book"></i>
-                                            <?php echo get_post_views(get_the_ID()); ?>
-                                        </small>
-                                    </div>
-                                </div>
-                            <?php // endif; ?>
+                <article class="post-card h-100">
+                    <a href="<?php the_permalink(); ?>" class="post-card__cover text-decoration-none">
+                        <?php if (has_post_thumbnail()) : ?>
+                            <img src="<?php the_post_thumbnail_url('large'); ?>"
+                                 class="post-card__img"
+                                 alt="<?php echo esc_attr(get_the_title()); ?>"
+                                 loading="lazy"
+                                 decoding="async">
+                        <?php else: ?>
+                            <div class="placeholder-img post-card__img"
+                                 style="background-image: url('data:image/svg+xml,<?php echo rawurlencode(get_random_pattern()); ?>')"
+                                 role="img"
+                                 aria-label="<?php echo esc_attr(get_the_title()); ?>"></div>
+                        <?php endif; ?>
+                    </a>
 
-                        </div>
-
-                    <!-- Основное содержимое карточки -->
-                    <div class="card-body p-3 d-flex flex-column">
-                        <!-- Заголовок статьи -->
-                        <h2 class="h5 fw-bold mb-3">
-                            <a href="<?php the_permalink(); ?>" class="text-body-emphasis text-decoration-none">
+                    <div class="post-card__body">
+                        <h2 class="post-card__title">
+                            <a href="<?php the_permalink(); ?>" class="text-decoration-none">
                                 <?php the_title(); ?>
                             </a>
                         </h2>
 
-                        <!-- Нижняя часть карточки с метаданными -->
-                        <div class="mt-auto">
-                            <div class="d-flex flex-wrap justify-content-between align-items-center">
-                                <!-- Блок с датой и тегами -->
-                                <div class="d-flex flex-wrap gap-0 align-items-center">
-                                    <!-- Дата публикации -->
-                                    <small class="text-muted fw-light"><?php echo get_the_date(); ?></small>
-                                    <!-- Теги статьи -->
-                                    <?php
-                                    $tags = get_the_tags();
-                                    if ($tags) :
-                                        foreach ($tags as $tag) : ?>
-                                            <a href="<?php echo get_tag_link($tag->term_id); ?>" class="text-decoration-none">
-                                                <span class="badge bg-opacity-10 text-secondary fw-light">
-                                                    <span class="text-danger">#</span><?php echo $tag->name; ?>
-                                                </span>
-                                            </a>
-                                        <?php endforeach;
-                                    endif; ?>
-                                </div>
-
-                                <!-- Время чтения -->
-                                <small class="text-muted fw-light">
-                                    <i class="bi bi-clock-history"></i>
-                                    <?php echo get_reading_time(get_the_content()) . ' мин чтения'; ?>
-                                </small>
+                        <div class="post-card__meta">
+                            <div class="post-card__meta-start">
+                                <time class="post-card__date" datetime="<?php echo esc_attr(get_the_date(DATE_W3C)); ?>">
+                                    <?php echo esc_html(get_the_date()); ?>
+                                </time>
+                                <span class="post-card__read">
+                                    <?php echo esc_html(get_reading_time(get_the_content()) . ' мин'); ?>
+                                </span>
                             </div>
+                            <?php
+                            $views = (int) get_unique_post_views(get_the_ID());
+                            if ($views > 0) :
+                                ?>
+                                <span class="post-card__views">
+                                    <?php echo esc_html($views . ' чит.'); ?>
+                                </span>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </article>

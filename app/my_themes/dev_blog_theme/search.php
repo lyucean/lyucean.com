@@ -125,8 +125,8 @@
             </div>
             <?php else : ?>
                 <main class="col-12 col-lg-10 offset-lg-1 px-lg-5">
-                    <article class="rounded mb-4">
-                        <div class="article-content text-center">
+            <article class="rounded mb-4 post-shell">
+                <div class="article-content text-center">
                             <div class="d-flex justify-content-center mb-3">
                                 <img src="<?php echo get_template_directory_uri(); ?>/images/confused-travolta.gif"
                                      alt="Ничего не найдено" class="w-75 w-md-100">

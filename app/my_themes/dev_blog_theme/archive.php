@@ -23,7 +23,7 @@
                     if (is_category()) {
                         echo '<span class="fw-bold">' . single_cat_title('', false) . '</span>';
                     } elseif (is_tag()) {
-                        echo '<span class="fw-light"><span class="text-danger">#</span>' . single_tag_title('', false) . '</span>';
+                        echo '<span class="fw-light">#' . single_tag_title('', false) . '</span>';
                     } elseif (is_author()) {
                         echo '<span class="text-body-secondary fw-normal fs-5">Автор</span>
                   <span class="text-primary-emphasis fw-bold">' . get_the_author() . '</span>';
@@ -110,7 +110,7 @@
                                                 foreach ($tags as $tag) : ?>
                                                     <a href="<?php echo get_tag_link($tag->term_id); ?>" class="text-decoration-none">
                                                         <span class="badge bg-opacity-10 text-secondary fw-light">
-                                                            <span class="text-danger">#</span><?php echo $tag->name; ?>
+                                                            <span>#<?php echo $tag->name; ?></span>
                                                         </span>
                                                     </a>
                                                 <?php endforeach;

@@ -13,6 +13,7 @@ function dev_blog_theme_get_asset_version() {
         $dir . '/footer.php',
         $dir . '/header.php',
         $dir . '/template-parts/footer-web-projects.php',
+        $dir . '/template-parts/front-content.php',
         $dir . '/front-page.php',
     );
     $max = 0;
@@ -92,12 +93,12 @@ class Bootstrap_5_Nav_Walker extends Walker_Nav_Menu {
         'Разработка' => 'bi bi-code-square',
         'Мысли' => 'bi bi-lightbulb',
         'Практика' => 'bi bi-clipboard-check',
-        'Менторинг' => 'bi bi-mortarboard text-primary',
-        'Автор' => 'bi-pen',
-        'Скорая помощь' => 'bi bi-fire text-danger',
-        'ИТ Скорая' => 'bi bi-activity text-danger', // добавлена подходящая иконка
+        'Менторинг' => 'bi bi-mortarboard',
+        'Автор' => 'bi bi-pen',
+        'Скорая помощь' => 'bi bi-fire',
+        'ИТ Скорая' => 'bi bi-activity',
         'Мои правила' => 'bi bi-shield-check',
-        'Мои принципы' => 'bi bi-shield-check text-success',
+        'Мои принципы' => 'bi bi-shield-check',
         'ITIL 4' => 'bi bi-layers-half',
     ];
 

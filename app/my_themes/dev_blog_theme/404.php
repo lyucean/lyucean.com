@@ -4,7 +4,7 @@
     <div class="row">
         <!-- Основное содержимое -->
         <main class="col-12 col-lg-10 offset-lg-1 px-lg-5">
-            <article class="rounded mb-4">
+            <article class="post-shell mb-4">
                 <!-- Содержимое страницы -->
                 <div class="article-content">
 

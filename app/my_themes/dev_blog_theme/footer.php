@@ -1,55 +1,32 @@
 </main>
 <?php wp_footer(); ?>
-<footer class="py-5 mt-5 w-100 footer-custom">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
+<footer class="site-footer">
+    <div class="container-xl site-footer__inner">
 
-                <?php get_template_part('template-parts/footer', 'web-projects'); ?>
+        <?php get_template_part('template-parts/footer', 'web-projects'); ?>
 
-                <!-- Социальные сети  -->
-                <div class="d-flex justify-content-center gap-4 mb-4">
-                    <a href="https://www.instagram.com/lyucean"
-                       class="social-icon instagram-icon"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       aria-label="Instagram">
-                        <i class="bi bi-instagram"></i>
-                    </a>
-
-                    <a href="https://t.me/lyucean"
-                       class="social-icon telegram-icon"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       aria-label="Telegram">
-                        <i class="bi bi-telegram"></i>
-                    </a>
-
-                    <a href="mailto:lyucean@gmail.com"
-                       class="social-icon email-icon"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       aria-label="Email">
-                        <i class="bi bi-envelope"></i>
-                    </a>
-
-                    <a href="<?php bloginfo('rss2_url'); ?>"
-                       class="social-icon rss-icon"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       aria-label="RSS Feed">
-                        <i class="bi bi-rss"></i>
-                    </a>
-                </div>
-
-                <div class="text-center">
-                    <p class="footer-copyright">
-                        © Валентин Панченко, <?php echo get_deployment_version(); ?>
-                    </p>
-                </div>
-
-            </div>
+        <div class="footer-bar">
+            <p class="footer-copyright">
+                © Валентин Панченко · <?php echo esc_html(get_deployment_version()); ?>
+            </p>
+            <nav class="footer-social" aria-label="Контакты">
+                <a href="https://t.me/lyucean"
+                   class="footer-social__link"
+                   target="_blank"
+                   rel="noopener noreferrer">telegram</a>
+                <a href="https://www.instagram.com/lyucean"
+                   class="footer-social__link"
+                   target="_blank"
+                   rel="noopener noreferrer">instagram</a>
+                <a href="mailto:lyucean@gmail.com"
+                   class="footer-social__link">email</a>
+                <a href="<?php bloginfo('rss2_url'); ?>"
+                   class="footer-social__link"
+                   target="_blank"
+                   rel="noopener noreferrer">rss</a>
+            </nav>
         </div>
+
     </div>
 </footer>
 </body>

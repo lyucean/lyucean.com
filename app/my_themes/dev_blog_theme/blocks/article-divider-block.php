@@ -28,5 +28,5 @@ add_action('init', 'register_article_divider_block');
  */
 function render_article_divider_block($attributes, $content) {
     // Этот HTML будет вставлен в контент статьи
-    return '</div></article><article class="rounded mb-4"><div class="article-content">';
+    return '</div></article><article class="post-shell post-shell--segment mb-4"><div class="article-content">';
 }
