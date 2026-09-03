@@ -42,6 +42,7 @@ if (has_nav_menu('additional-menu')) : ?>
     </div>
 <?php endif; ?>
 
+<?php get_template_part('template-parts/front', 'tags'); ?>
 
 <?php
 // Проверяем, зарегистрировано ли блоковое меню

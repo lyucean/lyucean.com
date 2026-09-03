@@ -14,6 +14,7 @@ function dev_blog_theme_get_asset_version() {
         $dir . '/header.php',
         $dir . '/template-parts/footer-web-projects.php',
         $dir . '/template-parts/front-content.php',
+        $dir . '/template-parts/front-tags.php',
         $dir . '/front-page.php',
     );
     $max = 0;
@@ -73,6 +74,47 @@ function register_theme_menus() {
     ));
 }
 add_action('init', 'register_theme_menus');
+
+/**
+ * Топ тегов для сайдбара (по числу постов).
+ *
+ * @param int $limit
+ * @return WP_Term[]
+ */
+function dev_blog_get_popular_tags($limit = 15) {
+    $limit = max(1, (int) $limit);
+    $cache_key = 'dev_blog_popular_tags_' . $limit;
+    $cached = get_transient($cache_key);
+    if (is_array($cached)) {
+        return $cached;
+    }
+
+    $tags = get_tags([
+        'orderby'    => 'count',
+        'order'      => 'DESC',
+        'number'     => $limit,
+        'hide_empty' => true,
+    ]);
+
+    if (is_wp_error($tags) || empty($tags)) {
+        $tags = [];
+    }
+
+    set_transient($cache_key, $tags, DAY_IN_SECONDS);
+    return $tags;
+}
+
+function dev_blog_flush_popular_tags_cache() {
+    for ($i = 1; $i <= 50; $i++) {
+        delete_transient('dev_blog_popular_tags_' . $i);
+    }
+}
+add_action('save_post', 'dev_blog_flush_popular_tags_cache');
+add_action('deleted_post', 'dev_blog_flush_popular_tags_cache');
+add_action('set_object_terms', 'dev_blog_flush_popular_tags_cache');
+add_action('edited_post_tag', 'dev_blog_flush_popular_tags_cache');
+add_action('created_post_tag', 'dev_blog_flush_popular_tags_cache');
+add_action('delete_post_tag', 'dev_blog_flush_popular_tags_cache');
 
 // Bootstrap 5 Nav Walker для меню
 class Bootstrap_5_Nav_Walker extends Walker_Nav_Menu {

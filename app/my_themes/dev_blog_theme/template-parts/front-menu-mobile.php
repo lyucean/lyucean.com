@@ -45,6 +45,8 @@
                 </nav>
             <?php endif; ?>
 
+            <?php get_template_part('template-parts/front', 'tags'); ?>
+
             <?php
             // Проверяем, зарегистрировано ли блоковое меню
             if (has_nav_menu('block-menu')) : ?>
