@@ -116,6 +116,187 @@ add_action('edited_post_tag', 'dev_blog_flush_popular_tags_cache');
 add_action('created_post_tag', 'dev_blog_flush_popular_tags_cache');
 add_action('delete_post_tag', 'dev_blog_flush_popular_tags_cache');
 
+/**
+ * Связанные статьи: пересечение тегов, без RAND() на отдаче страницы.
+ * Счёт = число общих тегов. Два и больше общих: эти посты идут первыми.
+ * Результат лежит в post meta и живёт сутки, потом пересчитывается лениво.
+ */
+function dev_blog_published_post_ids(array $exclude = []) {
+    static $all = null;
+    if ($all === null) {
+        $all = get_posts([
+            'post_type'              => 'post',
+            'post_status'            => 'publish',
+            'posts_per_page'         => -1,
+            'fields'                 => 'ids',
+            'no_found_rows'          => true,
+            'ignore_sticky_posts'    => true,
+            'update_post_meta_cache' => false,
+            'update_post_term_cache' => false,
+        ]);
+        $all = array_map('intval', (array) $all);
+    }
+
+    if (empty($exclude)) {
+        return $all;
+    }
+
+    return array_values(array_diff($all, array_map('intval', $exclude)));
+}
+
+function dev_blog_pick_random_post_ids($limit, array $exclude = []) {
+    $ids = dev_blog_published_post_ids($exclude);
+    if (empty($ids)) {
+        return [];
+    }
+    shuffle($ids);
+    return array_slice($ids, 0, max(1, (int) $limit));
+}
+
+function dev_blog_pick_weighted_ids(array $scores, $limit) {
+    $picked = [];
+    $pool = $scores;
+    $limit = min(max(0, (int) $limit), count($pool));
+
+    for ($i = 0; $i < $limit; $i++) {
+        $total = (int) array_sum($pool);
+        if ($total < 1) {
+            break;
+        }
+        $roll = wp_rand(1, $total);
+        $acc = 0;
+        foreach ($pool as $id => $weight) {
+            $acc += (int) $weight;
+            if ($roll <= $acc) {
+                $picked[] = (int) $id;
+                unset($pool[$id]);
+                break;
+            }
+        }
+    }
+
+    return $picked;
+}
+
+function dev_blog_compute_related_ids($post_id, $limit = 2) {
+    $post_id = (int) $post_id;
+    $limit = max(1, (int) $limit);
+    $exclude = $post_id > 0 ? [$post_id] : [];
+
+    $tag_ids = [];
+    if ($post_id > 0) {
+        $tags = get_the_tags($post_id);
+        if (is_array($tags)) {
+            foreach ($tags as $tag) {
+                $tag_ids[] = (int) $tag->term_id;
+            }
+        }
+    }
+
+    if (empty($tag_ids)) {
+        return dev_blog_pick_random_post_ids($limit, $exclude);
+    }
+
+    $scores = [];
+    foreach ($tag_ids as $tag_id) {
+        $object_ids = get_objects_in_term($tag_id, 'post_tag');
+        if (is_wp_error($object_ids) || empty($object_ids)) {
+            continue;
+        }
+        foreach ($object_ids as $oid) {
+            $oid = (int) $oid;
+            if ($oid === $post_id) {
+                continue;
+            }
+            $scores[$oid] = ($scores[$oid] ?? 0) + 1;
+        }
+    }
+
+    $published = array_flip(dev_blog_published_post_ids($exclude));
+    foreach ($scores as $oid => $score) {
+        if (!isset($published[$oid])) {
+            unset($scores[$oid]);
+        }
+    }
+
+    $must = [];
+    $maybe = [];
+    foreach ($scores as $oid => $score) {
+        if ($score >= 2) {
+            $must[$oid] = (int) $score;
+        } elseif ($score > 0) {
+            $maybe[$oid] = (int) $score;
+        }
+    }
+
+    $picked = [];
+    if ($must) {
+        $picked = dev_blog_pick_weighted_ids($must, $limit);
+    }
+    $need = $limit - count($picked);
+    if ($need > 0 && $maybe) {
+        $picked = array_merge($picked, dev_blog_pick_weighted_ids($maybe, $need));
+    }
+    $need = $limit - count($picked);
+    if ($need > 0) {
+        $picked = array_merge(
+            $picked,
+            dev_blog_pick_random_post_ids($need, array_merge($exclude, $picked))
+        );
+    }
+
+    return array_values(array_unique($picked));
+}
+
+function dev_blog_get_related_ids($post_id = 0, $limit = 2) {
+    $post_id = (int) $post_id;
+    $limit = max(1, (int) $limit);
+
+    if ($post_id <= 0) {
+        return dev_blog_pick_random_post_ids($limit);
+    }
+
+    $cached = get_post_meta($post_id, '_ly_related_ids', true);
+    $computed_at = (int) get_post_meta($post_id, '_ly_related_at', true);
+    $fresh = is_array($cached)
+        && !empty($cached)
+        && $computed_at > 0
+        && (time() - $computed_at) < DAY_IN_SECONDS;
+
+    if ($fresh) {
+        return array_slice(array_values(array_map('intval', $cached)), 0, $limit);
+    }
+
+    $ids = dev_blog_compute_related_ids($post_id, $limit);
+    update_post_meta($post_id, '_ly_related_ids', $ids);
+    update_post_meta($post_id, '_ly_related_at', time());
+    return $ids;
+}
+
+function dev_blog_flush_related_cache($post_id = 0) {
+    $post_id = (int) $post_id;
+    if ($post_id <= 0 || get_post_type($post_id) !== 'post') {
+        return;
+    }
+    delete_post_meta($post_id, '_ly_related_ids');
+    delete_post_meta($post_id, '_ly_related_at');
+}
+
+function dev_blog_flush_related_cache_on_save($post_id) {
+    if (wp_is_post_revision($post_id) || (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)) {
+        return;
+    }
+    dev_blog_flush_related_cache($post_id);
+}
+
+add_action('save_post', 'dev_blog_flush_related_cache_on_save');
+add_action('deleted_post', 'dev_blog_flush_related_cache');
+add_action('set_object_terms', function ($object_id, $terms, $tt_ids, $taxonomy) {
+    if ($taxonomy === 'post_tag') {
+        dev_blog_flush_related_cache((int) $object_id);
+    }
+}, 10, 4);
+
 // Bootstrap 5 Nav Walker для меню
 class Bootstrap_5_Nav_Walker extends Walker_Nav_Menu {
     // Массив с иконками Bootstrap для каждого пункта меню

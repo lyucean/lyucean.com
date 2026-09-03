@@ -5,15 +5,22 @@
     </h2>
     <ul class="related-posts__list">
         <?php
-        $random_posts = new WP_Query(array(
-            'posts_per_page' => 2,
-            'post_type' => 'post',
-            'orderby' => 'rand',
-            'post__not_in' => array(get_the_ID()),
-        ));
+        $source_id = is_singular('post') ? (int) get_queried_object_id() : 0;
+        $related_ids = dev_blog_get_related_ids($source_id, 2);
+        $related_posts = empty($related_ids)
+            ? null
+            : new WP_Query([
+                'post_type'           => 'post',
+                'post_status'         => 'publish',
+                'posts_per_page'      => count($related_ids),
+                'post__in'            => $related_ids,
+                'orderby'             => 'post__in',
+                'ignore_sticky_posts' => true,
+                'no_found_rows'       => true,
+            ]);
 
-        if ($random_posts->have_posts()) :
-            while ($random_posts->have_posts()) : $random_posts->the_post();
+        if ($related_posts && $related_posts->have_posts()) :
+            while ($related_posts->have_posts()) : $related_posts->the_post();
                 ?>
                 <li class="related-posts__item-wrap">
                     <a href="<?php the_permalink(); ?>" class="related-posts__item">

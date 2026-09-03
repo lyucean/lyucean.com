@@ -996,13 +996,14 @@ button.post-side-nav__btn {
     background: transparent;
     box-shadow: none;
     border-radius: 0;
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 4rem;
+    padding-right: 4rem;
     padding-bottom: 0;
 }
 
 .related-posts__eyebrow {
     margin: 0 0 0.85rem;
+    padding-left: 0.75rem;
     font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.1em;
@@ -1029,7 +1030,7 @@ button.post-side-nav__btn {
     grid-template-columns: 3.75rem minmax(0, 1fr) auto;
     gap: 0.85rem 1rem;
     align-items: center;
-    padding: 0.9rem 0.35rem 0.9rem 0.1rem;
+    padding: 0.85rem 0.5rem 0.85rem 0.75rem;
     margin: 0;
     border-radius: var(--ly-radius);
     text-decoration: none;
@@ -1501,6 +1502,11 @@ blockquote p:last-child:not(:first-child) {
         padding: 1.75rem 3rem;
         font-size: 1.125rem;
     }
+
+    .related-posts {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
 }
 
 /* Для планшетов */
@@ -1509,6 +1515,11 @@ blockquote p:last-child:not(:first-child) {
         padding: 1.5rem 2rem;
         font-size: 1.115rem;
     }
+
+    .related-posts {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
 }
 
 /* Мобильная версия */
@@ -1516,6 +1527,11 @@ blockquote p:last-child:not(:first-child) {
     .article-content {
         padding: 1rem;
         font-size: 1.1rem;
+    }
+
+    .related-posts {
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 
     /* Мобильные заголовки */
@@ -1591,6 +1607,11 @@ blockquote p:last-child:not(:first-child) {
         padding: 1rem 1.25rem;
         font-size: 1.05rem;
     }
+
+    .related-posts {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
 }
 
 /* Для очень маленьких экранов */
@@ -1598,6 +1619,11 @@ blockquote p:last-child:not(:first-child) {
     .article-content {
         padding: 1rem 0.75rem;
         font-size: 1rem;
+    }
+
+    .related-posts {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
     }
 
     .article-content h1 {
