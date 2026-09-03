@@ -66,34 +66,8 @@
                                         ?>
                                     </p>
 
-                                    <!-- Нижняя часть карточки с метаданными -->
                                     <div class="mt-auto">
-                                        <div class="d-flex flex-wrap justify-content-between align-items-center">
-                                            <!-- Блок с датой и тегами -->
-                                            <div class="d-flex flex-wrap gap-0 align-items-center">
-                                                <!-- Дата публикации -->
-                                                <small class="text-muted fw-light"><?php echo get_the_date(); ?></small>
-                                                <!-- Теги статьи -->
-                                                <?php
-                                                $tags = get_the_tags();
-                                                if ($tags) :
-                                                    foreach ($tags as $tag) : ?>
-                                                        <a href="<?php echo get_tag_link($tag->term_id); ?>"
-                                                           class="text-decoration-none">
-                                                        <span class="badge bg-opacity-10 text-secondary fw-light">
-                                                            <span class="text-danger">#</span><?php echo $tag->name; ?>
-                                                        </span>
-                                                        </a>
-                                                    <?php endforeach;
-                                                endif; ?>
-                                            </div>
-
-                                            <!-- Время чтения -->
-                                            <small class="text-muted fw-light">
-                                                <i class="bi bi-clock-history"></i>
-                                                <?php echo get_reading_time(get_the_content()) . ' мин чтения'; ?>
-                                            </small>
-                                        </div>
+                                        <?php get_template_part('template-parts/post-card', 'meta'); ?>
                                     </div>
                                 </div>
                             </article>

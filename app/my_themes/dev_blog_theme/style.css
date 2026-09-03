@@ -754,6 +754,41 @@ header .logo {
     object-fit: cover;
 }
 
+.post-card-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    color: var(--ly-ink-muted);
+}
+
+.post-card-meta__line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin: 0;
+}
+
+.post-card-meta__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.65rem;
+    margin: 0;
+}
+
+.post-card-meta__tag {
+    color: var(--ly-ink-muted);
+    text-decoration: none;
+}
+
+.post-card-meta__tag:hover {
+    color: var(--ly-ink);
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+}
+
 .search-page article {
     border: 1px solid var(--ly-rule) !important;
     background-color: var(--ly-paper-elevated);
