@@ -29,7 +29,7 @@
             if (has_nav_menu('additional-menu')) : ?>
                 <!-- Дополнительное меню с заголовком для мобильной версии -->
                 <br/>
-                <strong class="ps-3 mb-2 mt-4">Полезное</strong>
+                <strong class="ps-3 mb-2 mt-4">Разное</strong>
                 <nav class="nav flex-column sidebar-nav">
                     <?php
                     wp_nav_menu(array(

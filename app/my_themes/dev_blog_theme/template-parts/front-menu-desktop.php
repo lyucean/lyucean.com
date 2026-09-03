@@ -26,7 +26,7 @@ if (has_nav_menu('additional-menu')) : ?>
     <div class="front-menu-desktop">
         <br/>
         <nav class="nav flex-column sidebar-nav">
-            <strong class="ps-3 mb-2 fw-bold">Полезное</strong>
+            <strong class="ps-3 mb-2 fw-bold">Разное</strong>
             <?php
             wp_nav_menu(array(
                 'theme_location' => 'additional-menu',
