@@ -22,10 +22,7 @@
                 <?php if (has_post_thumbnail()) : ?>
                     <div class="post-hero">
                         <div class="post-hero__cover post-hero__cover--page">
-                            <?php the_post_thumbnail('large', [
-                                'class' => 'post-hero__img',
-                                'alt'   => esc_attr(get_the_title()),
-                            ]); ?>
+                            <?php dev_blog_the_hero_thumbnail(); ?>
                         </div>
                     </div>
                 <?php endif; ?>

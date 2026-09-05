@@ -27,7 +27,11 @@
                         <div class="related-posts__thumb">
                             <?php
                             if (has_post_thumbnail()) {
-                                the_post_thumbnail('thumbnail', ['alt' => esc_attr(get_the_title())]);
+                                the_post_thumbnail('thumbnail', [
+                                    'alt'     => esc_attr(get_the_title()),
+                                    'loading' => 'lazy',
+                                    'decoding' => 'async',
+                                ]);
                             } else {
                                 echo '<div class="related-posts__thumb-placeholder" aria-hidden="true"></div>';
                             }

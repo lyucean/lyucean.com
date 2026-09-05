@@ -33,10 +33,7 @@
                 <?php if (has_post_thumbnail()) : ?>
                     <div class="post-hero">
                         <div class="post-hero__cover">
-                            <?php the_post_thumbnail('large', [
-                                'class' => 'post-hero__img',
-                                'alt'   => esc_attr(get_the_title()),
-                            ]); ?>
+                            <?php dev_blog_the_hero_thumbnail(); ?>
                         </div>
                     </div>
                 <?php endif; ?>
@@ -50,7 +47,7 @@
                                 <time datetime="<?php echo esc_attr(get_the_date(DATE_W3C)); ?>">
                                     <?php echo esc_html(get_the_date()); ?>
                                 </time>
-                                <span><?php echo esc_html(get_reading_time(get_the_content()) . ' мин'); ?></span>
+                                <span><?php echo esc_html(dev_blog_get_stored_reading_time() . ' мин'); ?></span>
                             </div>
                             <?php if ($views > 0) : ?>
                                 <span class="post-header__meta-end"><?php echo esc_html($views . ' чит.'); ?></span>

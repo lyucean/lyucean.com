@@ -26,24 +26,120 @@ function dev_blog_theme_get_asset_version() {
     return $max > 0 ? date('Ymd.His', $max) : '1.0';
 }
 
+function dev_blog_theme_file_version($relative) {
+    $path = get_stylesheet_directory() . $relative;
+    return is_readable($path) ? (string) filemtime($path) : '1';
+}
+
 // Подключаем стили и скрипты
 function dev_blog_theme_enqueue_styles() {
-    // Подключаем Poppins для логотипа
-    wp_enqueue_style('google-fonts-poppins', 'https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap', array(), null);
-    
-    // Подключаем Bootstrap
-    wp_enqueue_style('bootstrap-css', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css');
-    // Bootstrap Icons
-    wp_enqueue_style('bootstrap-icons', 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css');
-    // Bootstrap JS
-    wp_enqueue_script('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js', array(), null, true);
+    $uri = get_template_directory_uri();
+
+    wp_enqueue_style(
+        'dev-blog-poppins',
+        $uri . '/vendor/fonts/poppins/poppins.css',
+        array(),
+        dev_blog_theme_file_version('/vendor/fonts/poppins/poppins.css')
+    );
+    wp_enqueue_style(
+        'bootstrap-css',
+        $uri . '/vendor/bootstrap/bootstrap.min.css',
+        array(),
+        '5.3.3'
+    );
+    wp_enqueue_style(
+        'bootstrap-icons',
+        $uri . '/vendor/bootstrap-icons/bootstrap-icons.min.css',
+        array(),
+        '1.11.3'
+    );
+    wp_enqueue_script(
+        'bootstrap',
+        $uri . '/vendor/bootstrap/bootstrap.bundle.min.js',
+        array(),
+        '5.3.3',
+        true
+    );
 
     $version = dev_blog_theme_get_asset_version();
-
-    // Подключаем стили темы с версией
-    wp_enqueue_style('dev_blog_theme-style', get_stylesheet_uri(), array(), $version);
+    wp_enqueue_style('dev_blog_theme-style', get_stylesheet_uri(), array('bootstrap-css'), $version);
 }
-add_action('wp_enqueue_scripts', 'dev_blog_theme_enqueue_styles'); // Подключаем стили и скрипты когда WordPress загружает скрипты и стили
+add_action('wp_enqueue_scripts', 'dev_blog_theme_enqueue_styles');
+
+function dev_blog_enqueue_view_beacon() {
+    if (!is_singular('post') || is_preview() || is_user_logged_in()) {
+        return;
+    }
+
+    $post_id = (int) get_queried_object_id();
+    if ($post_id < 1) {
+        return;
+    }
+
+    wp_enqueue_script(
+        'ly-post-views',
+        get_template_directory_uri() . '/js/post-views.js',
+        array(),
+        dev_blog_theme_file_version('/js/post-views.js'),
+        true
+    );
+    wp_localize_script('ly-post-views', 'lyPostViews', array(
+        'url' => rest_url('lyucean/v1/views/' . $post_id),
+    ));
+}
+add_action('wp_enqueue_scripts', 'dev_blog_enqueue_view_beacon');
+
+/**
+ * Обложка карточки: 768px (medium_large), не large/1024.
+ * Первые две в цикле без lazy: они в первом экране.
+ */
+function dev_blog_the_card_thumbnail($index = 1, $class = 'post-card__img') {
+    if (!has_post_thumbnail()) {
+        return;
+    }
+
+    $eager = (int) $index <= 2;
+    $attrs = array(
+        'class'         => $class,
+        'alt'           => get_the_title(),
+        'decoding'      => 'async',
+        'sizes'         => '(min-width: 768px) 50vw, 100vw',
+        'loading'       => $eager ? 'eager' : 'lazy',
+    );
+    if ($eager) {
+        $attrs['fetchpriority'] = 'high';
+    }
+
+    $attachment_id = get_post_thumbnail_id();
+    $srcset_parts = array();
+    foreach (array('medium', 'medium_large') as $size_name) {
+        $sized = wp_get_attachment_image_src($attachment_id, $size_name);
+        if (!$sized || empty($sized[0]) || (int) $sized[1] > 768) {
+            continue;
+        }
+        $srcset_parts[(int) $sized[1]] = $sized[0] . ' ' . (int) $sized[1] . 'w';
+    }
+    if ($srcset_parts) {
+        ksort($srcset_parts, SORT_NUMERIC);
+        $attrs['srcset'] = implode(', ', $srcset_parts);
+    }
+
+    the_post_thumbnail('medium_large', $attrs);
+}
+
+function dev_blog_the_hero_thumbnail($class = 'post-hero__img') {
+    if (!has_post_thumbnail()) {
+        return;
+    }
+
+    the_post_thumbnail('large', array(
+        'class'         => $class,
+        'alt'           => get_the_title(),
+        'loading'       => 'eager',
+        'fetchpriority' => 'high',
+        'decoding'      => 'async',
+    ));
+}
 
 // Поддержка миниатюр. Нужен т.к. я планирую использовать миниатюры для постов/страниц
 add_theme_support('post-thumbnails');
@@ -363,34 +459,47 @@ add_action('after_setup_theme', function() {
     add_image_size('article-thumb', 1200, 630, true);
 });
 
-// Добавляем счетчик просмотров
-function set_post_views() {
-    if (is_single()) {
-        $post_id = get_the_ID();
-        $count = get_post_meta($post_id, 'post_views_count', true);
-
-        if ($count == '') {
-            delete_post_meta($post_id, 'post_views_count');
-            add_post_meta($post_id, 'post_views_count', 1);
-        } else {
-            update_post_meta($post_id, 'post_views_count', $count + 1);
-        }
-    }
-}
-add_action('wp_head', 'set_post_views');
-
-// Функция для получения количества просмотров
 function get_post_views($post_id) {
-    $count_key = 'post_views_count';
-    $count = get_post_meta($post_id, $count_key, true);
-
-    if ($count == '') {
-        delete_post_meta($post_id, $count_key);
-        add_post_meta($post_id, $count_key, '0');
-        return "0";
-    }
-    return $count;
+    return (string) get_unique_post_views($post_id);
 }
+
+function get_unique_post_views($post_id) {
+    $counted = (int) get_post_meta($post_id, 'post_views_count', true);
+    $legacy  = (int) get_post_meta($post_id, 'unique_post_views', true);
+    return max($counted, $legacy);
+}
+
+function dev_blog_rest_increment_views(WP_REST_Request $request) {
+    $id = (int) $request['id'];
+    $post = get_post($id);
+    if (!$post || $post->post_type !== 'post' || $post->post_status !== 'publish') {
+        return new WP_Error('ly_bad_post', 'Not found', array('status' => 404));
+    }
+
+    $count = (int) get_post_meta($id, 'post_views_count', true);
+    $count++;
+    update_post_meta($id, 'post_views_count', $count);
+
+    return array(
+        'ok'    => true,
+        'views' => $count,
+    );
+}
+
+function dev_blog_register_views_route() {
+    register_rest_route('lyucean/v1', '/views/(?P<id>\d+)', array(
+        'methods'             => 'POST',
+        'callback'            => 'dev_blog_rest_increment_views',
+        'permission_callback' => '__return_true',
+        'args'                => array(
+            'id' => array(
+                'required' => true,
+                'type'     => 'integer',
+            ),
+        ),
+    ));
+}
+add_action('rest_api_init', 'dev_blog_register_views_route');
 
 // Функция для получения SVG-паттерна
 function get_random_pattern() {
@@ -422,66 +531,56 @@ function get_random_pattern() {
     </svg>';
 }
 
-// Функция для расчета времени чтения
-function get_reading_time($content) {
-    // Очищаем текст от HTML тегов
-    $content = strip_tags($content);
-
-    // Удаляем пробелы в начале и конце
-    $content = trim($content);
-
-    // Заменяем множественные пробелы на один
-    $content = preg_replace('/\s+/', ' ', $content);
-
-    // Считаем количество слов, разделяя текст по пробелам
-    $word_count = count(explode(' ', $content));
-
-    // Подсчет времени на чтение текста
-    // Средняя скорость чтения - 150-200 слов в минуту
-    $reading_time = ceil($word_count / 150);
-
-    // Подсчет количества изображений в контенте
-    $image_count = substr_count(get_the_content(), '<img');
-
-    // Добавляем 0.5 минуты за каждое изображение
-    $image_time = $image_count * 0.5;
-
-    // Округляем общее время до ближайшего целого числа
-    return ceil($reading_time + $image_time);
-}
-
-// Добавляем счетчик уникальных просмотров по IP
-function set_unique_post_views() {
-    if (is_single()) {
-        $post_id = get_the_ID();
-        $ip_address = $_SERVER['REMOTE_ADDR'];
-
-        // Получаем текущие уникальные просмотры
-        $unique_views = get_post_meta($post_id, 'unique_post_views', true) ?: 0;
-
-        // Получаем массив IP-адресов, которые уже просмотрели пост
-        $viewed_ips = get_post_meta($post_id, 'viewed_ips', true);
-        if (!is_array($viewed_ips)) {
-            $viewed_ips = array();
-        }
-
-        // Проверяем, просматривал ли уже этот IP данный пост
-        if (!in_array($ip_address, $viewed_ips)) {
-            // Добавляем IP в список просмотревших
-            $viewed_ips[] = $ip_address;
-            update_post_meta($post_id, 'viewed_ips', $viewed_ips);
-
-            // Увеличиваем счетчик уникальных просмотров
-            update_post_meta($post_id, 'unique_post_views', $unique_views + 1);
-        }
+function dev_blog_compute_reading_time_for_post($post_id) {
+    $post = get_post($post_id);
+    if (!$post) {
+        return 1;
     }
-}
-add_action('wp_head', 'set_unique_post_views');
 
-// Функция для получения количества уникальных просмотров
-function get_unique_post_views($post_id) {
-    $unique_views = get_post_meta($post_id, 'unique_post_views', true);
-    return empty($unique_views) ? 0 : $unique_views;
+    $raw = (string) $post->post_content;
+    $text = trim(preg_replace('/\s+/u', ' ', wp_strip_all_tags($raw)));
+    $word_count = ($text === '') ? 0 : count(explode(' ', $text));
+    $reading_time = (int) ceil($word_count / 150);
+
+    $img_tags = preg_match_all('/<img\b/i', $raw);
+    $wp_images = substr_count($raw, '<!-- wp:image');
+    $image_count = max((int) $img_tags, (int) $wp_images);
+
+    return max(1, (int) ceil($reading_time + $image_count * 0.5));
+}
+
+function dev_blog_refresh_reading_time($post_id) {
+    $post_id = (int) $post_id;
+    if ($post_id < 1 || wp_is_post_revision($post_id) || wp_is_post_autosave($post_id)) {
+        return;
+    }
+    if (get_post_type($post_id) !== 'post') {
+        return;
+    }
+
+    update_post_meta($post_id, '_ly_reading_time', dev_blog_compute_reading_time_for_post($post_id));
+}
+add_action('save_post', 'dev_blog_refresh_reading_time');
+
+function dev_blog_get_stored_reading_time($post_id = 0) {
+    $post_id = $post_id ? (int) $post_id : (int) get_the_ID();
+    if ($post_id < 1) {
+        return 1;
+    }
+
+    $cached = get_post_meta($post_id, '_ly_reading_time', true);
+    if ($cached !== '' && $cached !== false) {
+        return max(1, (int) $cached);
+    }
+
+    $time = dev_blog_compute_reading_time_for_post($post_id);
+    update_post_meta($post_id, '_ly_reading_time', $time);
+    return $time;
+}
+
+function get_reading_time($content = '') {
+    unset($content);
+    return dev_blog_get_stored_reading_time();
 }
 
 // Функция для получения версии деплоя (дата модификации functions.php)
@@ -501,46 +600,17 @@ function get_deployment_version() {
     return $date->format('d.m.Y H:i');
 }
 
-// Опционально: функция для очистки старых IP-адресов (можно вызывать по крону)
-function cleanup_viewed_ips() {
-    $args = array(
-        'post_type' => 'post',
-        'posts_per_page' => -1,
-        'fields' => 'ids'
-    );
-
-    $posts = get_posts($args);
-
-    foreach ($posts as $post_id) {
-        $viewed_ips = get_post_meta($post_id, 'viewed_ips', true);
-        if (is_array($viewed_ips) && count($viewed_ips) > 1000) { // Ограничение на 1000 IP
-            // Оставляем только последние 1000 IP
-            $viewed_ips = array_slice($viewed_ips, -1000);
-            update_post_meta($post_id, 'viewed_ips', $viewed_ips);
-        }
+add_action('init', function () {
+    if (wp_next_scheduled('cleanup_viewed_ips_hook')) {
+        wp_clear_scheduled_hook('cleanup_viewed_ips_hook');
     }
-}
-
-// Добавляем задачу в cron (выполняется раз в неделю)
-if (!wp_next_scheduled('cleanup_viewed_ips_hook')) {
-    wp_schedule_event(time(), 'weekly', 'cleanup_viewed_ips_hook');
-}
-add_action('cleanup_viewed_ips_hook', 'cleanup_viewed_ips');
-
-// При деактивации плагина или темы
-register_deactivation_hook(__FILE__, 'remove_cleanup_schedule');
-function remove_cleanup_schedule() {
-    wp_clear_scheduled_hook('cleanup_viewed_ips_hook');
-}
+}, 20);
 
 // Подключение стилей для редактора Gutenberg
 function add_custom_editor_styles() {
-    // Регистрируем стили для редактора
     add_theme_support('editor-styles');
-
-    // Подключаем стили
     add_editor_style([
-        'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css',
+        'vendor/bootstrap/bootstrap.min.css',
         'editor-style.css'
     ]);
 }

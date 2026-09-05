@@ -54,16 +54,12 @@ $query = new WP_Query($args);
 <div class="articles">
     <!-- Сетка статей: 1 колонка на мобильных, 2 колонки на десктопах -->
     <div class="row row-cols-1 row-cols-md-2 g-4">
-        <?php if ($query->have_posts()) : while ($query->have_posts()) : $query->the_post(); ?>
+        <?php if ($query->have_posts()) : $card_index = 0; while ($query->have_posts()) : $query->the_post(); $card_index++; ?>
             <div class="col">
                 <article class="post-card h-100">
                     <a href="<?php the_permalink(); ?>" class="post-card__cover text-decoration-none">
                         <?php if (has_post_thumbnail()) : ?>
-                            <img src="<?php the_post_thumbnail_url('large'); ?>"
-                                 class="post-card__img"
-                                 alt="<?php echo esc_attr(get_the_title()); ?>"
-                                 loading="lazy"
-                                 decoding="async">
+                            <?php dev_blog_the_card_thumbnail($card_index); ?>
                         <?php else: ?>
                             <div class="placeholder-img post-card__img"
                                  style="background-image: url('data:image/svg+xml,<?php echo rawurlencode(get_random_pattern()); ?>')"
@@ -85,7 +81,7 @@ $query = new WP_Query($args);
                                     <?php echo esc_html(get_the_date()); ?>
                                 </time>
                                 <span class="post-card__read">
-                                    <?php echo esc_html(get_reading_time(get_the_content()) . ' мин'); ?>
+                                    <?php echo esc_html(dev_blog_get_stored_reading_time() . ' мин'); ?>
                                 </span>
                             </div>
                             <?php

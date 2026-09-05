@@ -56,7 +56,7 @@
 
         <?php if (have_posts()) : ?>
             <div class="row g-4">
-                <?php while (have_posts()) : the_post(); ?>
+                <?php $card_index = 0; while (have_posts()) : the_post(); $card_index++; ?>
                     <div class="col-md-6 col-lg-4">
                         <!-- Карточка статьи -->
                         <article class="card h-100 border-0">
@@ -64,9 +64,7 @@
                             <div class="card-img-wrapper">
                                 <?php if (has_post_thumbnail()) : ?>
                                     <a href="<?php the_permalink(); ?>" class="card-img-wrapper text-decoration-none">
-                                        <img src="<?php the_post_thumbnail_url('large'); ?>"
-                                             class="card-img-top"
-                                             alt="<?php the_title(); ?>">
+                                        <?php dev_blog_the_card_thumbnail($card_index, 'card-img-top'); ?>
                                     </a>
                                 <?php else: ?>
                                     <a href="<?php the_permalink(); ?>" class="card-img-wrapper text-decoration-none">

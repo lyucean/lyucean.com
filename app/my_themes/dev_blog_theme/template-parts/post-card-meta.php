@@ -8,7 +8,7 @@ $tags = get_the_tags();
 <div class="post-card-meta">
     <p class="post-card-meta__line">
         <time datetime="<?php echo esc_attr(get_the_date(DATE_W3C)); ?>"><?php echo esc_html(get_the_date()); ?></time>
-        <span><?php echo esc_html(get_reading_time(get_the_content()) . ' мин чтения'); ?></span>
+        <span><?php echo esc_html(dev_blog_get_stored_reading_time() . ' мин чтения'); ?></span>
     </p>
     <?php if ($tags && !is_wp_error($tags)) : ?>
         <p class="post-card-meta__tags">
