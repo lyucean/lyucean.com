@@ -34,8 +34,8 @@ else
 	PROFILE := --profile prod
 endif
 
-update: ## Пересобрать контейнер, обновить композер и миграции
-update: docker-down docker-pull docker-build docker-up
+update: ## Обновить контейнеры без полного down (кэш nginx не убиваем вместе с MySQL)
+update: docker-pull docker-up disable-super-cache cache-purge warmup
 
 restart: ## Restart docker containers
 restart: docker-down docker-up
@@ -43,7 +43,34 @@ restart: docker-down docker-up
 docker-up: ## Поднимем все контейнеры
 	@echo "$(PURPLE) Поднимем все контейнеры $(RESET)"
 	@docker network inspect web >/dev/null 2>&1 || docker network create web
-	docker compose $(ENV) $(PROFILE) up -d
+	docker compose $(ENV) $(PROFILE) up -d --remove-orphans
+
+disable-super-cache: ## Выключить WP Super Cache: отдаёт протухший HTML и спорит с nginx
+ifeq ($(ENVIRONMENT),development)
+	@echo "$(PURPLE) Super Cache: пропускаем в development $(RESET)"
+else
+	@echo "$(PURPLE) Выключаем WP Super Cache $(RESET)"
+	@if [ -f app/wordpress/wp-config.php ]; then \
+		sed -i "s/define('WP_CACHE', true)/define('WP_CACHE', false)/" app/wordpress/wp-config.php; \
+		sed -i 's/define("WP_CACHE", true)/define("WP_CACHE", false)/' app/wordpress/wp-config.php; \
+	fi
+	@rm -f app/wordpress/wp-content/advanced-cache.php
+	@rm -rf app/wordpress/wp-content/cache/supercache
+	@docker compose $(ENV) $(PROFILE) exec -T wordpress php -r 'require "/var/www/html/wp-load.php"; require_once ABSPATH . "wp-admin/includes/plugin.php"; deactivate_plugins("wp-super-cache/wp-cache.php"); echo "super-cache off\n";' || true
+endif
+
+cache-purge: ## Очистить HTML-кэш nginx
+	@echo "$(PURPLE) Чистим кэш nginx $(RESET)"
+	@docker compose $(ENV) $(PROFILE) exec -T nginx sh -c 'rm -rf /var/cache/nginx/html/* /var/cache/nginx/static/*; mkdir -p /var/cache/nginx/html /var/cache/nginx/static' || true
+
+warmup: ## Прогреть главную, чтобы первый живой клиент не ждал PHP
+	@echo "$(PURPLE) Прогрев кэша $(RESET)"
+	@sleep 4
+	@curl -fsS -o /dev/null --connect-timeout 20 --max-time 60 https://lyucean.com/ || true
+	@curl -fsS -o /dev/null --connect-timeout 20 --max-time 60 "https://lyucean.com/?sort=oldest" || true
+	@curl -fsS -o /dev/null --connect-timeout 20 --max-time 60 "https://lyucean.com/?sort=views" || true
+	@curl -sSI --connect-timeout 20 --max-time 30 https://lyucean.com/ | grep -iE 'HTTP/|x-cache|cache-control' || true
+
 
 docker-build: ## Соберём все контейнеры
 	@echo "$(PURPLE) Соберём образы $(RESET)"

@@ -1,6 +1,48 @@
 
 services:
 
+  nginx:
+    container_name: lyucean_blog_nginx
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    command: ["/bin/sh", "-c", "mkdir -p /var/cache/nginx/html /var/cache/nginx/static && nginx -g 'daemon off;'"]
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - lyucean-nginx-cache:/var/cache/nginx
+    depends_on:
+      - wordpress
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.wordpress.rule=Host(`lyucean.com`)
+      - traefik.http.routers.wordpress.entrypoints=websecure
+      - traefik.http.routers.wordpress.tls=true
+      - traefik.http.routers.wordpress.tls.certresolver=letsencrypt
+      - traefik.http.services.wordpress.loadbalancer.server.port=80
+    networks:
+      - web
+    profiles:
+      - prod
+
+  cache-warmup:
+    container_name: lyucean_blog_warmup
+    image: curlimages/curl:8.11.1
+    restart: unless-stopped
+    depends_on:
+      - nginx
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        while true; do
+          curl -fsS -o /dev/null -H "Host: lyucean.com" -H "X-Forwarded-Proto: https" http://nginx/ || true
+          curl -fsS -o /dev/null -H "Host: lyucean.com" -H "X-Forwarded-Proto: https" "http://nginx/?sort=oldest" || true
+          curl -fsS -o /dev/null -H "Host: lyucean.com" -H "X-Forwarded-Proto: https" "http://nginx/?sort=views" || true
+          sleep 300
+        done
+    networks:
+      - web
+    profiles:
+      - prod
+
   wordpress:
     container_name: lyucean_blog_wp
     image: wordpress
@@ -15,12 +57,7 @@ services:
       - ./app/my_plugins:/var/www/html/wp-content/plugins/custom
       - ./app/my_themes:/var/www/html/wp-content/themes/
     labels:
-      - traefik.enable=true
-      - traefik.http.routers.wordpress.rule=Host(`lyucean.com`)
-      - traefik.http.routers.wordpress.entrypoints=websecure
-      - traefik.http.routers.wordpress.tls=true
-      - traefik.http.routers.wordpress.tls.certresolver=letsencrypt
-      - traefik.http.services.wordpress.loadbalancer.server.port=80
+      - traefik.enable=false
     networks:
       - web
     profiles:
@@ -90,7 +127,8 @@ services:
       - dev
 
 volumes:
-  lyucean-mysql-data: # Определяем том для сохранения данных MySQL
+  lyucean-mysql-data:
+  lyucean-nginx-cache:
 
 networks:
   web:
