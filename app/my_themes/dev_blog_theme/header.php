@@ -10,7 +10,7 @@
 </head>
 <body class="bg-body-tertiary" <?php body_class(); ?>>
 
-<header class="py-3">
+<header class="site-header py-3">
     <div class="container-xl">
         <div class="row align-items-center justify-content-between">
             <div class="col-auto">

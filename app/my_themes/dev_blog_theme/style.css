@@ -47,7 +47,8 @@ body.bg-body-tertiary {
    Хедер (header.php)
    ========================================================================== */
 
-header {
+/* Не трогать голый header: у статьи тоже <header class="post-header">, и он наезжал на меню. */
+.site-header {
     position: relative;
     z-index: 20;
 }
