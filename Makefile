@@ -35,7 +35,7 @@ else
 endif
 
 update: ## Обновить контейнеры без полного down (кэш nginx не убиваем вместе с MySQL)
-update: docker-pull docker-up disable-super-cache cache-purge warmup
+update: docker-pull docker-up nginx-reload disable-super-cache cache-purge warmup
 
 restart: ## Restart docker containers
 restart: docker-down docker-up
@@ -44,6 +44,10 @@ docker-up: ## Поднимем все контейнеры
 	@echo "$(PURPLE) Поднимем все контейнеры $(RESET)"
 	@docker network inspect web >/dev/null 2>&1 || docker network create web
 	docker compose $(ENV) $(PROFILE) up -d --remove-orphans
+
+nginx-reload: ## Перечитать nginx.conf без рестарта кэша
+	@echo "$(PURPLE) nginx -s reload $(RESET)"
+	@docker compose $(ENV) $(PROFILE) exec -T nginx nginx -t && docker compose $(ENV) $(PROFILE) exec -T nginx nginx -s reload
 
 disable-super-cache: ## Выключить WP Super Cache: отдаёт протухший HTML и спорит с nginx
 ifeq ($(ENVIRONMENT),development)

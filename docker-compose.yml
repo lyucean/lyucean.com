@@ -36,7 +36,7 @@ services:
           curl -fsS -o /dev/null -H "Host: lyucean.com" -H "X-Forwarded-Proto: https" http://nginx/ || true
           curl -fsS -o /dev/null -H "Host: lyucean.com" -H "X-Forwarded-Proto: https" "http://nginx/?sort=oldest" || true
           curl -fsS -o /dev/null -H "Host: lyucean.com" -H "X-Forwarded-Proto: https" "http://nginx/?sort=views" || true
-          sleep 300
+          sleep 86400
         done
     networks:
       - web
