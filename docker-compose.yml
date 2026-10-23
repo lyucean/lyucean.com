@@ -45,7 +45,9 @@ services:
 
   wordpress:
     container_name: lyucean_blog_wp
-    image: wordpress
+    # Apache, ветка PHP 8.3. Плавающий тег: make update делает pull и пересоздаёт контейнер.
+    # Сейчас в теге PHP 8.3.36 (CVE-2026-109618, CVE-2026-109619). docker restart образ не меняет.
+    image: wordpress:php8.3
     restart: unless-stopped
     environment:
       WORDPRESS_DB_HOST: mysql
@@ -81,7 +83,7 @@ services:
 
   wordpress_dev:
     container_name: lyucean_blog_wp_dev
-    image: wordpress:latest
+    image: wordpress:php8.3
     restart: unless-stopped
     # На Mac 80 часто занят (Apache, другой стек) — хост-порт задаётся WORDPRESS_DEV_PORT
     ports:

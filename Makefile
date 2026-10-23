@@ -35,7 +35,7 @@ else
 endif
 
 update: ## Обновить контейнеры без полного down (кэш nginx не убиваем вместе с MySQL)
-update: docker-pull docker-up nginx-reload disable-super-cache cache-purge warmup
+update: docker-pull docker-recreate-wp docker-up nginx-reload disable-super-cache cache-purge warmup
 
 restart: ## Restart docker containers
 restart: docker-down docker-up
@@ -83,6 +83,15 @@ docker-build: ## Соберём все контейнеры
 docker-pull:
 	@echo "$(PURPLE) Поучим все контейнеры $(RESET)"
 	docker compose $(ENV) $(PROFILE) pull --include-deps
+
+# pull обновляет тег, но уже запущенный контейнер остаётся на старом образе, пока его не пересоздать.
+docker-recreate-wp:
+	@echo "$(PURPLE) Пересоздаём WordPress из нового образа $(RESET)"
+ifeq ($(ENVIRONMENT),development)
+	docker compose $(ENV) $(PROFILE) up -d --force-recreate --no-deps wordpress_dev
+else
+	docker compose $(ENV) $(PROFILE) up -d --force-recreate --no-deps wordpress
+endif
 
 docker-down: ## Остановим контейнеры
 	@echo "$(PURPLE) Остановим контейнеры $(RESET)"

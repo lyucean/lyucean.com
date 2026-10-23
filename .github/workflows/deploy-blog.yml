@@ -80,6 +80,9 @@ jobs:
             make update
             echo "Проверяем статус контейнеров..."
             docker compose --env-file app/.env --profile prod ps
+            echo "Версия PHP в lyucean_blog_wp:"
+            docker compose --env-file app/.env --profile prod exec -T wordpress php -v
+            docker compose --env-file app/.env --profile prod exec -T wordpress php -r 'exit(version_compare(PHP_VERSION, "8.3.36", ">=") ? 0 : 1);'
             echo "Заголовки кэша:"
             curl -sSI --max-time 30 https://lyucean.com/ | grep -iE 'HTTP/|x-cache|cache-control|server:' || true
 
