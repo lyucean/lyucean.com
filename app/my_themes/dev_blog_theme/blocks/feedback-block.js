@@ -242,6 +242,7 @@ jQuery(document).ready(function ($) {
         }
         
         $('#feedback-message').text(randomMessage);
+        $('.feedback-post').addClass('is-answered');
         $('#feedback-yesBtn').hide();
         $('#feedback-noBtn').hide();
         $('#feedback-commentBtn').hide();

@@ -1989,15 +1989,18 @@ figure.aligncenter figcaption {
 
 /* ==========================================================================
    Блок обратной связи (posts-feetback.php)
-   Полоска after-post, не клон .post-shell
+   Карточка по ширине колонки текста, не на всю main
    ========================================================================== */
 .feedback-post {
-    margin: 1.75rem 0 0;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    box-shadow: none;
-    border-radius: 0;
+    --fb-green: #3c6b4a;
+    --fb-green-deep: #2c5238;
+    --fb-thanks: #e7f3e4;
+    margin: 1.75rem 4rem 0;
+    padding: 1.05rem 1.35rem;
+    border: 1px solid var(--fb-green);
+    background: var(--ly-paper-elevated);
+    box-shadow: var(--ly-shadow-soft);
+    border-radius: var(--ly-radius);
 }
 
 .feedback-post__row {
@@ -2066,6 +2069,18 @@ figure.aligncenter figcaption {
     border-color: rgba(28, 27, 25, 0.22);
 }
 
+.feedback-post__btn[data-feedback="yes"] {
+    background: var(--fb-green);
+    border-color: var(--fb-green);
+    color: #f4faf3;
+}
+
+.feedback-post__btn[data-feedback="yes"]:hover {
+    background: var(--fb-green-deep);
+    border-color: var(--fb-green-deep);
+    color: #f4faf3;
+}
+
 .feedback-post__btn--accent {
     background: var(--ly-ink);
     border-color: var(--ly-ink);
@@ -2079,21 +2094,97 @@ figure.aligncenter figcaption {
 }
 
 .feedback-post__message {
-    margin: 0.65rem 0 0;
-    font-size: 0.875rem;
-    color: var(--ly-ink-muted);
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0.35rem 0.25rem;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.45;
+    letter-spacing: -0.015em;
+    color: var(--ly-ink);
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+}
+
+.feedback-post.is-answered {
+    background: var(--fb-thanks);
+    border: 0;
+    padding: 1.45rem 1.5rem;
+}
+
+.feedback-post.is-answered .feedback-post__row {
+    display: none;
+}
+
+.feedback-post.is-answered .feedback-post__message {
+    margin-top: 0;
 }
 
 .feedback-post__message:empty {
     display: none;
 }
 
+[data-bs-theme="dark"] .feedback-post {
+    --fb-green: #8fb89a;
+    --fb-green-deep: #d5ead8;
+    --fb-thanks: rgba(143, 184, 154, 0.16);
+    border-color: var(--fb-green);
+}
+
 [data-bs-theme="dark"] .feedback-post__btn:hover {
     background: rgba(240, 238, 234, 0.06);
 }
 
+[data-bs-theme="dark"] .feedback-post__btn[data-feedback="yes"] {
+    color: #16301c;
+}
+
+[data-bs-theme="dark"] .feedback-post__btn[data-feedback="yes"]:hover {
+    background: var(--fb-green-deep);
+    border-color: var(--fb-green-deep);
+    color: #16301c;
+}
+
 [data-bs-theme="dark"] .feedback-post__btn--accent {
     color: var(--ly-paper);
+}
+
+@media screen and (max-width: 1200px) {
+    .feedback-post {
+        margin-left: 3rem;
+        margin-right: 3rem;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .feedback-post {
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .feedback-post {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .feedback-post {
+        margin-left: 1.25rem;
+        margin-right: 1.25rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .feedback-post {
+        margin-left: 0.75rem;
+        margin-right: 0.75rem;
+    }
 }
 
 @media screen and (max-width: 575.98px) {
